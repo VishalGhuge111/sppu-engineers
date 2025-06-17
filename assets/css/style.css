@@ -1,0 +1,121 @@
+        * {
+             font-family: 'Gabriela', serif;
+        }
+        
+        /* Professional nav item styling */
+        .nav-item {
+            font-weight: 600; /* Semi-bold */
+            letter-spacing: 0.025em;
+            color: #1f2937; /* gray-800 */
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        /* Enhanced dropdown animations */
+        .dropdown-menu {
+            opacity: 0;
+            transform: translateY(8px); /* Slightly more subtle initial drop */
+            visibility: hidden;
+            transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.2s;
+            will-change: transform, opacity;
+        }
+        
+        .dropdown-parent:hover .dropdown-menu,
+        .dropdown-parent.active .dropdown-menu {
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
+        }
+        
+        /* Mobile menu animation */
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .mobile-menu.open {
+            max-height: 1000px;
+        }
+        
+        /* Mobile dropdown animation */
+        .mobile-dropdown {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .mobile-dropdown.open {
+            max-height: 500px;
+        }
+        
+        /* Professional nav item underline animation */
+        .nav-item-underline {
+            position: relative;
+        }
+        
+        .nav-item-underline::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #2563eb; /* blue-600 */
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .nav-item-underline:hover::after {
+            width: 100%;
+        }
+        
+        /* Active dropdown indicator */
+        .dropdown-parent.active .dropdown-chevron {
+            transform: rotate(180deg);
+        }
+        
+        /* Smooth dropdown chevron rotation */
+        .dropdown-chevron {
+            transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        /* Enhanced dropdown styling */
+        .dropdown-content {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e5e7eb; /* gray-200 */
+            border-radius: 0.5rem;
+        }
+        
+        /* Improved hover states */
+        .dropdown-item:hover {
+            background-color: #f8fafc; /* blue-50 */
+            color: #2563eb; /* blue-600 */
+        }
+        
+        /* Optimized for performance */
+        .will-change-transform {
+            will-change: transform;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Custom styles for card hover effects */
+        .card-hover {
+            transition: all 0.3s ease-in-out; /* Smooth transition for all properties */
+            border: 1px solid #e2e8f0; /* Tailwind border-gray-200 */
+        }
+        .card-hover:hover {
+            transform: translateY(-3px); /* Lifts the card slightly */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08); /* More pronounced shadow on hover */
+            border-color: #ef4444; /* Changes border color to red-500 on hover */
+        }
+
+        /* Style for the submit report button hover */
+        .button-hover:hover {
+        transform: scale(1.02); /* Slightly enlarges the button */
+        }

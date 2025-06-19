@@ -1,0 +1,34 @@
+/* Custom font import for 'Inter' */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Hide scrollbar for mobile semester buttons but allow scrolling */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+/* Smooth transitions for semester switching */
+.semester-card {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Additional custom styles */
+.bg-custom-light {
+    background-color: rgba(227, 246, 245, 0.4);
+}
+
+.md\:bg-custom-dark {
+    background-color: rgba(171, 209, 198, 0.5);
+}
+
+.bg-custom-mobile-nav {
+    background-color: #dff1f0;
+}

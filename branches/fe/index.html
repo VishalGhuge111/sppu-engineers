@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SPPU Engineers</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Gabriela&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/branch.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-white text-gray-900 font-sans">
+    <div id="header-placeholder"></div>
+
+    <div class="min-h-screen pt-20 md:pt-0 flex flex-col bg-[#e3f6f5]/40 md:bg-[#abd1c6]/50">
+        <!-- Mobile top bar with branch name -->
+        <div class="md:hidden mt-8 text-white p-3 shadow-sm border-b bg-gradient-to-r from-blue-600 to-blue-800 flex items-center justify-center">
+            <h1 class="text-lg font-bold text-center">First Year</h1>
+        </div>
+
+        <!-- Main content area -->
+        <div class="flex-1 flex flex-col md:flex-row mt-2 md:mt-0">
+            <!-- Mobile horizontal semester navigation -->
+            <div class="md:hidden flex justify-center bg-[#dff1f0] border-b border-gray-200 shadow-sm">
+                <nav class="flex overflow-x-auto p-3 no-scrollbar">
+                    <button class="sem-button flex-shrink-0 px-5 py-2 rounded-md text-sm font-semibold mr-3 border border-blue-600 text-blue-700 bg-blue-50 transition-colors duration-200" data-sem="3">Semester 1</button>
+                    <button class="sem-button flex-shrink-0 px-5 py-2 rounded-md text-sm font-semibold mr-3 border border-blue-600 text-blue-700 bg-blue-50 transition-colors duration-200" data-sem="4">Semester 2</button>
+                </nav>
+            </div>
+
+            <!-- Desktop Sidebar Navigation -->
+            <nav class="hidden md:flex md:w-64 bg-white border-r border-gray-200 px-6 py-8 flex-col sticky top-0 h-screen overflow-y-auto shadow">
+                <div class="absolute top-0 left-0 mt-20 w-full border-t-4 border-blue-600"></div>
+                <div class="mb-10 mt-20">
+                    <h1 class="text-2xl font-bold text-gray-900">First Year</h1>
+                    <p class="text-sm text-gray-500 mt-1">Study Materials & Resources</p>
+                </div>
+
+                <div>
+                    <h2 class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-4">Semesters</h2>
+                    <div class="space-y-2" id="semester-buttons">
+                        <button class="sem-button flex items-center w-full px-4 py-3 rounded-lg font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-800 transition-all duration-150" data-sem="3">
+                            <svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                            </svg>
+                            Semester 1
+                        </button>
+                        <button class="sem-button flex items-center w-full px-4 py-3 rounded-lg font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-800 transition-all duration-150" data-sem="4">
+                            <svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                            </svg>
+                            Semester 2
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Telegram Link -->
+                <div class="mt-auto pt-8 border-t border-gray-200">
+                    <a href="https://t.me/sppuengineersss" class="w-full flex items-center justify-center py-3 px-4 rounded-lg bg-blue-600 text-white font-semibold shadow hover:bg-blue-700 transition-all duration-150">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
+                        </svg>
+                        Join Telegram
+                    </a>
+                </div>
+            </nav>
+
+            <!-- Semester Content Area -->
+            <main class="flex-1 p-4 md:p-8 md:pt-32 flex flex-col items-center overflow-y-auto">
+                <!-- Semester content sections (3-6) -->
+                <div id="sem3Content" class="w-full max-w-5xl mx-auto mb-4">
+                <div class="bg-white border border-gray-200 rounded-lg p-6 pb-2 shadow-sm hover:shadow transition-all duration-200">
+                    <div class="flex justify-between items-start mb-6">
+                        <h3 class="text-2xl font-bold text-blue-700">Semester 1</h3>
+                        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-1 rounded-full">#2024</span>
+                    </div>
+
+                    <div class="md:hidden">
+                        <ul class="space-y-2 mb-4">
+                            <li class="flex items-start"><span class="text-blue-600 font-medium mr-2">1.</span> Engineering Mathematics- I</li>
+                            <li class="flex items-start"><span class="text-blue-600 font-medium mr-2">2.</span> Engineering Physics</li>
+                            <li class="flex items-start"><span class="text-blue-600 font-medium mr-2">3.</span> Basic Electronics Engineering</li>
+                            <li class="flex items-start"><span class="text-blue-600 font-medium mr-2">4.</span> Fundamentals of Programming Languages</li>
+                        </ul>
+                        <p class="text-sm text-gray-500 italic mb-6">"Master Solutions / Solved PYQs / IMP Notes / Decodes & More"</p>
+                    </div>
+
+                    <div class="hidden md:block">
+                        <div class="flex mb-4 gap-8">
+                            <div class="flex-1">
+                                <h4 class="text-lg font-semibold text-gray-800 mb-4 border-b pb-2">Subjects Included</h4>
+                                <ol class="space-y-3 ml-4">
+                                    <li class="flex items-start">
+                                        <span class="text-blue-600 mr-2">1</span>
+                                        <span class="text-gray-700">Engineering Mathematics- I</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-blue-600 mr-2">2</span>
+                                        <span class="text-gray-700">Engineering Physics</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-blue-600 mr-2">3</span>
+                                        <span class="text-gray-700">Basic Electronics Engineering</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-blue-600 mr-2">4</span>
+                                        <span class="text-gray-700">Fundamentals of Programming Languages</span>
+                                    </li>
+                                </ol>
+                            </div>
+
+                            <div class="flex-1">
+                                <h4 class="text-lg font-semibold text-gray-800 mb-4 border-b pb-2">Premium Features</h4>
+                                <ul class="space-y-3">
+                                    <li class="flex items-start">
+                                        <svg class="w-5 h-5 text-blue-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                        <span class="text-gray-700">Master Solutions with detailed explanations</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg class="w-5 h-5 text-blue-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                        <span class="text-gray-700">Solved Previous Year Questions (PYQs)</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg class="w-5 h-5 text-blue-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                        <span class="text-gray-700">Important Notes (IMP) from toppers</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg class="w-5 h-5 text-blue-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                        <span class="text-gray-700">Exam Decodes and pattern analysis</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 px-2 pt-4 py-4 border-t border-gray-200">
+                        <div class="flex justify-end space-x-3">
+                            <button class="px-5 py-2 border border-gray-300 rounded-md text-gray-700 font-medium hover:bg-gray-100 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                Try for Free
+                            </button>
+                            <button class="px-5 py-2 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                Purchase Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="sem4Content" class="w-full max-w-5xl mx-auto mb-4">
+                <div class="bg-white border border-gray-200 rounded-lg p-6 pb-2 shadow-sm hover:shadow transition-all duration-200">
+                    <div class="flex justify-between items-start mb-6">
+                        <h3 class="text-2xl font-bold text-blue-700">Semester 2</h3>
+                        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-1 rounded-full">#2024</span>
+                    </div>
+
+                    <div class="md:hidden">
+                        <ul class="space-y-2 mb-4">
+                            <li class="flex items-start"><span class="text-blue-600 font-medium mr-2">1.</span> Engineering Mathematics II</li>
+                            <li class="flex items-start"><span class="text-blue-600 font-medium mr-2">2.</span> Engineering Chemistry</li>
+                            <li class="flex items-start"><span class="text-blue-600 font-medium mr-2">3.</span> Basic Electrical Engineering</li>
+                            <li class="flex items-start"><span class="text-blue-600 font-medium mr-2">4.</span> Engineering Mechanics</li>
+                            <li class="flex items-start"><span class="text-blue-600 font-medium mr-2">5.</span> Programming and Problem Solving</li>
+                        </ul>
+                        <p class="text-sm text-gray-500 italic mb-6">"Master Solutions / Solved PYQs / IMP Notes / Decodes & More"</p>
+                    </div>
+
+                    <div class="hidden md:block">
+                        <div class="flex mb-4 gap-8">
+                            <div class="flex-1">
+                                <h4 class="text-lg font-semibold text-gray-800 mb-4 border-b pb-2">Subjects Included</h4>
+                                <ol class="space-y-3 ml-4">
+                                    <li class="flex items-start">
+                                        <span class="text-blue-600 mr-2">1</span>
+                                        <span class="text-gray-700">Engineering Mathematics II</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-blue-600 mr-2">2</span>
+                                        <span class="text-gray-700">Engineering Chemistry</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-blue-600 mr-2">3</span>
+                                        <span class="text-gray-700">Basic Electrical Engineering</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-blue-600 mr-2">4</span>
+                                        <span class="text-gray-700">Engineering Mechanics</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-blue-600 mr-2">5</span>
+                                        <span class="text-gray-700">Programming and Problem Solvings</span>
+                                    </li>
+                                </ol>
+                            </div>
+
+                            <div class="flex-1">
+                                <h4 class="text-lg font-semibold text-gray-800 mb-4 border-b pb-2">Premium Features</h4>
+                                <ul class="space-y-3">
+                                    <li class="flex items-start">
+                                        <svg class="w-5 h-5 text-blue-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                        <span class="text-gray-700">Master Solutions with detailed explanations</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg class="w-5 h-5 text-blue-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                        <span class="text-gray-700">Solved Previous Year Questions (PYQs)</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg class="w-5 h-5 text-blue-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                        <span class="text-gray-700">Important Notes (IMP) from toppers</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg class="w-5 h-5 text-blue-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                        <span class="text-gray-700">Exam Decodes and pattern analysis</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 px-2 pt-4 py-4 border-t border-gray-200">
+                        <div class="flex justify-end space-x-3">
+                            <button class="px-5 py-2 border border-gray-300 rounded-md text-gray-700 font-medium hover:bg-gray-100 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                Try for Free
+                            </button>
+                            <button class="px-5 py-2 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                Purchase Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                
+                <!-- How to Access Card -->
+                <div class="w-full max-w-5xl">
+                    <div class="bg-white border border-gray-200 rounded-lg p-6 mb-6 shadow-sm">
+                        <h4 class="text-lg font-semibold text-blue-800 mb-4">How to get access?</h4>
+                        <div class="md:hidden mb-6">
+                            <img src="/assets/images/Access Flow.png" alt="Access Flow Process" class="w-full h-auto rounded-lg border border-gray-200 shadow">
+                        </div>
+                        <div class="hidden md:flex mt-8 items-start gap-6">
+                            <div class="flex-1">
+                                <img src="/assets/images/Access Flow.png" alt="Access Flow Process" class="w-full h-auto rounded-lg border border-gray-200 shadow">
+                            </div>
+                            <div class="flex-1">
+                                <ol class="list-decimal list-inside text-gray-700 space-y-3">
+                                    <li class="font-medium">Select your branch and semester from the website.</li>
+                                    <li class="font-medium">Click on "Purchase Now" to begin.</li>
+                                    <li class="font-medium">Complete Payment securely using your preferred method.</li>
+                                    <li class="font-medium">Fill the Access Form linked after payment.</li>
+                                    <li class="font-medium">Get Instant Access to all notes, solutions & materials via Drive.</li>
+                                </ol>
+                            </div>
+                        </div>
+                        <div class="md:hidden">
+                            <ol class="list-decimal list-inside text-gray-700 space-y-3">
+                                <li class="font-medium">Select your branch and semester from the website.</li>
+                                <li class="font-medium">Click on "Purchase Now" to begin.</li>
+                                <li class="font-medium">Complete Payment securely using your preferred method.</li>
+                                <li class="font-medium">Fill the Access Form linked after payment.</li>
+                                <li class="font-medium">Get Instant Access to all notes, solutions & materials via Drive.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+  <div id="footer-placeholder"></div>
+  <script src="/assets/js/branch/branch.js" defer></script>
+  <script src="/assets/js/main.js" defer></script>
+  <script src="/assets/js/load-components.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SPPU Engineers</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Gabriela&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  </head>
+  
+<body class="bg-white text-gray-900 font-sans">
+
+  <div id="header-placeholder"></div>
+
+<!-- The main section of your content, using Tailwind CSS classes -->
+<div class="min-h-screen pt-20 md:pt-0 flex flex-col bg-[#e3f6f5]/40 md:bg-[#abd1c6]/50">
+  <!-- Mobile top bar with branch name -->
+  <div class="md:hidden mt-8 text-white p-3 shadow-sm border-b bg-gradient-to-r from-blue-600 to-blue-800 flex items-center justify-center">
+      <h1 class="text-lg font-bold text-center">Computer Engineering</h1>
+  </div>
+
+  <!-- Main content area for desktop and mobile -->
+  <div class="flex-1 flex flex-col md:flex-row mt-2 md:mt-0">
+
+      <!-- Mobile horizontal semester navigation - Updated professional style -->
+      <nav class="md:hidden flex overflow-x-auto p-3 bg-[#dff1f0] border-b border-gray-200 no-scrollbar shadow-sm">
+          <button class="sem-button flex-shrink-0 px-5 py-2 rounded-md text-sm font-semibold mr-3 border border-blue-600 text-blue-700 bg-blue-50 transition-colors duration-200" data-sem="3">Sem 3</button>
+          <button class="sem-button flex-shrink-0 px-5 py-2 rounded-md text-sm font-semibold mr-3 border border-blue-600 text-blue-700 bg-blue-50 transition-colors duration-200" data-sem="4">Sem 4</button>
+          <button class="sem-button flex-shrink-0 px-5 py-2 rounded-md text-sm font-semibold mr-3 border border-blue-600 text-blue-700 bg-blue-50 transition-colors duration-200" data-sem="5">Sem 5</button>
+          <button class="sem-button flex-shrink-0 px-5 py-2 rounded-md text-sm font-semibold mr-3 border border-blue-600 text-blue-700 bg-blue-50 transition-colors duration-200" data-sem="6">Sem 6</button>
+      </nav>
+
+     <!-- Professional Desktop Sidebar Navigation -->
+<nav class="hidden md:flex md:w-64 bg-white border-r border-gray-200 px-6 py-8 flex-col sticky top-0 h-screen overflow-y-auto shadow">
+<!-- Header -->
+ <!-- Top horizontal line -->
+<div class="absolute top-0 left-0 mt-20 w-full border-t-4 border-blue-600"></div>
+<div class="mb-10 mt-20">
+  <h1 class="text-2xl font-bold text-gray-900">Computer Engineering</h1>
+  <p class="text-sm text-gray-500 mt-1">Study Materials & Resources</p>
+</div>
+
+<!-- Semesters -->
+<div>
+  <h2 class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-4">Semesters</h2>
+  <div class="space-y-2" id="semester-buttons">
+    <button class="sem-button flex items-center w-full px-4 py-3 rounded-lg font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-800 transition-all duration-150" data-sem="3">
+      <svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+      </svg>
+      Semester 3
+    </button>
+    <button class="sem-button flex items-center w-full px-4 py-3 rounded-lg font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-800 transition-all duration-150" data-sem="4">
+      <svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+      </svg>
+      Semester 4
+    </button>
+    <button class="sem-button flex items-center w-full px-4 py-3 rounded-lg font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-800 transition-all duration-150" data-sem="5">
+      <svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+      </svg>
+      Semester 5
+    </button>
+    <button class="sem-button flex items-center w-full px-4 py-3 rounded-lg font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-800 transition-all duration-150" data-sem="6">
+      <svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+      </svg>
+      Semester 6
+    </button>
+  </div>
+</div>
+
+<!-- Telegram Link -->
+<div class="mt-auto pt-8 border-t border-gray-200">
+  <a href="#" class="w-full flex items-center justify-center py-3 px-4 rounded-lg bg-blue-600 text-white font-semibold shadow hover:bg-blue-700 transition-all duration-150">
+    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
+    </svg>
+    Join Telegram
+  </a>
+</div>
+</nav>
+<script>
+  // Only select buttons inside the desktop sidebar
+  const desktopSidebar = document.querySelector('.md\\:flex'); // escaped ":" for querySelector
+  if (window.innerWidth >= 768 && desktopSidebar) {
+    const buttons = desktopSidebar.querySelectorAll(".sem-button");
+
+    buttons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        buttons.forEach(b => b.classList.remove("bg-blue-100", "text-blue-800", "shadow", "ring-2", "ring-blue-500"));
+        btn.classList.add("bg-blue-100", "text-blue-800", "shadow", "ring-2", "ring-blue-500");
+      });
+    });
+
+    // Optional: Trigger default (e.g., Semester 3 selected on load)
+    const defaultBtn = desktopSidebar.querySelector('[data-sem="3"]');
+    if (defaultBtn) defaultBtn.click();
+  }
+</script>
+
+
+
+      <!-- Semester Content Area - Wider right column -->
+      <main class="flex-1 p-4 md:p-8 md:pt-32 flex flex-col items-center overflow-y-auto">
+          <!-- Semester 3 Content -->
+<div id="sem3Content" class="w-full max-w-5xl mx-auto mb-4">
+    <!-- Semester Card - Enhanced Version -->
+    <div class="bg-white border border-gray-200 rounded-lg p-6 pb-2 shadow-sm hover:shadow transition-all duration-200">
+        <!-- Header with Year Badge -->
+        <div class="flex justify-between items-start mb-6">
+            <h3 class="text-2xl font-bold text-blue-700">Semester 3</h3>
+            <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-1 rounded-full">#2024</span>
+        </div>
+
+        <!-- Mobile View (Same as Original) -->
+        <div class="md:hidden">
+            <ul class="space-y-2 mb-4">
+                <li class="flex items-start"><span class="text-blue-600 font-medium mr-2">1.</span> Data Structures</li>
+                <li class="flex items-start"><span class="text-blue-600 font-medium mr-2">2.</span> Object Oriented programming and Computer Graphics</li>
+                <li class="flex items-start"><span class="text-blue-600 font-medium mr-2">3.</span> Discrete Mathematics</li>
+                <li class="flex items-start"><span class="text-blue-600 font-medium mr-2">4.</span> Digital Electronics and Logic Design</li>
+                <li class="flex flex-col items-start">
+                <div class="flex items-start">
+                    <span class="text-blue-600 font-medium mr-2">5.</span>
+                    <span class="font-medium text-gray-800">Open Elective 1</span>
+                </div>
+                <ul class="ml-10 mt-2 list-disc text-sm text-gray-700 space-y-1">
+                    <li>Financial Accounting</li>
+                    <li>Digital Finance</li>
+                    <li>Digital Marketing</li>
+                </ul>
+                </li>
+            </ul>
+            <p class="text-sm text-gray-500 italic mb-6">"Master Solutions / Solved PYQs / IMP Notes / Decodes & More"</p>
+        </div>
+
+        <!-- Desktop View - Enhanced -->
+        <div class="hidden md:block">
+            <div class="flex gap-8">
+                <!-- Subjects Column -->
+                <div class="flex-1">
+                    <h4 class="text-lg font-semibold text-gray-800 mb-4 border-b pb-2">Subjects Included</h4>
+                    <ol class="space-y-3 ml-4">
+                        <li class="flex items-start">
+                            <span class="text-blue-600 mr-2">1</span>
+                            <span class="text-gray-700">Data Structures</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-600 mr-2">2</span>
+                            <span class="text-gray-700">Object Oriented
+programming and
+Computer Graphics</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-600 mr-2">3</span>
+                            <span class="text-gray-700">Discrete Mathematics</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-600 mr-2">4</span>
+                            <span class="text-gray-700">Digital Electronics and Logic Design</span>
+                        </li>
+                        <li class="flex flex-col items-start">
+  <div class="flex items-start">
+    <span class="text-blue-600 mr-2">5.</span>
+    <span class="text-gray-700">Open Elective 1</span>
+  </div>
+  <ul class="ml-10 mt-2 mb-4 list-disc text-sm text-gray-600 space-y-1">
+    <li>Financial Accounting</li>
+                    <li>Digital Finance</li>
+                    <li>Digital Marketing</li>
+  </ul>
+</li>
+
+                    </ol>
+                </div>
+
+                <!-- Features Column -->
+                <div class="flex-1">
+                    <h4 class="text-lg font-semibold text-gray-800 mb-4 border-b pb-2">Premium Features</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-blue-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-gray-700">Master Solutions with detailed explanations</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-blue-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-gray-700">Solved Previous Year Questions (PYQs)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-blue-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-gray-700">Important Notes (IMP) from toppers</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-blue-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-gray-700">Exam Decodes and pattern analysis</span>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+<div class="bg-gray-50 px-2 pt-4 py-4 border-t border-gray-200">
+        <!-- Action Buttons -->
+        <div class="flex justify-end space-x-3">
+                          <button class="px-5 py-2 border border-gray-300 rounded-md text-gray-700 font-medium hover:bg-gray-100 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                              Try for Free
+                          </button>
+                          <button class="px-5 py-2 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                              Purchase Now
+                          </button>
+                      </div></div>
+    </div>
+</div>
+          
+<div id="sem4Content" class="w-full max-w-5xl mx-auto mb-4">
+    <!-- Semester Card - Enhanced Version -->
+    <div class="bg-white border border-gray-200 rounded-lg p-6 pb-2 shadow-sm hover:shadow transition-all duration-200">
+        <!-- Header with Year Badge -->
+        <div class="flex justify-between items-start mb-6">
+            <h3 class="text-2xl font-bold text-blue-700">Semester 4</h3>
+            <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-1 rounded-full">#2024</span>
+        </div>
+
+        <!-- Mobile View (Same as Original) -->
+        <div class="md:hidden">
+            <ul class="space-y-2 mb-4">
+                <li class="flex items-start"><span class="text-blue-600 font-medium mr-2">1.</span> Database
+Management
+systems</li>
+                <li class="flex items-start"><span class="text-blue-600 font-medium mr-2">2.</span> Computer
+Organization &
+Microprocessor</li>
+                <li class="flex items-start"><span class="text-blue-600 font-medium mr-2">3.</span>Operating Systems</li>
+                <li class="flex items-start"><span class="text-blue-600 font-medium mr-2">4.</span> Internet of Things</li>
+                <li class="flex flex-col items-start">
+                <div class="flex items-start">
+                    <span class="text-blue-600 font-medium mr-2">5.</span>
+                    <span class="font-medium text-gray-800">Open Elective 2</span>
+                </div>
+                <ul class="ml-10 mt-2 list-disc text-sm text-gray-700 space-y-1">
+                    <li>Project Management</li>
+                    <li>Probability and Statistics</li>
+                    <li>Financial Management</li>
+                </ul>
+                </li>
+            </ul>
+            <p class="text-sm text-gray-500 italic mb-6">"Master Solutions / Solved PYQs / IMP Notes / Decodes & More"</p>
+        </div>
+
+        <!-- Desktop View - Enhanced -->
+        <div class="hidden md:block">
+            <div class="flex gap-8">
+                <!-- Subjects Column -->
+                <div class="flex-1">
+                    <h4 class="text-lg font-semibold text-gray-800 mb-4 border-b pb-2">Subjects Included</h4>
+                    <ol class="space-y-3 ml-4">
+                        <li class="flex items-start">
+                            <span class="text-blue-600 mr-2">1</span>
+                            <span class="text-gray-700">Database
+Management
+systems</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-600 mr-2">2</span>
+                            <span class="text-gray-700">Computer
+Organization &
+Microprocessor</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-600 mr-2">3</span>
+                            <span class="text-gray-700">Operating Systemss</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-600 mr-2">4</span>
+                            <span class="text-gray-700">Internet of Things</span>
+                        </li>
+                        <li class="flex flex-col items-start">
+  <div class="flex items-start">
+    <span class="text-blue-600 mr-2">5.</span>
+    <span class="text-gray-700">Open Elective II</span>
+  </div>
+  <ul class="ml-10 mt-2 mb-4 list-disc text-sm text-gray-600 space-y-1">
+    <li>Project Management</li>
+                    <li>Probability and Statistics</li>
+                    <li>Financial Management</li>
+  </ul>
+</li>
+
+                    </ol>
+                </div>
+
+                <!-- Features Column -->
+                <div class="flex-1">
+                    <h4 class="text-lg font-semibold text-gray-800 mb-4 border-b pb-2">Premium Features</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-blue-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-gray-700">Master Solutions with detailed explanations</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-blue-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-gray-700">Solved Previous Year Questions (PYQs)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-blue-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-gray-700">Important Notes (IMP) from toppers</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-blue-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-gray-700">Exam Decodes and pattern analysis</span>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+<div class="bg-gray-50 px-2 pt-4 py-4 border-t border-gray-200">
+        <!-- Action Buttons -->
+        <div class="flex justify-end space-x-3">
+                          <button class="px-5 py-2 border border-gray-300 rounded-md text-gray-700 font-medium hover:bg-gray-100 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                              Try for Free
+                          </button>
+                          <button class="px-5 py-2 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                              Purchase Now
+                          </button>
+                      </div></div>
+    </div>
+</div>
+
+          <!-- Semester 5 Content -->
+<div id="sem5Content" class="w-full max-w-5xl mx-auto mb-4">
+    <!-- Semester Card - Enhanced Version -->
+    <div class="bg-white border border-gray-200 rounded-lg p-6 pb-2 shadow-sm hover:shadow transition-all duration-200">
+        <!-- Header with Year Badge -->
+        <div class="flex justify-between items-start mb-6">
+            <h3 class="text-2xl font-bold text-blue-700">Semester 5</h3>
+            <span class="bg-black text-white text-xs font-medium px-2.5 py-1 rounded-full">#2019</span>
+        </div>
+
+        <!-- Mobile View (Same as Original) -->
+        <div class="md:hidden">
+            <ul class="space-y-2 mb-4">
+                <li class="flex items-start"><span class="text-blue-600 font-medium mr-2">1.</span> Database
+Management
+systems</li>
+                <li class="flex items-start"><span class="text-blue-600 font-medium mr-2">2.</span>Theory of Computation</li>
+                <li class="flex items-start"><span class="text-blue-600 font-medium mr-2">3.</span>Systems Programming
+and Operating System</li>
+                <li class="flex items-start"><span class="text-blue-600 font-medium mr-2">4.</span>Computer Networks
+and Security</li>
+                <li class="flex flex-col items-start">
+                <div class="flex items-start">
+                    <span class="text-blue-600 font-medium mr-2">5.</span>
+                    <span class="font-medium text-gray-800">Elective I </span>
+                </div>
+                <ul class="ml-10 mt-2 list-disc text-sm text-gray-700 space-y-1">
+                    <li>IOT and Embedded Systems</li>
+                    <li>Human Computer Interface</li>
+                    <li>Distributed Systems</li>
+                    <li>Software Project Management</li>
+                </ul>
+
+                </li>
+            </ul>
+            <p class="text-sm text-gray-500 italic mb-6">"Master Solutions / Solved PYQs / IMP Notes / Decodes & More"</p>
+        </div>
+
+        <!-- Desktop View - Enhanced -->
+        <div class="hidden md:block">
+            <div class="flex gap-8">
+                <!-- Subjects Column -->
+                <div class="flex-1">
+                    <h4 class="text-lg font-semibold text-gray-800 mb-4 border-b pb-2">Subjects Included</h4>
+                    <ol class="space-y-3 ml-4">
+                        <li class="flex items-start">
+                            <span class="text-blue-600 mr-2">1</span>
+                            <span class="text-gray-700">Database
+Management
+systems</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-600 mr-2">2</span>
+                            <span class="text-gray-700">Theory of Computation</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-600 mr-2">3</span>
+                            <span class="text-gray-700">Systems Programming
+and Operating System</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-600 mr-2">4</span>
+                            <span class="text-gray-700">Computer Networks
+and Security</span>
+                        </li>
+                        <li class="flex flex-col items-start">
+  <div class="flex items-start">
+    <span class="text-blue-600 mr-2">5.</span>
+    <span class="text-gray-700">Elective I</span>
+  </div>
+  <ul class="ml-10 mt-2 mb-4 list-disc text-sm text-gray-600 space-y-1">
+    <li>Internet of Things and Embedded Systems</li>
+                    <li>Human Computer Interface</li>
+                    <li>Distributed Systems</li>
+                    <li>Software Project Management</li>
+  </ul>
+</li>
+
+                    </ol>
+                </div>
+
+                <!-- Features Column -->
+                <div class="flex-1">
+                    <h4 class="text-lg font-semibold text-gray-800 mb-4 border-b pb-2">Premium Features</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-blue-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-gray-700">Master Solutions with detailed explanations</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-blue-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-gray-700">Solved Previous Year Questions (PYQs)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-blue-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-gray-700">Important Notes (IMP) from toppers</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-blue-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-gray-700">Exam Decodes and pattern analysis</span>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+<div class="bg-gray-50 px-2 pt-4 py-4 border-t border-gray-200">
+        <!-- Action Buttons -->
+        <div class="flex justify-end space-x-3">
+                          <button class="px-5 py-2 border border-gray-300 rounded-md text-gray-700 font-medium hover:bg-gray-100 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                              Try for Free
+                          </button>
+                          <button class="px-5 py-2 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                              Purchase Now
+                          </button>
+                      </div></div>
+    </div>
+</div>
+
+          <!-- Semester 6 Content -->
+               
+<div id="sem6Content" class="w-full max-w-5xl mx-auto mb-4">
+    <!-- Semester Card - Enhanced Version -->
+    <div class="bg-white border border-gray-200 rounded-lg p-6 pb-2 shadow-sm hover:shadow transition-all duration-200">
+        <!-- Header with Year Badge -->
+        <div class="flex justify-between items-start mb-6">
+            <h3 class="text-2xl font-bold text-blue-700">Semester 6</h3>
+            <span class="bg-black text-white text-xs font-medium px-2.5 py-1 rounded-full">#2019</span>
+        </div>
+
+        <!-- Mobile View (Same as Original) -->
+        <div class="md:hidden">
+            <ul class="space-y-2 mb-4">
+                <li class="flex items-start"><span class="text-blue-600 font-medium mr-2">1.</span>Data Science and Big
+Data Analytics</li>
+                <li class="flex items-start"><span class="text-blue-600 font-medium mr-2">2.</span> Web Technology</li>
+                <li class="flex items-start"><span class="text-blue-600 font-medium mr-2">3.</span>Artificial Intelligence</li>
+                
+                <li class="flex flex-col items-start">
+                <div class="flex items-start">
+                    <span class="text-blue-600 font-medium mr-2">4.</span>
+                    <span class="font-medium text-gray-800">Elective II </span>
+                </div>
+                <ul class="ml-10 mt-2 list-disc text-sm text-gray-700 space-y-1">
+                    <li>Information Security</li>
+                    <li>Augmented and Virtual Reality</li>
+                    <li>Cloud Computing</li>
+                    <li>Software Modeling and Architectures</li>
+                </ul>
+
+                </li>
+            </ul>
+            <p class="text-sm text-gray-500 italic mb-6">"Master Solutions / Solved PYQs / IMP Notes / Decodes & More"</p>
+        </div>
+
+        <!-- Desktop View - Enhanced -->
+        <div class="hidden md:block">
+            <div class="flex gap-8">
+                <!-- Subjects Column -->
+                <div class="flex-1">
+                    <h4 class="text-lg font-semibold text-gray-800 mb-4 border-b pb-2">Subjects Included</h4>
+                    <ol class="space-y-3 ml-4">
+                        <li class="flex items-start">
+                            <span class="text-blue-600 mr-2">1</span>
+                            <span class="text-gray-700">Data Science and Big
+Data Analytics</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-600 mr-2">2</span>
+                            <span class="text-gray-700">Web Technology</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-600 mr-2">3</span>
+                            <span class="text-gray-700">Artificial Intelligence</span>
+                        </li>
+                        
+                        <li class="flex flex-col items-start">
+  <div class="flex items-start">
+    <span class="text-blue-600 mr-2">4.</span>
+    <span class="text-gray-700">Elective II</span>
+  </div>
+  <ul class="ml-10 mt-2 mb-4 list-disc text-sm text-gray-600 space-y-1">
+    <li>Information Security</li>
+                    <li>Augmented and Virtual Reality</li>
+                    <li>Cloud Computing</li>
+                    <li>Software Modeling and Architectures</li>
+  </ul>
+</li>
+
+                    </ol>
+                </div>
+
+                <!-- Features Column -->
+                <div class="flex-1">
+                    <h4 class="text-lg font-semibold text-gray-800 mb-4 border-b pb-2">Premium Features</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-blue-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-gray-700">Master Solutions with detailed explanations</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-blue-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-gray-700">Solved Previous Year Questions (PYQs)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-blue-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-gray-700">Important Notes (IMP) from toppers</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-blue-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-gray-700">Exam Decodes and pattern analysis</span>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+<div class="bg-gray-50 px-2 pt-4 py-4 border-t border-gray-200">
+        <!-- Action Buttons -->
+        <div class="flex justify-end space-x-3">
+                          <button class="px-5 py-2 border border-gray-300 rounded-md text-gray-700 font-medium hover:bg-gray-100 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                              Try for Free
+                          </button>
+                          <button class="px-5 py-2 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                              Purchase Now
+                          </button>
+                      </div></div>
+    </div>
+</div>
+
+          <!-- Single How to Access Card (moved outside semester content divs) -->
+          <div class="w-full max-w-5xl">
+              <div class="bg-white border border-gray-200 rounded-lg p-6 mb-6 shadow-sm">
+                  <h4 class="text-lg font-semibold text-blue-800 mb-4">How to get access?</h4>
+                  <!-- Mobile layout - image first -->
+                  <div class="md:hidden mb-6">
+                      <img src="/assets/images/Access Flow.png" alt="Access Flow Process" class="w-full h-auto rounded-lg border border-gray-200 shadow">
+                  </div>
+                  <!-- Desktop layout - image left, text right -->
+                  <div class="hidden md:flex mt-8 items-start gap-6">
+                      <div class="flex-1">
+                          <img src="/assets/images/Access Flow.png" alt="Access Flow Process" class="w-full h-auto rounded-lg border border-gray-200 shadow">
+                      </div>
+                      <div class="flex-1">
+                          <ol class="list-decimal list-inside text-gray-700 space-y-3">
+                              <li class="font-medium">Select your branch and semester from the website.</li>
+                              <li class="font-medium">Click on "Purchase Now" to begin.</li>
+                              <li class="font-medium">Complete Payment securely using your preferred method.</li>
+                              <li class="font-medium">Fill the Access Form linked after payment.</li>
+                              <li class="font-medium">Get Instant Access to all notes, solutions & materials via Drive.</li>
+                          </ol>
+                      </div>
+                  </div>
+                  <!-- Mobile text content (hidden on desktop) -->
+                  <div class="md:hidden">
+                      <ol class="list-decimal list-inside text-gray-700 space-y-3">
+                          <li class="font-medium">Select your branch and semester from the website.</li>
+                          <li class="font-medium">Click on "Purchase Now" to begin.</li>
+                          <li class="font-medium">Complete Payment securely using your preferred method.</li>
+                          <li class="font-medium">Fill the Access Form linked after payment.</li>
+                          <li class="font-medium">Get Instant Access to all notes, solutions & materials via Drive.</li>
+                      </ol>
+                  </div>
+              </div>
+          </div>
+      </main>
+  </div>
+</div>
+
+<style>
+  /* Custom font import for 'Inter' */
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  body {
+      font-family: 'Inter', sans-serif;
+  }
+
+  /* Hide scrollbar for mobile semester buttons but allow scrolling */
+  .no-scrollbar::-webkit-scrollbar {
+      display: none;
+  }
+  .no-scrollbar {
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+  }
+
+  /* Smooth transitions for semester switching */
+  .semester-card {
+      transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      // Get all semester buttons
+      const semesterButtons = document.querySelectorAll('.sem-button');
+      // Get all semester content sections
+      const semesterContents = document.querySelectorAll('[id^="sem"][id$="Content"]');
+
+      // Function to show a specific semester content and highlight the corresponding button
+      function showSemester(semId) {
+          // Hide all content sections
+          semesterContents.forEach(content => {
+              content.classList.add('hidden');
+          });
+
+          // Show the selected content section
+          const selectedContent = document.getElementById(`sem${semId}Content`);
+          if (selectedContent) {
+              selectedContent.classList.remove('hidden');
+          }
+
+          // Remove active styling from all buttons
+          semesterButtons.forEach(button => {
+              // For mobile buttons
+              if (window.innerWidth < 768) {
+                  button.classList.remove('bg-blue-600', 'text-white', 'border-blue-600');
+                  button.classList.add('bg-blue-50', 'text-blue-700', 'border-blue-600');
+              } 
+              // For desktop buttons
+              else {
+                  button.classList.remove('bg-blue-100', 'text-blue-800');
+                  button.classList.add('text-blue-800', 'hover:bg-blue-100');
+              }
+          });
+
+          // Add active styling to the clicked button
+          semesterButtons.forEach(button => {
+              if (button.dataset.sem === String(semId)) {
+                  // Mobile active state
+                  if (window.innerWidth < 768) {
+                      button.classList.remove('bg-blue-50', 'text-blue-700', 'border-blue-600');
+                      button.classList.add('bg-blue-600', 'text-white', 'border-blue-600');
+                  } 
+                  // Desktop active state
+                  else {
+                      button.classList.remove('text-blue-800', 'hover:bg-blue-100');
+                      button.classList.add('bg-blue-100', 'text-blue-800');
+                  }
+              }
+          });
+      }
+
+      // Add click event listeners to all semester buttons
+      semesterButtons.forEach(button => {
+          button.addEventListener('click', function() {
+              const semId = this.dataset.sem;
+              showSemester(semId);
+          });
+      });
+
+      // Initially show Semester 3 content on page load
+      showSemester(3);
+  });
+</script>
+
+
+  <div id="footer-placeholder"></div>
+
+  <script src="/assets/js/main.js" defer></script>
+  <script src="/assets/js/load-components.js" defer></script>
+</body>
+</html>

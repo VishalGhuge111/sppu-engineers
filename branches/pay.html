@@ -3,83 +3,57 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SPPU Engineers - Payment</title>
-  <style>
-    body { font-family: Arial, sans-serif; background: #f0f8ff; padding: 20px; }
-    form { background: white; padding: 20px; border-radius: 8px; max-width: 400px; margin: auto; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-    label { display: block; margin-top: 15px; font-weight: bold; }
-    input, select, button {
-      width: 100%; padding: 10px; margin-top: 5px; border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-    button { background: #007bff; color: white; border: none; margin-top: 20px; }
-    button:hover { background: #0056b3; }
-  </style>
+  <title>SPPU Engineers Payment</title>
 </head>
-<body>
-
-  <h2 style="text-align: center;">Pay ₹149 to Access Notes</h2>
+<body style="font-family:sans-serif;padding:40px;">
+  <h2>Pay ₹149 to Access Notes</h2>
 
   <form id="paymentForm">
-    <label for="name">Full Name</label>
-    <input type="text" id="name" required />
-
-    <label for="email">Email</label>
-    <input type="email" id="email" required />
-
-    <label for="phone">Phone Number</label>
-    <input type="tel" id="phone" required pattern="[0-9]{10}" />
-
-    <label for="folder">Select Semester</label>
-    <select id="folder" required>
-      <option value="">-- Select Semester --</option>
-      <option value="FE-2024-S1">FE 1st Semester</option>
-      <option value="FE-2024-S2">FE 2nd Semester</option>
-      <option value="SE-2024-COMP3">SE Comp 3rd Semester</option>
-      <option value="SE-2024-COMP4">SE Comp 4th Semester</option>
-      <option value="TE-2019-COMP5">TE Comp 5th Semester</option>
-      <option value="TE-2019-COMP6">TE Comp 6th Semester</option>
-      <!-- Add other folders as needed -->
-    </select>
-
+    <input type="text" name="name" placeholder="Full Name" required><br><br>
+    <input type="email" name="email" placeholder="Email" required><br><br>
+    <input type="tel" name="phone" placeholder="Phone Number" required><br><br>
     <button type="submit">Pay ₹149</button>
   </form>
 
+  <p id="error" style="color:red;margin-top:20px;"></p>
+
   <script>
-    document.getElementById("paymentForm").onsubmit = async function(e) {
+    const form = document.getElementById('paymentForm');
+    const error = document.getElementById('error');
+
+    form.onsubmit = async (e) => {
       e.preventDefault();
+      error.textContent = "";
 
-      const name = document.getElementById("name").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const phone = document.getElementById("phone").value.trim();
-      const folder = document.getElementById("folder").value;
-
-      if (!name || !email || !phone || !folder) {
-        alert("Please fill in all fields.");
-        return;
-      }
+      const formData = new FormData(form);
+      const data = {
+        name: formData.get("name"),
+        email: formData.get("email"),
+        phone: formData.get("phone")
+      };
 
       try {
-        const res = await fetch("https://script.google.com/macros/s/AKfycbxPW5EPy8W52NOD61z0GedcwkjLgJwj6lTlMDdw8RdhWDjTX0vYRPm_G5GxZ9Jyc9Ua_g/exec", {
+        const response = await fetch("https://script.google.com/macros/s/AKfycbxPW5EPy8W52NOD61z0GedcwkjLgJwj6lTlMDdw8RdhWDjTX0vYRPm_G5GxZ9Jyc9Ua_g/exec", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name, email, phone, folder })
+          body: JSON.stringify(data),
+          headers: {
+            "Content-Type": "application/json"
+          }
         });
 
-        const result = await res.json();
-        if (result.payUrl) {
-          window.location.href = result.payUrl;
-        } else {
-          alert("Something went wrong. Try again.");
-          console.error(result);
-        }
+        const result = await response.json();
 
+        if (result.payments && result.payments.url) {
+          window.location.href = result.payments.url;
+        } else if (result.error) {
+          error.textContent = "Error: " + result.error;
+        } else {
+          error.textContent = "Unexpected error occurred.";
+        }
       } catch (err) {
-        alert("Error: " + err.message);
-        console.error("Error details:", err);
+        error.textContent = "Network Error: " + err.message;
       }
     };
   </script>
-
 </body>
 </html>

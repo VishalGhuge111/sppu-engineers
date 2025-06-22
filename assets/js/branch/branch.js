@@ -76,3 +76,13 @@ document.addEventListener('DOMContentLoaded', function() {
         if (defaultBtn) defaultBtn.click();
     }
 });
+
+function openCashfreePopup() {
+    if (typeof Cashfree !== 'undefined') {
+      Cashfree.initPopup({
+        paymentFormURL: 'https://payments.cashfree.com/forms/Sppuengineer'
+      });
+    } else {
+      alert("Cashfree SDK not loaded.");
+    }
+  }

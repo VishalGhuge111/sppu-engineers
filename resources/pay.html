@@ -1,85 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SPPU Engineers - Payment</title>
-  <style>
-    body { font-family: Arial, sans-serif; background: #f0f8ff; padding: 20px; }
-    form { background: white; padding: 20px; border-radius: 8px; max-width: 400px; margin: auto; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-    label { display: block; margin-top: 15px; font-weight: bold; }
-    input, select, button {
-      width: 100%; padding: 10px; margin-top: 5px; border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-    button { background: #007bff; color: white; border: none; margin-top: 20px; }
-    button:hover { background: #0056b3; }
-  </style>
+  <title>Pay ₹149 to Access Notes</title>
 </head>
 <body>
-
-  <h2 style="text-align: center;">Pay ₹149 to Access Notes</h2>
-
-  <form id="paymentForm">
-    <label for="name">Full Name</label>
-    <input type="text" id="name" required />
-
-    <label for="email">Email</label>
-    <input type="email" id="email" required />
-
-    <label for="phone">Phone Number</label>
-    <input type="tel" id="phone" required pattern="[0-9]{10}" />
-
-    <label for="folder">Select Semester</label>
-    <select id="folder" required>
-      <option value="">-- Select Semester --</option>
-      <option value="FE-2024-S1">FE 1st Semester</option>
-      <option value="FE-2024-S2">FE 2nd Semester</option>
-      <option value="SE-2024-COMP3">SE Comp 3rd Semester</option>
-      <option value="SE-2024-COMP4">SE Comp 4th Semester</option>
-      <option value="TE-2019-COMP5">TE Comp 5th Semester</option>
-      <option value="TE-2019-COMP6">TE Comp 6th Semester</option>
-      <!-- Add other folders as needed -->
-    </select>
-
-    <button type="submit">Pay ₹149</button>
-  </form>
+  <h2>Pay ₹149 to Access Notes</h2>
+  <input id="name" placeholder="Your Name"><br><br>
+  <input id="email" placeholder="Your Email"><br><br>
+  <input id="phone" placeholder="Your Phone"><br><br>
+  <select id="semester">
+    <option value="SE Comp 3rd Sem">SE Comp 3rd Sem</option>
+  </select><br><br>
+  <button id="payBtn">Pay Now</button>
 
   <script>
-    document.getElementById("paymentForm").onsubmit = async function(e) {
-      e.preventDefault();
+    document.getElementById("payBtn").addEventListener("click", createOrder);
 
-      const name = document.getElementById("name").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const phone = document.getElementById("phone").value.trim();
-      const folder = document.getElementById("folder").value;
-
-      if (!name || !email || !phone || !folder) {
-        alert("Please fill in all fields.");
-        return;
-      }
+    async function createOrder() {
+      const payload = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        phone: document.getElementById("phone").value,
+        semester: document.getElementById("semester").value
+      };
 
       try {
-        const res = await fetch("https://script.google.com/macros/s/AKfycbxPW5EPy8W52NOD61z0GedcwkjLgJwj6lTlMDdw8RdhWDjTX0vYRPm_G5GxZ9Jyc9Ua_g/exec", {
+        const res = await fetch("https://script.google.com/macros/s/AKfycbyd9nl6eT3huSczOj4ntgtxS1wEERLa1DNfw06fJMeF-BE5NfcAHKLxJgvArTEjeE6F/exec", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name, email, phone, folder })
+          body: JSON.stringify(payload),
+          headers: {
+            "Content-Type": "application/json"
+          }
         });
 
-        const result = await res.json();
-        if (result.payUrl) {
-          window.location.href = result.payUrl;
+        const data = await res.json();
+
+        if (data?.payments?.url) {
+          window.location.href = data.payments.url;
         } else {
-          alert("Something went wrong. Try again.");
-          console.error(result);
+          alert("Failed to create order.");
+          console.log(data);
         }
-
-      } catch (err) {
-        alert("Error: " + err.message);
-        console.error("Error details:", err);
+      } catch (error) {
+        console.error("Error:", error);
+        alert("Something went wrong. Please try again.");
       }
-    };
+    }
   </script>
-
 </body>
 </html>

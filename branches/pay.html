@@ -3,25 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cashfree Popup Test</title>
+  <title>Cashfree Checkout</title>
   <script src="https://sdk.cashfree.com/js/v3/cashfree.js"></script>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body class="bg-gray-100 flex items-center justify-center h-screen">
+<body style="display:flex; justify-content:center; align-items:center; height:100vh;">
 
-  <button onclick="openCashfreePopup()"
-          class="px-5 py-2 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+  <button onclick="openCashfreePopup()" style="padding:12px 24px; background:#2563eb; color:white; border:none; border-radius:6px; font-size:16px;">
     Purchase Now
   </button>
 
   <script>
     function openCashfreePopup() {
       if (typeof Cashfree !== 'undefined') {
-        Cashfree.initPopup({
+        Cashfree.checkout({
           paymentFormURL: 'https://payments.cashfree.com/forms/Sppuengineer'
         });
       } else {
-        alert("Cashfree SDK failed to load.");
+        alert("Cashfree SDK not loaded.");
       }
     }
   </script>

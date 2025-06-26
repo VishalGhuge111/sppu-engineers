@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Payment Successful | SPPU Engineers</title>
+    <meta name="description" content="Thank you for your payment. Your study materials are now available on Google Drive and a confirmation email has been sent to your registered address.">
+    <meta name="keywords" content="SPPU payment success, engineering study materials, diploma notes, SPPU resources, Pune University">
+    <meta name="author" content="SPPU Engineers">
+    
+    <link rel="icon" type="image/png" href="/assets/images/logo.png" sizes="96x96">
+    <link rel="apple-touch-icon" href="/assets/images/logo.png">
+    
+    <meta property="og:title" content="Payment Successful | SPPU Engineers">
+    <meta property="og:description" content="Your study materials are now available on Google Drive. Confirmation email sent.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sppuengineers.site/pg/py-success">
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Payment Successful | SPPU Engineers">
+    <meta name="twitter:description" content="Your study materials are now available on Google Drive. Confirmation email sent.">
+    
+    <link rel="canonical" href="https://sppuengineers.site/pg/py-success">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Gabriela&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    
+    <style>
+        /* Loading Screen Styles - Keep Black */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+
+        .logo-loader {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 24px;
+            opacity: 0;
+            animation: fadeInScale 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .progress-container {
+            width: 200px;
+            height: 4px;
+            background-color: #374151;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: #3b82f6;
+            width: 0;
+            animation: progressLoad 2s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+        }
+
+        @keyframes fadeInScale {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes progressLoad {
+            0% { width: 0; }
+            100% { width: 100%; }
+        }
+
+        /* Success Card Animations */
+        .checkmark-container {
+            animation: checkmarkPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes checkmarkPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .success-card {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-card {
+            border: 1px solid #e5e7eb;
+            background-color: #ffffff;
+        }
+
+        /* Blue theme for success header and button */
+        .success-header {
+            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+        }
+
+        .gradient-button {
+            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+        }
+
+        .gradient-button:active {
+            background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+        }
+
+        /* Use Gabriela font */
+        .font-gabriela {
+            font-family: 'Gabriela', serif;
+        }
+
+        /* Professional styling */
+        .icon-circle {
+            background-color: #f9fafb;
+            border: 1px solid #e5e7eb;
+        }
+
+        /* Return to Home button styling */
+        .home-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 12px;
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+        }
+
+        .home-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .home-button:active {
+            transform: translateY(0);
+            box-shadow: none;
+        }
+
+        /* Mobile responsive improvements */
+        @media (max-width: 640px) {
+            .main-container {
+                padding: 16px;
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .success-card-mobile {
+                width: 100%;
+                max-width: none;
+                margin: 0;
+                border-radius: 16px;
+            }
+            
+            .header-mobile {
+                padding: 32px 24px;
+            }
+            
+            .content-mobile {
+                padding: 24px;
+            }
+            
+            .feature-card-mobile {
+                padding: 20px;
+                margin-bottom: 16px;
+            }
+            
+            .button-mobile {
+                height: 48px;
+                font-size: 16px;
+            }
+
+            /* Mobile-specific layout: icon + heading on same line, description below */
+            .mobile-feature-layout {
+                display: block;
+            }
+            
+            .mobile-feature-header {
+                display: flex;
+                align-items: center;
+                margin-bottom: 12px;
+            }
+            
+            .mobile-feature-icon {
+                margin-right: 12px;
+                margin-top: 0;
+            }
+            
+            .mobile-feature-title {
+                margin-bottom: 0;
+            }
+            
+            .mobile-feature-description {
+                width: 100%;
+                margin-bottom: 16px;
+            }
+            
+            .mobile-feature-button {
+                width: 100%;
+            }
+        }
+
+        @media (min-width: 641px) {
+            .main-container {
+                padding: 32px;
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .success-card-desktop {
+                width: 100%;
+                max-width: 600px;
+                margin: 0 auto;
+            }
+
+            /* Desktop layout: keep original structure */
+            .desktop-feature-layout {
+                display: flex;
+                align-items: start;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-gabriela">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Payment Successful | SPPU Engineers",
+      "description": "Thank you for your payment. Your study materials are now available on Google Drive and a confirmation email has been sent.",
+      "url": "https://sppuengineers.site/pg/py-success"
+    }
+    </script>
+
+    <div id="loadingScreen" class="loading-screen">
+        <img src="/assets/images/logo.png" alt="SPPU Engineers" class="logo-loader">
+        <div class="progress-container">
+            <div class="progress-bar"></div>
+        </div>
+        <p class="mt-4 text-gray-300 text-sm font-gabriela">Preparing your access...</p>
+    </div>
+
+    <div id="header-placeholder"></div>
+
+    <main class="main-container pt-24">
+        <div class="success-card success-card-mobile sm:success-card-desktop bg-white rounded-2xl overflow-hidden">
+            <div class="success-header header-mobile sm:px-8 sm:py-12 text-center">
+                <div class="mx-auto w-20 h-20 mb-6">
+                    <div class="checkmark-container w-20 h-20 rounded-full bg-white bg-opacity-20 backdrop-blur-sm flex items-center justify-center border border-white border-opacity-30">
+                        <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center">
+                            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <h1 class="text-2xl sm:text-3xl font-bold text-white mb-2 font-gabriela">Payment Successful!</h1>
+                <p class="text-white text-opacity-90 text-base sm:text-lg font-gabriela">Your study materials are now available</p>
+            </div>
+
+            <div class="content-mobile sm:p-8">
+                <div class="space-y-4 mb-8">
+                    <div class="feature-card feature-card-mobile sm:p-6 rounded-lg">
+                        <div class="mobile-feature-layout sm:hidden">
+                            <div class="mobile-feature-header">
+                                <div class="mobile-feature-icon flex-shrink-0 w-10 h-10 icon-circle rounded-full flex items-center justify-center">
+                                    <svg class="w-5 h-5 text-gray-600" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z" />
+                                    </svg>
+                                </div>
+                                <h3 class="mobile-feature-title font-semibold text-gray-900 font-gabriela text-base"> Drive Access Granted</h3>
+                            </div>
+                            <p class="mobile-feature-description text-gray-600 text-sm font-gabriela leading-relaxed">
+                                All your study materials have been instantly added to your personal Google Drive folder. Access them anytime, anywhere.
+                            </p>
+                            <button onclick="window.open('https://drive.google.com/drive/shared-with-me', '_blank')" class="mobile-feature-button inline-flex items-center justify-center px-4 py-2 bg-gray-100 text-gray-700 text-sm rounded-lg font-gabriela border">
+                                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M6.5 2L3 6.5 6.5 11H10L13.5 6.5 10 2H6.5ZM14 2L10.5 6.5 14 11H21L17.5 6.5 21 2H14ZM3 13.5L6.5 18H10L6.5 13.5H3ZM14 13.5L10.5 18H17.5L21 13.5H14Z" />
+                                </svg>
+                                Open Drive Folder
+                            </button>
+                        </div>
+
+                        <div class="desktop-feature-layout hidden sm:flex space-x-4">
+                            <div class="flex-shrink-0 w-10 h-10 icon-circle rounded-full flex items-center justify-center mt-1">
+                                <svg class="w-5 h-5 text-gray-600" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z" />
+                                </svg>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-semibold text-gray-900 mb-2 font-gabriela text-base">Google Drive Access Granted</h3>
+                                <p class="text-gray-600 text-sm font-gabriela leading-relaxed mb-4">
+                                    All your study materials have been instantly added to your personal Google Drive folder. Access them anytime, anywhere.
+                                </p>
+                                <button onclick="window.open('https://drive.google.com/drive/shared-with-me', '_blank')" class="inline-flex items-center px-4 py-2 bg-gray-100 text-gray-700 text-sm rounded-lg font-gabriela border">
+                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M6.5 2L3 6.5 6.5 11H10L13.5 6.5 10 2H6.5ZM14 2L10.5 6.5 14 11H21L17.5 6.5 21 2H14ZM3 13.5L6.5 18H10L6.5 13.5H3ZM14 13.5L10.5 18H17.5L21 13.5H14Z" />
+                                    </svg>
+                                    Open Drive Folder
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="feature-card feature-card-mobile sm:p-6 rounded-lg">
+                        <div class="mobile-feature-layout sm:hidden">
+                            <div class="mobile-feature-header">
+                                <div class="mobile-feature-icon flex-shrink-0 w-10 h-10 icon-circle rounded-full flex items-center justify-center">
+                                    <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="mobile-feature-title font-semibold text-gray-900 font-gabriela text-base">Confirmation Email Sent</h3>
+                            </div>
+                            <p class="mobile-feature-description text-gray-600 text-sm font-gabriela leading-relaxed">
+                                A detailed receipt with access instructions and download links has been sent to your registered email address.
+                            </p>
+                        </div>
+
+                        <div class="desktop-feature-layout hidden sm:flex space-x-4">
+                            <div class="flex-shrink-0 w-10 h-10 icon-circle rounded-full flex items-center justify-center mt-1">
+                                <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-semibold text-gray-900 mb-2 font-gabriela text-base">Confirmation Email Sent</h3>
+                                <p class="text-gray-600 text-sm font-gabriela leading-relaxed">
+                                    A detailed receipt with access instructions and download links has been sent to your registered email address.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="feature-card feature-card-mobile sm:p-6 rounded-lg">
+                        <div class="mobile-feature-layout sm:hidden">
+                            <div class="mobile-feature-header">
+                                <div class="mobile-feature-icon flex-shrink-0 w-10 h-10 icon-circle rounded-full flex items-center justify-center">
+                                    <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="mobile-feature-title font-semibold text-gray-900 font-gabriela text-base">24/7 Premium Support</h3>
+                            </div>
+                            <p class="mobile-feature-description text-gray-600 text-sm font-gabriela leading-relaxed">
+                                Our dedicated support team is available round the clock to assist you with any questions or technical issues.
+                            </p>
+                        </div>
+
+                        <div class="desktop-feature-layout hidden sm:flex space-x-4">
+                            <div class="flex-shrink-0 w-10 h-10 icon-circle rounded-full flex items-center justify-center mt-1">
+                                <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-semibold text-gray-900 mb-2 font-gabriela text-base">24/7 Premium Support</h3>
+                                <p class="text-gray-600 text-sm font-gabriela leading-relaxed">
+                                    Our dedicated support team is available round the clock to assist you with any questions or technical issues.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <button onclick="window.location.href='/'" class="gradient-button home-button w-full text-white font-semibold font-gabriela">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                        </svg>
+                        Return to Homepage
+                    </button>
+
+                    <div class="text-center pt-4 border-t border-gray-200">
+                        <p class="text-gray-500 text-sm font-gabriela">
+                            Need help?
+                            <button onclick="window.location.href='/contact'" class="text-gray-700 ml-1 underline font-gabriela">
+                                Contact Support
+                            </button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="/assets/js/main.js" defer></script>
+    <script src="/assets/js/load-components.js" defer></script>
+    
+    <script>
+        // Loading Animation Script
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                var loadingScreen = document.getElementById('loadingScreen');
+                loadingScreen.style.opacity = '0';
+                
+                setTimeout(function() {
+                    loadingScreen.style.display = 'none';
+                }, 800);
+            }, 2200); // 2.2 seconds for premium feel
+        });
+
+    </script>
+</body>
+</html>

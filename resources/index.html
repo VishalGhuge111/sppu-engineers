@@ -1,24 +1,294 @@
 <!DOCTYPE html>
-  <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>SPPU Engineers</title>
-      <script src="https://cdn.tailwindcss.com"></script>
-      <link href="https://fonts.googleapis.com/css2?family=Gabriela&display=swap" rel="stylesheet">
-      <link rel="stylesheet" href="/assets/css/style.css">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    </head>
-    
-  <body class="bg-white text-gray-900 font-sans">
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- Primary Meta Tags -->
+    <title>Diverse Resources - SPPU Engineers | Tools, Projects & More</title>
+    <meta name="description" content="Explore a curated collection of diverse resources for SPPU engineering students, including coding tools, development guides, project kits, portfolio templates, and more." />
+    <meta name="keywords" content="SPPU resources, engineering tools, coding guides, development kits, project resources, portfolio site, educational content, tech resources, student resources, SPPU Engineers" />
+    <meta name="author" content="SPPU Engineers" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/assets/images/logo.png" sizes="96x96" />
+    <link rel="apple-touch-icon" href="/assets/images/logo.png" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://sppuengineers.site/resources/" />
+    <meta property="og:title" content="Diverse Resources - SPPU Engineers" />
+    <meta property="og:description" content="Expand your skillset with a wide range of tools, project guides, and educational content for engineering students." />
+    <meta property="og:image" content="https://sppuengineers.site/assets/images/sppu-engineers-preview.png" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://sppuengineers.site/resources/" />
+    <meta name="twitter:title" content="Diverse Resources - SPPU Engineers" />
+    <meta name="twitter:description" content="Expand your skillset with a wide range of tools, project guides, and educational content for engineering students." />
+    <meta name="twitter:image" content="https://sppuengineers.site/assets/images/sppu-engineers-preview.png" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://sppuengineers.site/resources/" />
+
+    <!-- Preconnects -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+
+    <!-- Styles & Fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Gabriela&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <style>
+        body {
+            /* Ensures footer sticks to bottom if content is short */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .font-gabriela { font-family: 'Gabriela', serif; }
+        
+        /* Transparent Loading Overlay */
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(212, 216, 240, 0.8);
+            backdrop-filter: blur(4px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 0.75rem;
+            z-index: 10;
+        }
+
+        .logo-loader {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 16px;
+            opacity: 0;
+            animation: fadeInScale 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .progress-container {
+            width: 200px;
+            height: 4px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: #232946;
+            width: 0;
+            animation: progressLoad 2s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+        }
+
+        @keyframes fadeInScale {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes progressLoad {
+            0% { width: 0; }
+            100% { width: 100%; }
+        }
+
+        /* Card hover effects */
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        /* Image container with fixed aspect ratio */
+        .image-container {
+            width: 100%;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+            border-radius: 0.5rem;
+            background: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body class="bg-[#d4d8f0] min-h-screen">
     <div id="header-placeholder"></div>
-
     
+    <main class="flex-grow pt-28 pb-12">
+        <div class="max-w-7xl mx-auto px-4 md:px-6">
+            <div class="text-center mb-12">
+                <h1 class="text-2xl md:text-4xl font-bold text-[#232946] mb-4 font-gabriela">Diverse Resources for Engineers</h1>
+                <p class="text-base text-[#232946]">Expand your skillset with curated tools, projects, and learning materials.</p>
+            </div>
+
+            <section id="mainContent" class="relative min-h-[400px]">
+                <div id="loadingOverlay" class="loading-overlay" role="status" aria-live="polite" aria-label="Loading resources">
+                    <img src="/assets/images/logo.png" alt="SPPU Engineers logo" class="logo-loader">
+                    <div class="progress-container">
+                        <div class="progress-bar"></div>
+                    </div>
+                    <p class="mt-4 text-[#232946] text-sm font-gabriela">Loading resources...</p>
+                </div>
+
+                <div id="resources-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 opacity-0 transition-opacity duration-500">
+                    </div>
+
+                <div id="no-resources" class="text-center py-16 hidden">
+                    <i class="fas fa-box-open text-gray-400 text-6xl mb-4"></i>
+                    <h3 class="text-xl font-semibold text-[#232946] mb-2">No Resources Available</h3>
+                    <p class="text-[#232946]">Check back later for new tools, projects, and educational content.</p>
+                </div>
+            </section>
+        </div>
+    </main>
 
     <div id="footer-placeholder"></div>
+    
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getDatabase, ref, onValue } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js';
 
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyC7EvohC3Y9FScY0glVt-hPvkPWrbdM0rU",
+            authDomain: "sppu-engineers-111.firebaseapp.com",
+            databaseURL: "https://sppu-engineers-111-default-rtdb.firebaseio.com",
+            projectId: "sppu-engineers-111",
+            storageBucket: "sppu-engineers-111.firebasestorage.app",
+            messagingSenderId: "622650122117",
+            appId: "1:622650122117:web:0218bbf87b43cf1168aeec"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        // DOM Elements
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        const resourcesGrid = document.getElementById('resources-grid');
+        const noResourcesMessage = document.getElementById('no-resources');
+
+        /**
+         * Loads resource data from Firebase.
+         */
+        function loadResources() {
+            const resourcesRef = ref(database, 'resources');
+            onValue(resourcesRef, (snapshot) => {
+                const resources = snapshot.val();
+                if (resources) {
+                    displayResources(resources);
+                } else {
+                    showNoResources();
+                }
+                hideLoading();
+            }, (error) => {
+                console.error("Error loading resources:", error);
+                hideLoading();
+                showNoResources();
+            });
+        }
+
+        /**
+         * Renders the resource cards on the page.
+         * @param {Object} resources - The object containing resource data from Firebase.
+         */
+        function displayResources(resources) {
+            // Clear previous content
+            resourcesGrid.innerHTML = ''; 
+
+            if (!resources || Object.keys(resources).length === 0) {
+                showNoResources();
+                return;
+            }
+
+            // Hide no resources message if it was previously shown
+            noResourcesMessage.classList.add('hidden');
+
+            // Convert to array and sort by timestamp (newest first)
+            const resourcesArray = Object.entries(resources).map(([id, resource]) => ({
+                id,
+                ...resource
+            })).sort((a, b) => b.timestamp - a.timestamp); // Assuming 'timestamp' exists in your resource objects
+
+            resourcesArray.forEach(resource => {
+                const primaryButtonText = "Access Resource"; 
+                
+                const resourceCard = document.createElement('div');
+                resourceCard.className = 'bg-[#fffffe] rounded-xl shadow-md p-4 card-hover min-h-[350px] flex flex-col';
+                
+                resourceCard.innerHTML = `
+                    ${resource.imageUrl ? `
+                        <div class="image-container mb-4">
+                            <img src="${resource.imageUrl}" alt="Image for ${resource.title}" class="card-image">
+                        </div>
+                    ` : `
+                        <div class="image-container mb-4 bg-gray-200 text-gray-500">
+                            <i class="fas fa-image text-5xl"></i>
+                        </div>
+                    `}
+                    
+                    <div class="flex-1 flex flex-col">
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="text-lg font-bold text-[#232946] font-gabriela line-clamp-2 flex-1">${resource.title}</h3>
+                        </div>
+                        
+                        <p class="text-[#232946] text-sm mb-6 leading-relaxed flex-1">${resource.description.substring(0, 120)}${resource.description.length > 120 ? '...' : ''}</p>
+                        
+                        <div class="flex gap-2 mt-auto">
+                            <a href="${resource.link}" target="_blank" rel="noopener noreferrer" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors flex-1 text-center font-medium text-sm">
+                                ${primaryButtonText}
+                            </a>
+                            <a href="view.html?id=${resource.id}" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors font-medium flex items-center text-sm">
+                                <i class="fas fa-eye mr-2"></i>View More
+                            </a>
+                        </div>
+                    </div>
+                `;
+                
+                resourcesGrid.appendChild(resourceCard);
+            });
+            resourcesGrid.classList.add('opacity-100'); // Ensure grid becomes visible
+        }
+
+        /**
+         * Hides the loading overlay and makes the resources grid visible.
+         */
+        function hideLoading() {
+            loadingOverlay.style.display = "none";
+            resourcesGrid.style.opacity = "1";
+        }
+
+        /**
+         * Displays the "No Resources Available" message.
+         */
+        function showNoResources() {
+            noResourcesMessage.classList.remove('hidden');
+            resourcesGrid.classList.remove('opacity-100'); // Hide the grid if no resources
+        }
+
+        // Load resources when the DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', loadResources);
+    </script>
+    
     <script src="/assets/js/main.js" defer></script>
     <script src="/assets/js/load-components.js" defer></script>
-  </body>
+</body>
 </html>

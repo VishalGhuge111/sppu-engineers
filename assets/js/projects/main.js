@@ -113,10 +113,13 @@ function openModal(projectId) {
         </span>
     `).join('');
     
-    // Button actions
     document.getElementById('payAdvanceButton').onclick = () => {
-        alert(`Payment for ${currentProject.title} - ₹500 advance`);
-    };
+    const confirmPurchase = confirm(`Proceed to payment for ${currentProject.title} - ₹500 advance?`);
+    if (confirmPurchase) {
+        window.open('https://payments.cashfree.com/forms/sppu-projects', '_blank');
+    }
+};
+
     
     document.getElementById('contactButton').onclick = () => {
         const message = `Hi! I'm interested in ${currentProject.title} (${currentProject.id}). Please provide more details.`;

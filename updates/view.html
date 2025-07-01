@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Details | SPPU Engineers</title>
+    <meta name="description" content="View detailed information about this update from SPPU Engineers">
+    <meta name="keywords" content="SPPU update details, engineering news, student information">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:title" content="Update Details | SPPU Engineers">
+    <meta property="og:description" content="Detailed information about this update from SPPU Engineers">
+    <meta property="og:image" content="https://sppuengineers.site/assets/images/logo.png">
+    <meta property="og:url" content="https://sppuengineers.site/updates/view.html"> <meta property="og:type" content="article">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Update Details | SPPU Engineers">
+    <meta name="twitter:description" content="Detailed information about this update from SPPU Engineers">
+    <meta name="twitter:image" content="https://sppuengineers.site/assets/images/logo.png">
+
+    <link rel="canonical" href="https://sppuengineers.site/updates/view.html"> <link rel="icon" type="image/png" href="/assets/images/logo.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Gabriela&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        .font-gabriela { font-family: 'Gabriela', serif; }
+        
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(212, 216, 240, 0.8); /* Adjusted for better contrast */
+            backdrop-filter: blur(4px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 0.75rem;
+            z-index: 10;
+        }
+
+        .logo-loader {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 16px;
+            opacity: 0;
+            animation: fadeInScale 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .progress-container {
+            width: 200px;
+            height: 4px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: #232946;
+            width: 0;
+            animation: progressLoad 2s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+        }
+
+        @keyframes fadeInScale {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes progressLoad {
+            0% { width: 0; }
+            100% { width: 100%; }
+        }
+
+        .detail-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: contain;
+            border-radius: 0.5rem;
+            background: #f3f4f6;
+        }
+    </style>
+</head>
+<body class="bg-[#d4d8f0] min-h-screen flex flex-col">
+    <div id="header-placeholder"></div>
+    
+    <main class="flex-grow pt-28 pb-12">
+        <div class="max-w-4xl mx-auto px-4 md:px-6">
+            <div class="mb-6">
+                <a href="/updates/" class="inline-flex items-center text-[#232946] hover:text-blue-600 transition-colors font-medium font-gabriela">
+                    <i class="fas fa-arrow-left mr-2"></i>
+                    Back to All Updates
+                </a>
+            </div>
+
+            <section id="mainContent" class="relative min-h-[60vh]">
+                <div id="loadingOverlay" class="loading-overlay" role="status" aria-live="polite">
+                    <img src="/assets/images/logo.png" alt="SPPU Engineers" class="logo-loader">
+                    <div class="progress-container">
+                        <div class="progress-bar"></div>
+                    </div>
+                    <p class="mt-4 text-[#232946] text-sm font-gabriela">Loading update details...</p>
+                </div>
+
+                <div id="update-content" class="opacity-0 transition-opacity duration-500">
+                    </div>
+
+                <div id="not-found" class="text-center py-16 hidden">
+                    <i class="fas fa-exclamation-triangle text-gray-400 text-6xl mb-4"></i>
+                    <h1 class="text-2xl font-bold text-[#232946] mb-4 font-gabriela">Update Not Found</h1>
+                    <p class="text-[#232946] mb-6">The update you're looking for doesn't exist or has been removed.</p>
+                    <a href="/updates/" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition-colors">
+                        Return to Updates
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+    
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getDatabase, ref, onValue } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js';
+
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyC7EvohC3Y9FScY0glVt-hPvkPWrbdM0rU",
+            authDomain: "sppu-engineers-111.firebaseapp.com",
+            databaseURL: "https://sppu-engineers-111-default-rtdb.firebaseio.com",
+            projectId: "sppu-engineers-111",
+            storageBucket: "sppu-engineers-111.firebasestorage.app",
+            messagingSenderId: "622650122117",
+            appId: "1:622650122117:web:0218bbf87b43cf1168aeec"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        /**
+         * Extracts the update ID from the URL query parameters.
+         * @returns {string|null} The update ID or null if not found.
+         */
+        function getUpdateIdFromUrl() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('id');
+        }
+
+        /**
+         * Loads and displays the update details from Firebase.
+         */
+        function loadUpdate() {
+            const updateId = getUpdateIdFromUrl();
+            const currentUrl = `https://sppuengineers.site/updates/view.html?id=${updateId}`;
+            
+            // Update canonical and Open Graph URLs
+            const canonicalLink = document.querySelector('link[rel="canonical"]');
+            if (canonicalLink) {
+                canonicalLink.href = currentUrl;
+            }
+
+            const ogUrlMeta = document.querySelector('meta[property="og:url"]');
+            if (ogUrlMeta) {
+                ogUrlMeta.content = currentUrl;
+            }
+
+            if (!updateId) {
+                showNotFound();
+                return;
+            }
+
+            const updateRef = ref(database, `updates/${updateId}`);
+            onValue(updateRef, (snapshot) => {
+                const update = snapshot.val();
+                hideLoading();
+                
+                if (update) {
+                    displayUpdate(update);
+                } else {
+                    showNotFound();
+                }
+            }, (error) => {
+                console.error("Error loading update:", error);
+                hideLoading();
+                showNotFound();
+            });
+        }
+
+        /**
+         * Displays the update content on the page.
+         * @param {Object} update - The update object retrieved from Firebase.
+         */
+        function displayUpdate(update) {
+            const updateContent = document.getElementById('update-content');
+            
+            // Update page title dynamically
+            document.title = `${update.title} | SPPU Engineers`;
+            
+            updateContent.innerHTML = `
+                <article class="bg-white rounded-xl shadow-md overflow-hidden">
+                    ${update.imageUrl ? `
+                        <div class="p-6 pb-0">
+                            <img src="${update.imageUrl}" alt="${update.title}" class="detail-image w-full">
+                        </div>
+                    ` : ''}
+                    
+                    <div class="p-6 md:p-8">
+                        <header class="mb-8">
+                            <h1 class="text-2xl md:text-3xl font-bold text-[#232946] mb-4 font-gabriela">${update.title}</h1>
+                            <div class="flex items-center text-gray-600">
+                                <i class="fas fa-calendar-alt mr-2"></i>
+                                <time datetime="${update.date}">${new Date(update.date).toLocaleDateString('en-US', { 
+                                    year: 'numeric', 
+                                    month: 'long', 
+                                    day: 'numeric' 
+                                })}</time>
+                            </div>
+                        </header>
+                        
+                        <div class="prose max-w-none mb-8">
+                            <div class="text-gray-700 leading-relaxed text-base whitespace-pre-line">${update.description}</div>
+                        </div>
+                    </div>
+                    
+                    ${(update.link || update.pdfUrl) ? `
+                        <div class="px-6 md:px-8 pb-6 md:pb-8 border-t border-gray-200">
+                            <div class="pt-6">
+                                <h3 class="text-lg font-semibold text-[#232946] mb-4 font-gabriela">Additional Resources</h3>
+                                <div class="flex flex-wrap gap-4">
+                                    ${update.link ? `
+                                        <a href="${update.link}" target="_blank" rel="noopener noreferrer" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors flex items-center font-medium">
+                                            <i class="fas fa-external-link-alt mr-2"></i>
+                                            Visit Link
+                                        </a>
+                                    ` : ''}
+                                    
+                                    ${update.pdfUrl ? `
+                                        <a href="${update.pdfUrl}" target="_blank" rel="noopener noreferrer" class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg transition-colors flex items-center font-medium">
+                                            <i class="fas fa-file-pdf mr-2"></i>
+                                            Download PDF
+                                        </a>
+                                    ` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    ` : ''}
+                </article>
+            `;
+            // Make content visible after loading
+            updateContent.classList.add('opacity-100');
+        }
+
+        /**
+         * Shows the "Update Not Found" message and hides loading overlay.
+         */
+        function showNotFound() {
+            document.getElementById('not-found').classList.remove('hidden');
+            document.getElementById('loadingOverlay').style.display = "none"; // Ensure loading is hidden
+        }
+
+        /**
+         * Hides the loading overlay and makes update content visible.
+         */
+        function hideLoading() {
+            const loadingOverlay = document.getElementById("loadingOverlay");
+            const updateContent = document.getElementById("update-content");
+            
+            loadingOverlay.style.display = "none";
+            updateContent.style.opacity = "1"; // Directly set opacity to 1 as it's handled by transition-opacity
+        }
+
+        // Event listener for DOM content loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            loadUpdate();
+            window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top on load
+        });
+    </script>
+    
+    <script src="/assets/js/main.js" defer></script>
+    <script src="/assets/js/load-components.js" defer></script>
+</body>
+</html>

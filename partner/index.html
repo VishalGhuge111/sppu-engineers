@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Partner with Us - SPPU Engineers | Collaborate, Refer, and Grow Together</title>
+  <meta name="description" content="Partner with SPPU Engineers to reach 1L+ students. Whether you're a college, startup, educator, or student leader—refer, collaborate, or contribute content and grow with us." />
+  <meta name="keywords" content="partner with sppu engineers, collaborate with platform, refer students, sppu student partner, startup collaboration, college outreach, join community, sponsor events" />
+  <meta name="author" content="SPPU Engineers" />
+  <meta name="robots" content="index, follow" />
+
+  <link rel="icon" type="image/png" href="/assets/images/logo.png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/assets/images/logo.png" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://sppuengineers.site/partner" />
+  <meta property="og:title" content="Partner with Us - SPPU Engineers | Collaborate, Refer, and Grow Together" />
+  <meta property="og:description" content="Partner with SPPU Engineers to reach 1L+ students. Whether you're a college, startup, educator, or student leader—refer, collaborate, or contribute content and grow with us." />
+  <meta property="og:image" content="https://sppuengineers.site/assets/images/sppu-engineers-preview.png" />
+  <meta property="og:image:alt" content="SPPU Engineers Partnership Opportunities" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://sppuengineers.site/partner" />
+  <meta name="twitter:title" content="Partner with Us - SPPU Engineers" />
+  <meta name="twitter:description" content="Partner with SPPU Engineers to reach 1L+ students. Whether you're a college, startup, educator, or student leader—refer, collaborate, or contribute content and grow with us." />
+  <meta name="twitter:image" content="https://sppuengineers.site/assets/images/sppu-engineers-preview.png" />
+  <meta name="twitter:image:alt" content="SPPU Engineers Partnership Opportunities" />
+
+  <link rel="canonical" href="https://sppuengineers.site/partner" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Gabriela&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    :root {
+      /* Refined Blue Palette */
+      --primary: #2563EB; /* A strong, clear blue */
+      --primary-light: #3B82F6;
+      --primary-dark: #1D4ED8;
+      
+      /* Neutrals for better contrast */
+      --dark: #1F2937; /* Dark charcoal */
+      --light: #F9FAFB; /* Off-white */
+      --gray-text: #4B5563; /* Deeper gray for text */
+    }
+    
+    body {
+      color: var(--dark);
+      line-height: 1.6;
+      background-color: var(--light);
+    }
+
+    /* Ensure hero section takes at least full screen height */
+    .hero-section-full-height {
+      min-height: calc(100vh - var(--header-height, 0px) - var(--footer-height, 0px)); /* Adjust for header/footer if they are present and fixed height */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .card {
+      transition: all 0.3s ease;
+      border-radius: 12px;
+      border: 1px solid #E5E7EB;
+      overflow: hidden;
+      background: white;
+      position: relative;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+    
+    .card:hover {
+      transform: translateY(-6px); /* More pronounced lift */
+      box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.15), 0 6px 12px -4px rgba(0, 0, 0, 0.08); /* Stronger, diffused shadow */
+      border-color: var(--primary-light); /* Border color changes on hover */
+      z-index: 10; /* Bring hovered card slightly to the front */
+    }
+    
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      color: white;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    }
+    
+    .btn-primary {
+      background-color: var(--primary);
+      transition: all 0.3s ease;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+    
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 6px rgba(37, 99, 235, 0.25); /* Adjusted shadow color */
+    }
+    
+    .btn-secondary {
+      transition: all 0.3s ease;
+      border: 1px solid #E5E7EB;
+    }
+    
+    .btn-secondary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      border-color: #D1D5DB;
+    }
+    
+    .hero-gradient {
+      background: linear-gradient(135deg, var(--light) 0%, rgba(37, 99, 235, 0.05) 100%); /* Softer gradient */
+      background-size: 200% 200%;
+      animation: gradient 8s ease infinite;
+    }
+    
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    .badge {
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      background-color: #DBEAFE; /* Lighter blue for badge */
+      color: var(--primary-dark);
+    }
+    
+    .section-title {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .section-title:after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 40px;
+      height: 4px;
+      background: var(--primary);
+      border-radius: 2px;
+    }
+    
+    .stats-card {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+    
+    .stats-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+    
+    .feature-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      font-size: 1.5rem;
+    }
+    
+    .cta-box {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3); /* Adjusted shadow color */
+    }
+
+    /* Ensure text in CTA box is clearly visible */
+    .cta-box h2, .cta-box p, .cta-box a {
+        color: white !important; /* Force white text for better contrast */
+    }
+
+    .cta-box a.bg-white {
+        color: var(--primary) !important; /* Primary color for white button text */
+    }
+    
+    @media (max-width: 640px) {
+      .card-icon {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 1rem;
+      }
+      
+      .feature-icon {
+        width: 48px;
+        height: 48px;
+        font-size: 1.25rem;
+      }
+    }
+  </style>
+</head>
+
+<body class="antialiased">
+  <div id="header-placeholder"></div>
+
+  <section class="py-20 md:py-28 px-4 sm:px-6 lg:px-8 hero-gradient hero-section-full-height">
+    <div class="max-w-4xl mx-auto text-center">
+      <span class="badge mb-4 inline-block">Partnership Program</span>
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+        Collaborate & Grow with <span class="text-primary">SPPU Engineers</span>
+      </h1>
+      <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+        Join our network of educators, creators, and community builders to reach 1L+ SPPU engineering students.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="#partnerships" class="btn-primary text-white px-8 py-3 rounded-lg font-medium">
+          Explore Opportunities
+        </a>
+        <a href="#contact" class="btn-secondary bg-white text-gray-800 px-8 py-3 rounded-lg font-medium">
+          Contact Our Team
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="partnerships" class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="section-title text-3xl md:text-4xl font-bold text-gray-900 mb-4 inline-block">Partnership Opportunities</h2>
+        <p class="text-gray-500 max-w-2xl mx-auto mt-6">Choose the collaboration model that fits your goals</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="card">
+          <div class="p-8 h-full flex flex-col">
+            <div class="card-icon">
+              <i class="fas fa-user-plus"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-3 text-gray-900">Refer & Earn Program</h3>
+            <p class="text-gray-600 mb-4 flex-grow">
+              Earn ₹25 for every friend who purchases notes. Reach 50+ referrals for tech gadgets rewards.
+            </p>
+            </div>
+        </div>
+
+        <div class="card">
+          <div class="p-8 h-full flex flex-col">
+            <div class="card-icon">
+              <i class="fas fa-bullhorn"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-3 text-gray-900">Free Promotion</h3>
+            <p class="text-gray-600 mb-4 flex-grow">
+              Get your student startup, event, or initiative featured to our 1L+ student network.
+            </p>
+            </div>
+        </div>
+
+        <div class="card">
+          <div class="p-8 h-full flex flex-col">
+            <div class="card-icon">
+              <i class="fas fa-camera-retro"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-3 text-gray-900">Social Media Handler</h3>
+            <p class="text-gray-600 mb-4 flex-grow">
+              Create content for our platforms and earn gadgets or payments based on performance.
+            </p>
+            </div>
+        </div>
+
+        <div class="card">
+          <div class="p-8 h-full flex flex-col">
+            <div class="card-icon">
+              <i class="fas fa-pen-fancy"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-3 text-gray-900">Content Contributor</h3>
+            <p class="text-gray-600 mb-4 flex-grow">
+              Share your notes or projects and get paid. Top contributors receive featured recognition.
+            </p>
+            </div>
+        </div>
+
+        <div class="card">
+          <div class="p-8 h-full flex flex-col">
+            <div class="card-icon">
+              <i class="fas fa-code"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-3 text-gray-900">Developer Team</h3>
+            <p class="text-gray-600 mb-4 flex-grow">
+              Build features for CareerSetu and gain real-world development experience.
+            </p>
+            </div>
+        </div>
+
+        <div class="card">
+          <div class="p-8 h-full flex flex-col">
+            <div class="card-icon">
+              <i class="fas fa-handshake"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-3 text-gray-900">Custom Collaboration</h3>
+            <p class="text-gray-600 mb-4 flex-grow">
+              Have a unique partnership idea? Let's discuss how we can work together.
+            </p>
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="section-title text-3xl md:text-4xl font-bold text-gray-900 mb-4 inline-block">Why Partner With Us?</h2>
+        <p class="text-gray-500 max-w-2xl mx-auto mt-6">Benefits for our collaborators</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="stats-card text-center p-8">
+          <div class="feature-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-3 text-gray-900">Massive Reach</h3>
+          <p class="text-gray-600">Direct access to 100,000+ SPPU engineering students across multiple platforms</p>
+        </div>
+        
+        <div class="stats-card text-center p-8">
+          <div class="feature-icon">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-3 text-gray-900">Growth Support</h3>
+          <p class="text-gray-600">We help amplify your initiatives across our newsletter, social media, and website</p>
+        </div>
+        
+        <div class="stats-card text-center p-8">
+          <div class="feature-icon">
+            <i class="fas fa-award"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-3 text-gray-900">Recognition</h3>
+          <p class="text-gray-600">Featured spots for top partners and contributors in our monthly highlights</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-900 text-white">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="section-title text-3xl md:text-4xl font-bold mb-4 inline-block">Our Community Reach</h2>
+        <p class="text-gray-300 max-w-2xl mx-auto mt-6">Numbers that showcase our impact</p>
+      </div>
+      
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div class="stats-card text-center p-6 bg-gray-800 hover:bg-gray-700">
+          <div class="text-3xl md:text-4xl font-bold text-white mb-2">100K+</div>
+          <div class="text-gray-300">Students</div>
+        </div>
+        <div class="stats-card text-center p-6 bg-gray-800 hover:bg-gray-700">
+          <div class="text-3xl md:text-4xl font-bold text-white mb-2">100+</div>
+          <div class="text-gray-300">Colleges</div>
+        </div>
+        <div class="stats-card text-center p-6 bg-gray-800 hover:bg-gray-700">
+          <div class="text-3xl md:text-4xl font-bold text-white mb-2">10K+</div>
+          <div class="text-gray-300">Monthly Visitors</div>
+        </div>
+        <div class="stats-card text-center p-6 bg-gray-800 hover:bg-gray-700">
+          <div class="text-3xl md:text-4xl font-bold text-white mb-2">10+</div>
+          <div class="text-gray-300">Partners</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto cta-box text-center p-10">
+      <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Collaborate?</h2>
+      <p class="mb-8 max-w-2xl mx-auto">
+        Join our network of partners helping SPPU students succeed. All collaborations are currently free.
+      </p>
+      <div class="flex justify-center">
+        <a href="/contact" class="bg-white text-primary px-8 py-3 rounded-lg font-medium hover:bg-gray-50 transition-colors">
+          Get Started
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-placeholder"></div>
+
+  <script>
+    // Simple smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+  
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Partner with SPPU Engineers",
+      "description": "Partner with SPPU Engineers to reach 1L+ students. Whether you're a college, startup, educator, or student leader—refer, collaborate, or contribute content and grow with us.",
+      "url": "https://sppuengineers.site/partner",
+      "publisher": {
+        "@type": "Organization",
+        "name": "SPPU Engineers"
+      }
+    }
+  </script>
+  
+  <script src="/assets/js/main.js" defer></script>
+  <script src="/assets/js/load-components.js" defer></script>
+</body>
+</html>

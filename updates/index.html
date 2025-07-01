@@ -1,176 +1,342 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- SEO Meta Tags -->
-    <title>SPPU Engineering Updates | Latest Notices, Syllabus Changes & Results | SPPU Engineers</title>
-    <meta name="description" content="Get all important SPPU Engineering updates including syllabus changes, exam results, study material releases, and university announcements in one place.">
-    <meta name="keywords" content="SPPU updates, engineering syllabus, exam results, university notices, study material, computer engineering, IT syllabus, SPPU circulars">
-    <meta name="author" content="SPPU Engineers">
-
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="SPPU Engineering Updates | Latest Notices & Announcements">
-    <meta property="og:description" content="Stay updated with all SPPU Engineering notices, syllabus changes, exam results and study material releases.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://sppuengineers.site/updates">
-    <meta property="og:image" content="https://sppuengineers.site/assets/images/sppu-engineers-preview.png">
-    <meta property="og:site_name" content="SPPU Engineers">
-
-    <!-- Twitter Meta -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="SPPU Engineering Updates | Latest Notices & Announcements">
-    <meta name="twitter:description" content="Stay updated with all SPPU Engineering notices, syllabus changes, exam results and study material releases.">
-    <meta name="twitter:image" content="https://sppuengineers.site/assets/images/sppu-engineers-preview.png">
+    <!-- Primary Meta Tags -->
+    <title>Latest Updates | SPPU Engineers</title>
+    <meta name="description" content="Stay updated with the latest news, announcements and important information for SPPU engineering students." />
+    <meta name="keywords" content="SPPU updates, engineering news, results, university announcements, exam timetable, syllabus updates" />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="SPPU Engineers" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="/assets/images/logo.png" sizes="96x96">
-    <link rel="apple-touch-icon" href="/assets/images/logo.png">
+    <link rel="icon" type="image/png" href="/assets/images/logo.png" sizes="96x96" />
+    <link rel="apple-touch-icon" href="/assets/images/logo.png" />
 
-    <!-- Canonical & Preconnect -->
-    <link rel="canonical" href="https://sppuengineers.site/updates">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://sppuengineers.site/updates/" />
+    <meta property="og:title" content="Latest Updates | SPPU Engineers" />
+    <meta property="og:description" content="Stay updated with the latest news and announcements for SPPU engineering students." />
+    <meta property="og:image" content="https://sppuengineers.site/assets/images/logo.png" />
 
-    <!-- Fonts & CSS -->
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://sppuengineers.site/updates/" />
+    <meta name="twitter:title" content="Latest Updates | SPPU Engineers" />
+    <meta name="twitter:description" content="Stay updated with the latest news and announcements for SPPU engineering students." />
+    <meta name="twitter:image" content="https://sppuengineers.site/assets/images/logo.png" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://sppuengineers.site/updates/" />
+
+    <!-- Preconnects -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+
+    <!-- Styles & Fonts -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Gabriela&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  </head>
+    <link href="https://fonts.googleapis.com/css2?family=Gabriela&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-  <body class="bg-white text-gray-900 font-sans">
+    <!-- Firebase (only for updates page) -->
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"></script>
+
+    <style>
+        .font-gabriela { font-family: 'Gabriela', serif; }
+        
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(212, 216, 240, 0.8);
+            backdrop-filter: blur(4px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 0.75rem;
+            z-index: 10;
+        }
+
+        .logo-loader {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 16px;
+            opacity: 0;
+            animation: fadeInScale 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .progress-container {
+            width: 200px;
+            height: 4px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: #232946;
+            width: 0;
+            animation: progressLoad 2s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+        }
+
+        @keyframes fadeInScale {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes progressLoad {
+            0% { width: 0; }
+            100% { width: 100%; }
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .image-container {
+            width: 100%;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+            border-radius: 0.5rem;
+            background: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .card-hover:hover .card-image {
+            transform: scale(1.03);
+        }
+    </style>
+</head>
+<body class="bg-[#d4d8f0] min-h-screen flex flex-col">
     <div id="header-placeholder"></div>
+    
+    <main class="flex-grow pt-28">
+        <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+            <section class="text-center mb-12">
+                <h1 class="text-3xl font-bold text-[#232946] mb-4 font-gabriela">Latest Updates</h1>
+                <p class="text-lg text-[#232946] max-w-2xl mx-auto">Stay informed with the most recent announcements and news for SPPU engineering students</p>
+            </section>
 
-    <!-- Updates Section -->
-    <main class="bg-[#f8fafc] py-20 px-6 pt-28 md:px-12">
-      <div class="max-w-7xl mx-auto">
-        <!-- Heading -->
-        <header class="text-center mb-14">
-          <h1 class="text-4xl font-bold text-gray-800 mb-2">Latest <span class="text-blue-600">SPPU Updates</span></h1>
-          <p class="text-gray-600 text-base md:text-lg max-w-2xl mx-auto">
-            Official announcements, syllabus changes, exam results and important notices for SPPU Engineering students.
-          </p>
-        </header>
+            <section id="mainContent" class="relative min-h-[60vh]">
+                <div id="loadingOverlay" class="loading-overlay">
+                    <img src="/assets/images/logo.png" alt="SPPU Engineers" class="logo-loader">
+                    <div class="progress-container">
+                        <div class="progress-bar"></div>
+                    </div>
+                    <p class="mt-4 text-[#232946] text-sm font-gabriela">Loading updates...</p>
+                </div>
 
-        <!-- Updates List -->
-        <div class="space-y-8">
+                <div id="updates-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 opacity-0 transition-opacity duration-500 mb-12">
+                    </div>
 
-          <!-- Example Update Cards -->
-          <article class="bg-white border-l-4 border-blue-600 shadow-sm rounded-lg p-6 hover:shadow-md transition">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-              <div>
-                <h2 class="text-xl font-semibold text-gray-800">🎯 Weekly Contest Results Released</h2>
-                <p class="text-gray-600 mt-2">Check the leaderboard and rewards for our latest contest held on 15th June 2025. Congratulations to the top 3 winners!</p>
-              </div>
-              <time class="mt-4 md:mt-0 text-sm text-gray-500" datetime="2025-06-17">17 June 2025</time>
-            </div>
-          </article>
-
-          <article class="bg-white border-l-4 border-green-500 shadow-sm rounded-lg p-6 hover:shadow-md transition">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-              <div>
-                <h2 class="text-xl font-semibold text-gray-800">📚 Semester 3 Notes Now Available</h2>
-                <p class="text-gray-600 mt-2">We've uploaded detailed unit-wise notes for SE (Computer/IT) under the 2019 pattern. Access them from the Study Material section.</p>
-              </div>
-              <time class="mt-4 md:mt-0 text-sm text-gray-500" datetime="2025-06-15">15 June 2025</time>
-            </div>
-          </article>
-
-          <article class="bg-white border-l-4 border-yellow-500 shadow-sm rounded-lg p-6 hover:shadow-md transition">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-              <div>
-                <h2 class="text-xl font-semibold text-gray-800">🚀 AI Career Assistant Launched</h2>
-                <p class="text-gray-600 mt-2">Start exploring career paths and resume tips with our new AI-powered assistant built exclusively for engineering students.</p>
-              </div>
-              <time class="mt-4 md:mt-0 text-sm text-gray-500" datetime="2025-06-12">12 June 2025</time>
-            </div>
-          </article>
-
-          <article class="bg-white border-l-4 border-purple-500 shadow-sm rounded-lg p-6 hover:shadow-md transition">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-              <div>
-                <h2 class="text-xl font-semibold text-gray-800">📢 SPPU 2024 Pattern Syllabus Changes</h2>
-                <p class="text-gray-600 mt-2">Important updates to Computer Engineering syllabus for 2024 pattern students. Download revised curriculum documents.</p>
-                <a href="/downloads/sppu-2024-syllabus.pdf" class="inline-block mt-3 text-blue-600 hover:underline" aria-label="Download revised syllabus documents">Download Syllabus PDF</a>
-              </div>
-              <time class="mt-4 md:mt-0 text-sm text-gray-500" datetime="2025-06-10">10 June 2025</time>
-            </div>
-          </article>
-
-          <article class="bg-white border-l-4 border-red-500 shadow-sm rounded-lg p-6 hover:shadow-md transition">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-              <div>
-                <h2 class="text-xl font-semibold text-gray-800">📝 Semester 4 Results Announced</h2>
-                <p class="text-gray-600 mt-2">SPPU has declared Semester 4 results for all engineering branches. Check your marks on the official university portal.</p>
-                <a href="https://unipune.ac.in/results" class="inline-block mt-3 text-blue-600 hover:underline" aria-label="Check SPPU semester 4 results">View Result Portal</a>
-              </div>
-              <time class="mt-4 md:mt-0 text-sm text-gray-500" datetime="2025-06-08">8 June 2025</time>
-            </div>
-          </article>
-
-          <article class="bg-white border-l-4 border-indigo-500 shadow-sm rounded-lg p-6 hover:shadow-md transition">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-              <div>
-                <h2 class="text-xl font-semibold text-gray-800">🔔 Exam Form Submission Deadline Extended</h2>
-                <p class="text-gray-600 mt-2">Last date for Winter 2025 exam form submission extended to 25th June. Late fees applicable after 20th June.</p>
-              </div>
-              <time class="mt-4 md:mt-0 text-sm text-gray-500" datetime="2025-06-05">5 June 2025</time>
-            </div>
-          </article>
-
-          <article class="bg-white border-l-4 border-pink-500 shadow-sm rounded-lg p-6 hover:shadow-md transition">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-              <div>
-                <h2 class="text-xl font-semibold text-gray-800">📖 New Reference Books Added</h2>
-                <p class="text-gray-600 mt-2">Recommended reference books for Artificial Intelligence (AI) subject now available in digital library section.</p>
-                <a href="/library/ai" class="inline-block mt-3 text-blue-600 hover:underline" aria-label="Access digital library resources">Visit Digital Library</a>
-              </div>
-              <time class="mt-4 md:mt-0 text-sm text-gray-500" datetime="2025-06-03">3 June 2025</time>
-            </div>
-          </article>
-
-          <article class="bg-white border-l-4 border-teal-500 shadow-sm rounded-lg p-6 hover:shadow-md transition">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-              <div>
-                <h2 class="text-xl font-semibold text-gray-800">🎓 Final Year Project Submission Guidelines</h2>
-                <p class="text-gray-600 mt-2">Updated guidelines and format requirements for BE Final Year Project reports submission for 2024–25 batch.</p>
-                <a href="/downloads/project-guidelines.pdf" class="inline-block mt-3 text-blue-600 hover:underline" aria-label="Download project submission guidelines">Download Guidelines</a>
-              </div>
-              <time class="mt-4 md:mt-0 text-sm text-gray-500" datetime="2025-05-30">30 May 2025</time>
-            </div>
-          </article>
+                <div id="no-updates" class="text-center py-16 hidden">
+                    <i class="fas fa-newspaper text-gray-400 text-6xl mb-4"></i>
+                    <h3 class="text-xl font-semibold text-[#232946] mb-2 font-gabriela">No Updates Available</h3>
+                    <p class="text-[#232946]">Check back later for new updates and announcements.</p>
+                </div>
+            </section>
         </div>
-      </div>
     </main>
 
     <div id="footer-placeholder"></div>
+    
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getDatabase, ref, onValue } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js';
 
+        // Firebase configuration - It's generally safer to load this from an environment variable or a secure server endpoint
+        // rather than hardcoding in public HTML for production applications.
+        const firebaseConfig = {
+            apiKey: "AIzaSyC7EvohC3Y9FScY0glVt-hPvkPWrbdM0rU",
+            authDomain: "sppu-engineers-111.firebaseapp.com",
+            databaseURL: "https://sppu-engineers-111-default-rtdb.firebaseio.com",
+            projectId: "sppu-engineers-111",
+            storageBucket: "sppu-engineers-111.firebasestorage.app",
+            messagingSenderId: "622650122117",
+            appId: "1:622650122117:web:0218bbf87b43cf1168aeec"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        /**
+         * Loads updates from Firebase Realtime Database.
+         */
+        function loadUpdates() {
+            const updatesRef = ref(database, 'updates');
+            onValue(updatesRef, (snapshot) => {
+                const updates = snapshot.val();
+                console.log("Updates loaded:", updates); // For debugging
+                displayUpdates(updates);
+                hideLoading();
+            }, (error) => {
+                console.error("Error loading updates:", error);
+                hideLoading();
+                showNoUpdates();
+            });
+        }
+
+        /**
+         * Dynamically creates and displays update cards.
+         * @param {object} updates - An object containing update data from Firebase.
+         */
+        function displayUpdates(updates) {
+            const updatesGrid = document.getElementById('updates-grid');
+            const noUpdatesMessage = document.getElementById('no-updates');
+            updatesGrid.innerHTML = ''; // Clear existing content
+
+            if (!updates || Object.keys(updates).length === 0) {
+                showNoUpdates();
+                return;
+            }
+
+            noUpdatesMessage.classList.add('hidden'); // Hide "No Updates" message if updates exist
+
+            // Convert updates object to an array and sort by timestamp in descending order
+            const updatesArray = Object.entries(updates).map(([id, update]) => ({
+                id,
+                ...update
+            })).sort((a, b) => b.timestamp - a.timestamp); // Assuming 'timestamp' exists in your update data
+
+            updatesArray.forEach(update => {
+                const updateCard = document.createElement('div');
+                updateCard.className = 'bg-white rounded-xl shadow-sm p-4 card-hover flex flex-col h-full';
+                
+                // Truncate description for card view
+                const truncatedDescription = update.description.substring(0, 120) + (update.description.length > 120 ? '...' : '');
+
+                // Format date nicely
+                const formattedDate = new Date(update.date).toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'short', 
+                    day: 'numeric' 
+                });
+
+                updateCard.innerHTML = `
+                    ${update.imageUrl ? `
+                        <div class="image-container mb-4">
+                            <img src="${update.imageUrl}" alt="${update.title}" class="card-image">
+                        </div>
+                    ` : '<div class="h-4"></div>'}
+                    
+                    <div class="flex-1 flex flex-col">
+                        <h3 class="text-xl font-bold text-[#232946] mb-3 font-gabriela line-clamp-2">${update.title}</h3>
+                        <p class="text-gray-700 text-base mb-4 leading-relaxed flex-1">${truncatedDescription}</p>
+                        
+                        <div class="mb-4">
+                            <span class="text-sm text-gray-600 flex items-center">
+                                <i class="fas fa-calendar-alt mr-2"></i>
+                                ${formattedDate}
+                            </span>
+                        </div>
+                        
+                        <div class="flex items-center justify-between mt-auto">
+                            <a href="view.html?id=${update.id}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors text-sm font-medium flex-1 text-center">
+                                <i class="fas fa-eye mr-2"></i>Read More
+                            </a>
+                            <button class="share-button bg-gray-600 hover:bg-gray-700 text-white px-3 py-2 rounded-lg transition-colors text-sm font-medium ml-2" 
+                                data-title="${update.title}" 
+                                data-url="${window.location.origin}/updates/view.html?id=${update.id}"
+                                data-description="${update.description.substring(0, 150)}...">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                updatesGrid.appendChild(updateCard);
+            });
+
+            // Add event listeners for share buttons after they are added to the DOM
+            document.querySelectorAll('.share-button').forEach(button => {
+                button.addEventListener('click', handleShare);
+            });
+        }
+
+        /**
+         * Handles the sharing functionality for an update.
+         * Uses the Web Share API if available, otherwise falls back to copying to clipboard.
+         * @param {Event} event - The click event from the share button.
+         */
+        function handleShare(event) {
+            const button = event.currentTarget;
+            const title = button.dataset.title;
+            const url = button.dataset.url;
+            const description = button.dataset.description;
+
+            if (navigator.share) {
+                navigator.share({
+                    title: title,
+                    text: description,
+                    url: url,
+                })
+                .then(() => console.log('Successful share'))
+                .catch((error) => console.log('Error sharing:', error));
+            } else {
+                // Fallback for browsers that do not support Web Share API
+                const shareText = `${title}\n${description}\nRead more: ${url}`;
+                navigator.clipboard.writeText(shareText)
+                    .then(() => {
+                        alert('Link copied to clipboard!');
+                    })
+                    .catch(err => {
+                        console.error('Failed to copy: ', err);
+                        alert('Could not copy link.');
+                    });
+            }
+        }
+
+        /**
+         * Hides the loading overlay and makes the content visible.
+         */
+        function hideLoading() {
+            const loadingOverlay = document.getElementById("loadingOverlay");
+            const updatesGrid = document.getElementById("updates-grid");
+            
+            if (loadingOverlay) loadingOverlay.style.display = "none";
+            if (updatesGrid) updatesGrid.style.opacity = "1";
+        }
+
+        /**
+         * Displays the "No Updates Available" message.
+         */
+        function showNoUpdates() {
+            const noUpdatesMessage = document.getElementById('no-updates');
+            const updatesGrid = document.getElementById('updates-grid');
+            if (noUpdatesMessage) noUpdatesMessage.classList.remove('hidden');
+            if (updatesGrid) updatesGrid.innerHTML = ''; // Ensure the grid is empty
+        }
+
+        // Initialize on DOMContentLoaded
+        document.addEventListener('DOMContentLoaded', () => {
+            loadUpdates();
+            window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top on page load for consistent experience
+        });
+    </script>
+    
     <script src="/assets/js/main.js" defer></script>
     <script src="/assets/js/load-components.js" defer></script>
-
-    <!-- Schema.org Markup -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "NewsArticle",
-      "headline": "Latest SPPU Engineering Updates",
-      "description": "Official announcements, syllabus changes, exam results and important notices for SPPU Engineering students.",
-      "datePublished": "2025-06-17",
-      "publisher": {
-        "@type": "Organization",
-        "name": "SPPU Engineers",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://sppuengineers.site/assets/images/logo.png"
-        }
-      },
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "https://sppuengineers.site/updates"
-      }
-    }
-    </script>
-  </body>
+</body>
 </html>

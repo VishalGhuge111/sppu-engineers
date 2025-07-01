@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login | SPPU Engineers</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script type="module" src="/js/firebase-config.js"></script>
+
+  <style>
+    :root {
+      --primary-blue: #4a90e2;
+      --primary-blue-light: #63a4ff;
+      --accent-green: #28a745;
+      --background-light: #f8f9fa;
+      --background-darker: #e9ecef;
+      --text-dark: #343a40;
+      --text-muted: #6c757d;
+      --border-color: #ced4da;
+      --focus-ring-color: rgba(0, 123, 255, 0.25);
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      overflow: hidden;
+      color: var(--text-dark);
+    }
+
+    .login-card {
+      background-color: #ffffff;
+      border-radius: 1rem;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+      padding: 2.5rem;
+      width: 100%;
+      max-width: 28rem;
+      animation: fadeIn 0.8s ease-out;
+      margin-left: 1.5rem;
+      margin-right: 1.5rem;
+      box-sizing: border-box;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    input {
+      border: 1px solid var(--border-color);
+      transition: all 0.2s ease-in-out;
+    }
+
+    input:focus {
+      border-color: var(--primary-blue);
+      box-shadow: 0 0 0 0.2rem var(--focus-ring-color);
+      outline: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(45deg, var(--primary-blue) 0%, var(--primary-blue-light) 100%);
+      color: white;
+      padding: 0.85rem 1.5rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(45deg, var(--primary-blue-light) 0%, var(--primary-blue) 100%);
+      box-shadow: 0 8px 20px rgba(0, 123, 255, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .text-gray-800 { color: var(--text-dark); }
+    .text-gray-600 { color: var(--text-muted); }
+    .text-gray-700 { color: var(--text-dark); }
+    .placeholder-gray-400 { color: var(--text-muted); }
+    .text-red-600 { color: #dc3545; }
+
+    @media (max-width: 640px) {
+      .login-card {
+        padding: 2rem 1.5rem;
+        margin-left: 1rem;
+        margin-right: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-card">
+    <div class="text-center mb-8">
+      <img src="/assets/images/logo.png" alt="SPPU Engineers Logo" class="mx-auto h-16 mb-5 filter drop-shadow-sm">
+      <h2 class="text-3xl font-extrabold text-gray-800 mb-2">Admin Dashboard</h2>
+      <p class="text-md text-gray-600">Securely sign in to manage your data</p>
+    </div>
+
+    <form id="loginForm" class="space-y-6">
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+        <div class="relative">
+          <input type="email" id="email" required autocomplete="username"
+            class="pl-10 pr-4 py-2 w-full border rounded-lg text-gray-800 placeholder-gray-400 focus:ring-opacity-50"
+            placeholder="your.email@example.com">
+          <i class="fas fa-envelope absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+        </div>
+      </div>
+      
+      <div>
+        <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+        <div class="relative">
+          <input type="password" id="password" required autocomplete="current-password"
+            class="pl-10 pr-4 py-2 w-full border rounded-lg text-gray-800 placeholder-gray-400 focus:ring-opacity-50"
+            placeholder="********">
+          <i class="fas fa-lock absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+        </div>
+      </div>
+      
+      <button type="submit" class="btn-primary w-full flex items-center justify-center">
+        <i class="fas fa-sign-in-alt mr-3"></i>Login
+      </button>
+      
+      <p id="errorMsg" class="text-red-600 text-sm mt-4 hidden text-center font-medium"></p>
+    </form>
+  </div>
+
+  <script type="module">
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+    const auth = getAuth();
+    const loginForm = document.getElementById("loginForm");
+    const errorMsg = document.getElementById("errorMsg");
+
+    loginForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+
+      signInWithEmailAndPassword(auth, email, password)
+        .then(() => {
+          window.location.href = "/admin/index.html";
+        })
+        .catch((error) => {
+          console.error("Login failed:", error);
+          let errorMessageText = "An unknown error occurred. Please try again.";
+          
+          if (error.code === 'auth/invalid-email') {
+            errorMessageText = "Invalid email format.";
+          } else if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+            errorMessageText = "Invalid email or password. Please check your credentials.";
+          } else if (error.code === 'auth/too-many-requests') {
+            errorMessageText = "Too many failed login attempts. Please try again later.";
+          } else if (error.code === 'auth/network-request-failed') {
+            errorMessageText = "Network error. Please check your internet connection.";
+          }
+          
+          errorMsg.textContent = errorMessageText;
+          errorMsg.classList.remove("hidden");
+        });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Competition Details - SPPU Engineers</title>
+    <meta name="description" content="View full competition details, registration information, and requirements for engineering contests.">
+    <meta name="keywords" content="competition details, engineering contest, registration, SPPU competitions">
+    <meta property="og:title" content="Competition Details - SPPU Engineers">
+    <meta property="og:description" content="Get full details of engineering competitions from SPPU Engineers.">
+    <meta property="og:image" content="https://sppuengineers.site/assets/images/sppu-engineers-preview.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" type="image/png" href="/assets/images/logo.png">
+
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Gabriela&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gabriela&display=swap"></noscript>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body {
+            /* Ensures footer sticks to bottom if content is short */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .font-gabriela { font-family: 'Gabriela', serif; }
+        
+        /* Transparent Loading Overlay */
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(212, 216, 240, 0.8);
+            backdrop-filter: blur(4px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 0.75rem;
+            z-index: 10;
+        }
+
+        .logo-loader {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 16px;
+            opacity: 0;
+            animation: fadeInScale 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .progress-container {
+            width: 200px;
+            height: 4px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: #232946;
+            width: 0;
+            animation: progressLoad 2s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+        }
+
+        @keyframes fadeInScale {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes progressLoad {
+            0% { width: 0; }
+            100% { width: 100%; }
+        }
+
+        /* Image container with proper sizing for detail view */
+        .detail-image-container {
+            width: 100%;
+            max-height: 450px; 
+            overflow: hidden;
+            border-radius: 0.75rem; 
+            background: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem; 
+        }
+
+        .detail-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Status Badge styles for detail page */
+        .badge-status {
+            padding: 0.3rem 0.7rem; 
+            border-radius: 9999px;
+            font-size: 0.75rem; 
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem; 
+            white-space: nowrap; 
+        }
+        .badge-status i { 
+            display: none; /* Hide icon on mobile */
+        }
+        @media (min-width: 768px) {
+            .badge-status {
+                padding: 0.4rem 0.9rem;
+                font-size: 0.8rem;
+                gap: 0.4rem;
+            }
+            .badge-status i {
+                display: inline-block; /* Show icon on desktop */
+            }
+        }
+        .badge-expired {
+            background-color: #ef4444; 
+            color: white;
+        }
+        .badge-upcoming {
+            background-color: #6366f1; 
+            color: white;
+        }
+        .badge-live {
+            background-color: #0d9488; 
+            color: white;
+        }
+
+        /* Information blocks (for prize and start date) */
+        .info-block {
+            background-color: #f8faff; 
+            padding: 0.75rem; 
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05); 
+            display: flex;
+            align-items: flex-start; 
+            gap: 0.6rem; 
+        }
+        @media (min-width: 768px) {
+            .info-block {
+                padding: 1.25rem;
+                gap: 0.8rem;
+            }
+        }
+        .info-block i {
+            font-size: 1.2rem; 
+            color: #4a5568; 
+            flex-shrink: 0; 
+            margin-top: 0.1rem; 
+        }
+        @media (min-width: 768px) {
+            .info-block i {
+                font-size: 1.6rem;
+            }
+        }
+        .info-block .label {
+            font-size: 0.75rem; 
+            color: #6b7280; 
+            margin-bottom: 0.05rem; 
+        }
+        @media (min-width: 768px) {
+            .info-block .label {
+                font-size: 0.85rem;
+            }
+        }
+        .info-block .value {
+            font-size: 0.875rem; 
+            font-weight: 600;
+            color: #232946;
+            line-height: 1.3; 
+        }
+        @media (min-width: 768px) {
+            .info-block .value {
+                font-size: 1rem;
+            }
+        }
+
+        /* New direct display for Entry Fee and Last Date */
+        .direct-detail-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-weight: 600;
+            white-space: nowrap; /* Prevent wrapping */
+        }
+        .direct-detail-item .label {
+            font-size: 0.8rem; /* Smaller label for these inline items */
+            color: #6b7280; /* Subtle label color */
+        }
+        .direct-detail-item .value {
+            font-size: 0.9rem; /* Slightly larger value */
+            color: #232946; /* Default value color */
+        }
+        .direct-detail-item .value.free {
+            color: #0d9488; /* Green for Free */
+        }
+        .direct-detail-item .value.paid {
+            color: #b45309; /* Amber for Paid */
+        }
+        .direct-detail-item .value.expired {
+            color: #ef4444; /* Red for Expired */
+        }
+
+        @media (min-width: 768px) {
+            .direct-detail-item .label {
+                font-size: 0.85rem;
+            }
+            .direct-detail-item .value {
+                font-size: 1rem;
+            }
+        }
+
+        /* Add bottom padding to main card on larger screens */
+        @media (min-width: 768px) {
+            #competition-content {
+                margin-bottom: 2rem; 
+            }
+        }
+    </style>
+</head>
+<body class="bg-[#d4d8f0] min-h-screen">
+    <div id="header-placeholder"></div>
+    
+    <main class="flex-grow pt-28 pb-12"> 
+        <div class="max-w-4xl mx-auto px-4 md:px-6">
+            <div class="mb-6">
+                <a href="/competitions/" class="inline-flex items-center text-[#232946] hover:text-blue-600 transition-colors font-medium">
+                    <i class="fas fa-arrow-left mr-2"></i>
+                    Back to All Competitions
+                </a>
+            </div>
+
+            <section id="mainContent" class="relative min-h-[400px]">
+                <div id="loadingOverlay" class="loading-overlay">
+                    <img src="/assets/images/logo.png" alt="SPPU Engineers logo" class="logo-loader">
+                    <div class="progress-container">
+                        <div class="progress-bar"></div>
+                    </div>
+                    <p class="mt-4 text-[#232946] text-sm font-gabriela">Loading competition details...</p>
+                </div>
+
+                <div id="competition-content" class="bg-[#fffffe] rounded-xl shadow-lg opacity-0 transition-opacity duration-500 p-4 md:p-8">
+                    </div>
+
+                <div id="not-found" class="text-center py-16 hidden">
+                    <i class="fas fa-exclamation-triangle text-gray-400 text-6xl mb-4"></i>
+                    <h1 class="text-2xl font-bold text-[#232946] mb-4">Competition Not Found</h1>
+                    <p class="text-[#232946] mb-6">The competition you're looking for doesn't exist or has been removed.</p>
+                    <a href="/competitions/" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium">
+                        Go to All Competitions
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+    
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getDatabase, ref, onValue } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js';
+
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyC7EvohC3Y9FScY0glVt-hPvkPWrbdM0rU",
+            authDomain: "sppu-engineers-111.firebaseapp.com",
+            databaseURL: "https://sppu-engineers-111-default-rtdb.firebaseio.com",
+            projectId: "sppu-engineers-111",
+            storageBucket: "sppu-engineers-111.firebasestorage.app",
+            messagingSenderId: "622650122117",
+            appId: "1:622650122117:web:0218bbf87b43cf1168aeec"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        // DOM Elements
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        const competitionContent = document.getElementById('competition-content');
+        const notFoundMessage = document.getElementById('not-found');
+
+        /**
+         * Extracts the competition ID from the URL query parameters.
+         * @returns {string|null} The competition ID or null if not found.
+         */
+        function getCompetitionIdFromUrl() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('id');
+        }
+
+        /**
+         * Loads competition data from Firebase based on the URL ID.
+         */
+        function loadCompetition() {
+            const competitionId = getCompetitionIdFromUrl();
+            
+            if (!competitionId) {
+                hideLoading();
+                showNotFound(); 
+                return;
+            }
+
+            const competitionRef = ref(database, `competitions/${competitionId}`);
+            onValue(competitionRef, (snapshot) => {
+                const competition = snapshot.val();
+                
+                if (competition) {
+                    displayCompetition(competition);
+                    hideLoading(); 
+                } else {
+                    hideLoading();
+                    showNotFound();
+                }
+            }, (error) => {
+                console.error("Error loading competition:", error);
+                hideLoading();
+                showNotFound();
+            });
+        }
+
+        /**
+         * Renders the competition details on the page.
+         * @param {Object} competition - The competition data object.
+         */
+        function displayCompetition(competition) {
+            const now = new Date(); 
+            const lastDateObj = new Date(competition.lastDate);
+            const startDateObj = competition.startDate ? new Date(competition.startDate) : null;
+            
+            const isExpired = lastDateObj < now;
+
+            // Determine status badge
+            let statusBadgeClass = '';
+            let statusText = '';
+            if (isExpired) {
+                statusBadgeClass = 'badge-expired';
+                statusText = 'Expired';
+            } else if (startDateObj && startDateObj > now) {
+                statusBadgeClass = 'badge-upcoming';
+                statusText = 'Upcoming';
+            } else {
+                statusBadgeClass = 'badge-live';
+                statusText = 'Live';
+            }
+
+            // Fee display
+            const feeValue = competition.type === "free" ? "Free" : `₹${competition.fee}`;
+            const feeValueClass = competition.type === "free" ? "value free" : "value paid";
+
+            // Prize display
+            const prizeDisplay = competition.prize ? competition.prize : "Not specified";
+
+            // Update page title dynamically
+            document.title = `${competition.title} - SPPU Engineers`;
+            
+            competitionContent.innerHTML = `
+                ${competition.imageUrl ? `
+                    <div class="detail-image-container">
+                        <img src="${competition.imageUrl}" alt="${competition.title} competition image" class="detail-image">
+                    </div>
+                ` : `
+                    <div class="detail-image-container flex items-center justify-center bg-gray-200 text-gray-500">
+                        <i class="fas fa-image text-7xl"></i>
+                    </div>
+                `}
+                
+                <div class="mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                    <h1 class="text-xl md:text-3xl font-bold text-[#232946] font-gabriela leading-tight">${competition.title}</h1>
+                    <span class="badge-status ${statusBadgeClass}">
+                        <i class="fas fa-info-circle"></i>
+                        ${statusText}
+                    </span>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-x-6 gap-y-2 mb-6 md:mb-8 text-sm md:text-base">
+                    <div class="direct-detail-item">
+                        <span class="label">Entry Fee:</span>
+                        <span class="${feeValueClass}">
+                            ${feeValue}
+                        </span>
+                    </div>
+                    <div class="direct-detail-item">
+                        <span class="label">Last Date:</span>
+                        <span class="value ${isExpired ? 'expired' : ''}">
+                            ${lastDateObj.toLocaleDateString('en-IN', { 
+                                year: 'numeric', 
+                                month: 'short', 
+                                day: 'numeric' 
+                            })}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-6 mb-6 md:mb-8">
+                    ${competition.prize ? `
+                        <div class="info-block md:col-span-2">
+                            <i class="fas fa-trophy text-yellow-500"></i>
+                            <div>
+                                <div class="label">Prizes</div>
+                                <div class="value">${prizeDisplay}</div>
+                            </div>
+                        </div>
+                    ` : ''}
+                    ${competition.startDate ? `
+                        <div class="info-block">
+                            <i class="fas fa-play-circle text-gray-700"></i>
+                            <div>
+                                <div class="label">Start Date</div>
+                                <div class="value">
+                                    ${startDateObj.toLocaleDateString('en-IN', { 
+                                        year: 'numeric', 
+                                        month: 'long', 
+                                        day: 'numeric' 
+                                    })}
+                                </div>
+                            </div>
+                        </div>
+                    ` : ''}
+                </div>
+                
+                <div class="mb-6 md:mb-8">
+                    <h2 class="text-lg md:text-xl font-bold text-[#232946] mb-3 font-gabriela">About This Competition</h2>
+                    <div class="text-[#232946] leading-relaxed text-sm md:text-base whitespace-pre-line">${competition.description}</div>
+                </div>
+                
+                <div class="pt-4 md:pt-6 border-t border-gray-200">
+                    <h2 class="text-xl font-bold text-[#232946] mb-4 font-gabriela">Ready to Participate?</h2>
+                    <div class="flex flex-wrap gap-4">
+                        ${!isExpired ? `
+                            <a href="${competition.link}" target="_blank" rel="noopener noreferrer" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors flex items-center font-semibold text-base shadow-md w-full sm:w-auto justify-center">
+                                <i class="fas fa-user-plus mr-2"></i>
+                                Register Now
+                            </a>
+                        ` : `
+                            <button disabled class="bg-gray-400 text-white px-6 py-3 rounded-lg cursor-not-allowed flex items-center justify-center font-semibold text-base opacity-80 shadow-md w-full sm:w-auto">
+                                <i class="fas fa-times-circle mr-2"></i>
+                                Registration Closed
+                            </button>
+                        `}
+                    </div>
+                </div>
+            `;
+        }
+
+        /**
+         * Displays the "Competition Not Found" message.
+         */
+        function showNotFound() {
+            notFoundMessage.classList.remove('hidden');
+        }
+
+        /**
+         * Hides the loading overlay and makes the competition content visible.
+         */
+        function hideLoading() {
+            loadingOverlay.style.display = 'none';
+            competitionContent.style.opacity = '1';
+        }
+
+        // Load competition data when the DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', loadCompetition);
+    </script>
+    
+    <script src="/assets/js/main.js" defer></script>
+    <script src="/assets/js/load-components.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resource Details - SPPU Engineers</title>
+    <meta name="description" content="Access full details, pricing, and direct links for engineering resources, coding tools, projects, and educational content from SPPU Engineers.">
+    <meta name="keywords" content="resource details, engineering tools, coding guides, project kits, educational content, SPPU, tech resources, SPPU Engineers">
+    <meta property="og:title" content="Resource Details - SPPU Engineers">
+    <meta property="og:description" content="Get comprehensive information, pricing, and access options for diverse resources curated for engineering students.">
+    <meta property="og:image" content="https://sppuengineers.site/assets/images/sppu-engineers-preview.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" type="image/png" href="/assets/images/logo.png">
+    <link rel="canonical" href="https://sppuengineers.site/resources/view.html">
+    
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Gabriela&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gabriela&display=swap"></noscript>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        body {
+            /* Ensures footer sticks to bottom if content is short */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .font-gabriela { 
+            font-family: 'Gabriela', serif; 
+        }
+        
+        /* Transparent Loading Overlay */
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(212, 216, 240, 0.8);
+            backdrop-filter: blur(4px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 0.75rem;
+            z-index: 10;
+        }
+
+        .logo-loader {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 16px;
+            opacity: 0;
+            animation: fadeInScale 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .progress-container {
+            width: 200px;
+            height: 4px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: #232946;
+            width: 0;
+            animation: progressLoad 2s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+        }
+
+        @keyframes fadeInScale {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes progressLoad {
+            0% { width: 0; }
+            100% { width: 100%; }
+        }
+
+        /* Image container with proper sizing */
+        .detail-image {
+            width: 100%;
+            max-height: 400px; /* Limit height */
+            object-fit: contain; /* Ensures entire image is visible without cropping */
+            border-radius: 0.5rem;
+            background: #f3f4f6; /* Placeholder background */
+            /* Add flex properties for centering placeholder icon */
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+        }
+
+        /* Style for text inside prose class to be more readable */
+        .prose p {
+            margin-bottom: 1em; /* Add space between paragraphs */
+        }
+    </style>
+</head>
+<body class="bg-[#d4d8f0]">
+    <div id="header-placeholder"></div>
+    
+    <main class="flex-grow pt-28 pb-12">
+        <div class="max-w-4xl mx-auto px-4 md:px-6">
+            <div class="mb-6">
+                <a href="/resources/" class="inline-flex items-center text-[#232946] hover:text-blue-600 transition-colors font-medium" aria-label="Back to all resources">
+                    <i class="fas fa-arrow-left mr-2" aria-hidden="true"></i>
+                    Back to All Resources
+                </a>
+            </div>
+
+            <section id="mainContent" class="relative min-h-[400px]">
+                <div id="loadingOverlay" class="loading-overlay" role="status" aria-live="polite" aria-label="Loading resource details">
+                    <img src="/assets/images/logo.png" alt="SPPU Engineers logo" class="logo-loader">
+                    <div class="progress-container">
+                        <div class="progress-bar"></div>
+                    </div>
+                    <p class="mt-4 text-[#232946] text-sm font-gabriela">Loading resource...</p>
+                </div>
+
+                <div id="resource-content" class="opacity-0 transition-opacity duration-500">
+                    </div>
+
+                <div id="not-found" class="text-center py-16 hidden" role="alert" aria-live="polite">
+                    <i class="fas fa-magnifying-glass text-gray-400 text-6xl mb-4" aria-hidden="true"></i>
+                    <h1 class="text-2xl font-bold text-[#232946] mb-4">Resource Not Found</h1>
+                    <p class="text-[#232946] mb-6">The resource you're looking for doesn't exist or has been removed. Please check the URL or return to the <a href="/resources/" class="text-blue-600 hover:underline">resources list</a>.</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+    
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getDatabase, ref, onValue } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js';
+
+        // Firebase Configuration (Replace with your actual config if different)
+        const firebaseConfig = {
+            apiKey: "AIzaSyC7EvohC3Y9FScY0glVt-hPvkPWrbdM0rU",
+            authDomain: "sppu-engineers-111.firebaseapp.com",
+            databaseURL: "https://sppu-engineers-111-default-rtdb.firebaseio.com",
+            projectId: "sppu-engineers-111",
+            storageBucket: "sppu-engineers-111.firebasestorage.app",
+            messagingSenderId: "622650122117",
+            appId: "1:622650122117:web:0218bbf87b43cf1168aeec"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        // DOM Elements (cached for performance)
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        const resourceContent = document.getElementById('resource-content');
+        const notFoundMessage = document.getElementById('not-found');
+
+        /**
+         * Extracts the resource ID from the URL query parameters.
+         * @returns {string|null} The resource ID or null if not found.
+         */
+        function getResourceIdFromUrl() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('id');
+        }
+
+        /**
+         * Loads a specific resource's data from Firebase based on the URL ID.
+         */
+        function loadResource() {
+            const resourceId = getResourceIdFromUrl();
+            
+            if (!resourceId) {
+                // No ID in URL, directly show not found
+                hideLoading(); 
+                showNotFound();
+                return;
+            }
+
+            const resourceRef = ref(database, `resources/${resourceId}`);
+            onValue(resourceRef, (snapshot) => {
+                const resourceData = snapshot.val();
+                hideLoading(); // Hide loading regardless of success or failure
+                
+                if (resourceData) {
+                    displayResource(resourceData);
+                } else {
+                    showNotFound(); // Resource not found in database
+                }
+            }, (error) => {
+                console.error("Error loading resource:", error);
+                hideLoading(); // Hide loading on error
+                showNotFound(); // Show error message to user
+            });
+        }
+
+        /**
+         * Renders the resource details on the page.
+         * @param {Object} resource - The resource data object.
+         */
+        function displayResource(resource) {
+            // Determine price display and button text/icon based on resource type
+            let priceDisplay;
+            let priceIconColorClass;
+            let buttonText;
+            let buttonIcon;
+
+            if (resource.type === "free") {
+                priceDisplay = "Free";
+                priceIconColorClass = "text-green-600"; // Green for free
+                buttonText = "Download Now";
+                buttonIcon = "download";
+            } else {
+                priceDisplay = `₹${resource.price}`; // Assuming Indian Rupees
+                priceIconColorClass = "text-yellow-600"; // Amber for paid
+                buttonText = "Purchase Now";
+                buttonIcon = "shopping-cart";
+            }
+            
+            // Update page title dynamically for better SEO and user experience
+            document.title = `${resource.title} - SPPU Engineers`;
+            
+            resourceContent.innerHTML = `
+                <article class="bg-[#fffffe] rounded-xl shadow-md overflow-hidden">
+                    ${resource.imageUrl ? `
+                        <div class="p-6 pb-0">
+                            <img src="${resource.imageUrl}" alt="${resource.title} main image" class="detail-image shadow-sm">
+                        </div>
+                    ` : `
+                        <div class="p-6 pb-0 detail-image bg-gray-200 text-gray-500">
+                            <i class="fas fa-image text-8xl" aria-hidden="true"></i>
+                        </div>
+                    `}
+                    
+                    <div class="p-6 md:p-8">
+                        <header class="mb-8">
+                            <h1 class="text-2xl md:text-3xl font-bold text-[#232946] mb-4 font-gabriela">${resource.title}</h1>
+                            <div class="flex items-center" role="group" aria-label="Resource price">
+                                <i class="fas fa-tag text-xl mr-2 ${priceIconColorClass}" aria-hidden="true"></i>
+                                <span class="text-[#232946] text-xl font-bold">${priceDisplay}</span>
+                            </div>
+                        </header>
+                        
+                        <div class="prose max-w-none mb-8">
+                            <h2 class="text-xl font-semibold text-[#232946] mb-4">About This Resource</h2>
+                            <p class="text-[#232946] leading-relaxed text-base whitespace-pre-line">${resource.description}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="px-6 md:px-8 pb-6 md:pb-8 border-t border-gray-200">
+                        <div class="pt-6">
+                            <h3 class="text-lg font-semibold text-[#232946] mb-4">Ready to Access?</h3>
+                            <div class="flex flex-wrap gap-4">
+                                <a href="${resource.link}" target="_blank" rel="noopener noreferrer" class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors flex items-center font-medium">
+                                    <i class="fas fa-${buttonIcon} mr-2" aria-hidden="true"></i>
+                                    ${buttonText}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            `;
+            resourceContent.classList.add('opacity-100'); // Ensure content becomes visible
+            notFoundMessage.classList.add('hidden'); // Ensure not found message is hidden
+        }
+
+        /**
+         * Displays the "Resource Not Found" message.
+         */
+        function showNotFound() {
+            notFoundMessage.classList.remove('hidden');
+            resourceContent.classList.remove('opacity-100'); // Hide the content area if not found
+            // Update page title for not found state
+            document.title = "Resource Not Found - SPPU Engineers";
+        }
+
+        /**
+         * Hides the loading overlay and makes the resource content visible.
+         */
+        function hideLoading() {
+            loadingOverlay.style.display = "none";
+            // The resourceContent opacity will be set by displayResource or showNotFound
+        }
+
+        // Load resource details when the DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', loadResource);
+    </script>
+    
+    <script src="/assets/js/main.js" defer></script>
+    <script src="/assets/js/load-components.js" defer></script>
+</body>
+</html>

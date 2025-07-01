@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - SPPU Engineers</title>
+    
+    <!-- Meta Tags -->
+    <meta name="description" content="SPPU Engineers Admin Panel - Manage updates, competitions and resources">
+    <meta name="keywords" content="SPPU admin, engineering admin, content management">
+    <meta property="og:title" content="SPPU Engineers Admin">
+    <meta property="og:description" content="Admin panel for SPPU Engineers platform">
+    <meta property="og:image" content="https://sppuengineers.site/assets/images/sppu-engineers-preview.png">
+    <link rel="icon" type="image/png" href="/assets/images/logo.png">
+    
+    <!-- CSS & Fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Gabriela&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Firebase SDK -->
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"></script>
+    
+    <style>
+        /* Typography */
+        .font-gabriela { font-family: 'Gabriela', serif; }
+        
+        /* Color Scheme */
+        .admin-bg { background-color: #abd1c6; }
+        .admin-card { background-color: #004643; }
+        .admin-headline { color: #001e1d; }
+        .admin-card-title { color: #fffffe; }
+        .admin-subheadline { color: #0f3433; }
+        .admin-card-paragraph { color: #abd1c6; }
+        
+        /* Loading Animation */
+        .loading-screen {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 70vh;
+            background-color: #004643;
+            border-radius: 0.75rem;
+            margin: 2rem 0;
+            color: #abd1c6;
+        }
+        
+        .logo-loader {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 16px;
+            opacity: 0;
+            animation: fadeInScale 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        
+        .progress-container {
+            width: 200px;
+            height: 4px;
+            background-color: #0f3433;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background-color: #abd1c6;
+            width: 0;
+            animation: progressLoad 2s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+        }
+        
+        @keyframes fadeInScale {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        
+        @keyframes progressLoad {
+            0% { width: 0; }
+            100% { width: 100%; }
+        }
+        
+        /* Navigation */
+        .nav-btn.active-link {
+            background-color: #0f3433 !important;
+            border-left: 4px solid #abd1c6;
+            padding-left: calc(1.5rem - 4px);
+        }
+        
+        .nav-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Responsive Layout */
+        .sidebar-panel {
+            background-color: #004643;
+            z-index: 1000;
+            width: 16rem;
+            flex-shrink: 0;
+        }
+        
+        /* Mobile Styles */
+        @media (max-width: 767px) {
+            .sidebar-panel {
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100vh;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease-out;
+            }
+            
+            .sidebar-panel.is-active {
+                transform: translateX(0);
+            }
+            
+            .main-content-area {
+                padding-top: 5rem;
+                margin-left: 0;
+            }
+        }
+        
+        /* Desktop Styles */
+        @media (min-width: 768px) {
+            .sidebar-panel {
+                position: sticky;
+                top: 0;
+                height: 100vh;
+            }
+            
+            .sidebar-overlay, 
+            .mobile-menu-toggle {
+                display: none;
+            }
+            
+            .main-content-area {
+                padding-top: 2rem;
+            }
+        }
+        
+        /* Sidebar States */
+        .sidebar-panel.is-active {
+            transform: translateX(0);
+        }
+        
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
+        }
+        
+        .sidebar-overlay.is-active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Mobile Menu Button */
+        .mobile-menu-toggle {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 990;
+            background-color: #004643;
+            color: #fffffe;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        
+        .mobile-menu-toggle:hover {
+            background-color: #0f3433;
+        }
+        
+        /* Form Elements */
+        .admin-image {
+            max-height: 300px;
+            width: 100%;
+            object-fit: contain;
+            border-radius: 0.5rem;
+        }
+    </style>
+</head>
+
+<body class="admin-bg min-h-screen md:flex">
+    <!-- Mobile Menu Button -->
+    <button id="mobile-menu-toggle" class="mobile-menu-toggle md:hidden">
+        <i class="fas fa-bars text-xl"></i>
+    </button>
+
+    <!-- Sidebar Panel -->
+    <aside id="sidebar-panel" class="sidebar-panel">
+        <div>
+            <div class="p-6 border-b border-opacity-20 border-white">
+                <img src="/assets/images/logo.png" alt="SPPU Engineers" class="w-16 h-16 mb-3 mx-auto">
+                <h1 class="text-2xl font-bold admin-card-title font-gabriela text-center">SPPU Engineers</h1>
+                <p class="text-sm admin-card-paragraph text-center">Admin Dashboard</p>
+            </div>
+            
+            <nav class="mt-6 flex-grow">
+                <button data-section="updates" class="nav-btn w-full flex items-center px-6 py-4 text-left admin-card-paragraph transition-all duration-200 active-link">
+                    <i class="fas fa-newspaper mr-3 text-lg"></i>
+                    <span class="font-medium">Updates</span>
+                </button>
+                <button data-section="competitions" class="nav-btn w-full flex items-center px-6 py-4 text-left admin-card-paragraph transition-all duration-200">
+                    <i class="fas fa-trophy mr-3 text-lg"></i>
+                    <span class="font-medium">Competitions</span>
+                </button>
+                <button data-section="resources" class="nav-btn w-full flex items-center px-6 py-4 text-left admin-card-paragraph transition-all duration-200">
+                    <i class="fas fa-book mr-3 text-lg"></i>
+                    <span class="font-medium">Resources</span>
+                </button>
+                <a href="/admin/pg/host-request/" class="nav-btn w-full flex items-center px-6 py-4 text-left admin-card-paragraph transition-all duration-200">
+                    <i class="fas fa-trophy mr-3 text-lg"></i>
+                    <span class="font-medium">Host-Request</span>
+                </a>
+                <a href="/admin/pg/feedback/" class="nav-btn w-full flex items-center px-6 py-4 text-left admin-card-paragraph transition-all duration-200">
+                    <i class="fas fa-user mr-3 text-lg"></i>
+                    <span class="font-medium">FeedBack</span>
+                </a>
+                <a href="/admin/pg/partner-with-us/" class="nav-btn w-full flex items-center px-6 py-4 text-left admin-card-paragraph transition-all duration-200">
+                    <i class="fas fa-handshake mr-3 text-lg"></i>
+                    <span class="font-medium">Partner</span>
+                </a>
+
+            </nav>
+        </div>
+        
+        <div class="p-6 border-t border-opacity-20 border-white">
+            <button onclick="logout()" class="text-sm text-white px-6 py-3 w-full text-left rounded-lg bg-red-700 hover:bg-red-800 transition flex items-center justify-center">
+                <i class="fas fa-sign-out-alt mr-2"></i> Logout
+            </button>
+        </div>
+    </aside>
+
+    <!-- Sidebar Overlay -->
+    <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+    <!-- Main Content -->
+    <main id="main-content-area" class="main-content-area flex-grow p-4 md:p-8">
+        <div class="max-w-7xl mx-auto py-8">
+            <!-- Updates Section -->
+            <div id="updates-section" class="section-content">
+                <header class="mb-8">
+                    <h2 class="text-3xl font-bold admin-headline mb-2 font-gabriela">Manage Updates</h2>
+                    <p class="admin-subheadline text-lg">Add and manage news updates for students</p>
+                </header>
+
+                <div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
+                    <!-- Updates Form -->
+                    <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                        <h3 class="text-2xl font-semibold mb-6 text-gray-800">Add New Update</h3>
+                        <form id="updates-form" class="space-y-6">
+                            <input type="hidden" id="update-id">
+                            <div>
+                                <label for="update-title" class="block text-sm font-medium text-gray-700 mb-2">Title</label>
+                                <input type="text" id="update-title" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200" required>
+                            </div>
+                            <div>
+                                <label for="update-description" class="block text-sm font-medium text-gray-700 mb-2">Description</label>
+                                <textarea id="update-description" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200" required></textarea>
+                            </div>
+                            <div>
+                                <label for="update-date" class="block text-sm font-medium text-gray-700 mb-2">Date</label>
+                                <input type="date" id="update-date" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200" required>
+                            </div>
+                            <div>
+                                <label for="update-image" class="block text-sm font-medium text-gray-700 mb-2">Image URL (Optional)</label>
+                                <input type="url" id="update-image" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200" placeholder="https://example.com/image.jpg">
+                            </div>
+                            <div>
+                                <label for="update-pdf" class="block text-sm font-medium text-gray-700 mb-2">PDF URL (Optional)</label>
+                                <input type="url" id="update-pdf" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200" placeholder="https://example.com/document.pdf">
+                            </div>
+                            <div>
+                                <label for="update-link" class="block text-sm font-medium text-gray-700 mb-2">External Link (Optional)</label>
+                                <input type="url" id="update-link" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200" placeholder="https://example.com">
+                            </div>
+                            <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 pt-4">
+                                <button type="submit" class="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 font-medium transition-colors text-lg">
+                                    <span id="update-submit-text">Save Update</span>
+                                </button>
+                                <button type="button" id="cancel-update" class="bg-gray-500 text-white px-8 py-3 rounded-lg hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 font-medium transition-colors text-lg">
+                                    Cancel
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Updates List -->
+                    <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                        <h3 class="text-2xl font-semibold mb-6 text-gray-800">All Updates</h3>
+                        
+                        <div id="updates-loading" class="loading-screen">
+                            <img src="/assets/images/logo.png" alt="SPPU Engineers" class="logo-loader">
+                            <div class="progress-container">
+                                <div class="progress-bar"></div>
+                            </div>
+                            <p class="mt-4 admin-card-paragraph text-sm font-gabriela">Loading updates...</p>
+                        </div>
+                        
+                        <div id="updates-list" class="space-y-4 max-h-96 overflow-y-auto pr-2 hidden"></div>
+                        
+                        <div id="no-updates" class="text-center py-8 hidden">
+                            <i class="fas fa-newspaper text-gray-400 text-5xl mb-4"></i>
+                            <p class="text-gray-500 text-lg">No updates yet</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Competitions Section -->
+            <div id="competitions-section" class="section-content hidden">
+                <header class="mb-8">
+                    <h2 class="text-3xl font-bold admin-headline mb-2 font-gabriela">Manage Competitions</h2>
+                    <p class="admin-subheadline text-lg">Add and manage competitions for students</p>
+                </header>
+
+                <div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
+                    <!-- Competitions Form -->
+                    <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                        <h3 class="text-2xl font-semibold mb-6 text-gray-800">Add New Competition</h3>
+                        <form id="competitions-form" class="space-y-6">
+                            <input type="hidden" id="competition-id">
+                            <div>
+                                <label for="competition-title" class="block text-sm font-medium text-gray-700 mb-2">Title</label>
+                                <input type="text" id="competition-title" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200" required>
+                            </div>
+                            <div>
+                                <label for="competition-description" class="block text-sm font-medium text-gray-700 mb-2">Description</label>
+                                <textarea id="competition-description" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200" required></textarea>
+                            </div>
+                            <div>
+                                <label for="competition-lastdate" class="block text-sm font-medium text-gray-700 mb-2">Last Date</label>
+                                <input type="date" id="competition-lastdate" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200" required>
+                            </div>
+                            
+                            <div>
+                                <label for="competition-type" class="block text-sm font-medium text-gray-700 mb-2">Type</label>
+                                <select id="competition-type" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200" required>
+                                    <option value="free">Free</option>
+                                    <option value="paid">Paid</option>
+                                </select>
+                            </div>
+                            
+                            <div id="competition-fee-container" class="hidden">
+                                <label for="competition-fee" class="block text-sm font-medium text-gray-700 mb-2">Entry Fee (₹)</label>
+                                <input type="number" id="competition-fee" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200" placeholder="500">
+                            </div>
+                            
+                            <div>
+                                <label for="competition-image" class="block text-sm font-medium text-gray-700 mb-2">Image URL (Optional)</label>
+                                <input type="url" id="competition-image" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200" placeholder="https://example.com/image.jpg">
+                            </div>
+                            <div>
+                                <label for="competition-link" class="block text-sm font-medium text-gray-700 mb-2">Registration Link</label>
+                                <input type="url" id="competition-link" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200" required placeholder="https://example.com/register">
+                            </div>
+                            <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 pt-4">
+                                <button type="submit" class="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 font-medium transition-colors text-lg">
+                                    <span id="competition-submit-text">Save Competition</span>
+                                </button>
+                                <button type="button" id="cancel-competition" class="bg-gray-500 text-white px-8 py-3 rounded-lg hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 font-medium transition-colors text-lg">
+                                    Cancel
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Competitions List -->
+                    <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                        <h3 class="text-2xl font-semibold mb-6 text-gray-800">All Competitions</h3>
+                        
+                        <div id="competitions-loading" class="loading-screen">
+                            <img src="/assets/images/logo.png" alt="SPPU Engineers" class="logo-loader">
+                            <div class="progress-container">
+                                <div class="progress-bar"></div>
+                            </div>
+                            <p class="mt-4 admin-card-paragraph text-sm font-gabriela">Loading competitions...</p>
+                        </div>
+                        
+                        <div id="competitions-list" class="space-y-4 max-h-96 overflow-y-auto pr-2 hidden"></div>
+                        
+                        <div id="no-competitions" class="text-center py-8 hidden">
+                            <i class="fas fa-trophy text-gray-400 text-5xl mb-4"></i>
+                            <p class="text-gray-500 text-lg">No competitions yet</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resources Section -->
+            <div id="resources-section" class="section-content hidden">
+                <header class="mb-8">
+                    <h2 class="text-3xl font-bold admin-headline mb-2 font-gabriela">Manage Resources</h2>
+                    <p class="admin-subheadline text-lg">Add and manage educational resources</p>
+                </header>
+
+                <div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
+                    <!-- Resources Form -->
+                    <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                        <h3 class="text-2xl font-semibold mb-6 text-gray-800">Add New Resource</h3>
+                        <form id="resources-form" class="space-y-6">
+                            <input type="hidden" id="resource-id">
+                            <div>
+                                <label for="resource-title" class="block text-sm font-medium text-gray-700 mb-2">Title</label>
+                                <input type="text" id="resource-title" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200" required>
+                            </div>
+                            <div>
+                                <label for="resource-description" class="block text-sm font-medium text-gray-700 mb-2">Description</label>
+                                <textarea id="resource-description" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200" required></textarea>
+                            </div>
+                            
+                            <div>
+                                <label for="resource-type" class="block text-sm font-medium text-gray-700 mb-2">Type</label>
+                                <select id="resource-type" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200" required>
+                                    <option value="free">Free</option>
+                                    <option value="paid">Paid</option>
+                                </select>
+                            </div>
+                            
+                            <div id="resource-price-container" class="hidden">
+                                <label for="resource-price" class="block text-sm font-medium text-gray-700 mb-2">Price (₹)</label>
+                                <input type="number" id="resource-price" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200" placeholder="299">
+                            </div>
+                            
+                            <div>
+                                <label for="resource-image" class="block text-sm font-medium text-gray-700 mb-2">Image URL (Optional)</label>
+                                <input type="url" id="resource-image" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200" placeholder="https://example.com/image.jpg">
+                            </div>
+                            <div>
+                                <label for="resource-link" class="block text-sm font-medium text-gray-700 mb-2">Purchase/Download Link</label>
+                                <input type="url" id="resource-link" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200" required placeholder="https://example.com/buy">
+                            </div>
+                            <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 pt-4">
+                                <button type="submit" class="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 font-medium transition-colors text-lg">
+                                    <span id="resource-submit-text">Save Resource</span>
+                                </button>
+                                <button type="button" id="cancel-resource" class="bg-gray-500 text-white px-8 py-3 rounded-lg hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 font-medium transition-colors text-lg">
+                                    Cancel
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Resources List -->
+                    <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                        <h3 class="text-2xl font-semibold mb-6 text-gray-800">All Resources</h3>
+                        
+                        <div id="resources-loading" class="loading-screen">
+                            <img src="/assets/images/logo.png" alt="SPPU Engineers" class="logo-loader">
+                            <div class="progress-container">
+                                <div class="progress-bar"></div>
+                            </div>
+                            <p class="mt-4 admin-card-paragraph text-sm font-gabriela">Loading resources...</p>
+                        </div>
+                        
+                        <div id="resources-list" class="space-y-4 max-h-96 overflow-y-auto pr-2 hidden"></div>
+                        
+                        <div id="no-resources" class="text-center py-8 hidden">
+                            <i class="fas fa-book text-gray-400 text-5xl mb-4"></i>
+                            <p class="text-gray-500 text-lg">No resources yet</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- JavaScript Files -->
+    <script type="module" src="../js/firebase-config.js"></script>
+    <script type="module" src="../js/auth-protect.js"></script>
+    <script type="module" src="../js/admin.js"></script>
+    <script type="module" src="../js/updates.js"></script>
+    <script type="module" src="../js/competitions.js"></script>
+    <script type="module" src="../js/resources.js"></script>
+
+    <!-- Navigation Script -->
+    <script type="module">
+        // Mobile Menu & Navigation Logic
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const sidebarPanel = document.getElementById('sidebar-panel');
+        const sidebarOverlay = document.getElementById('sidebar-overlay');
+        const navButtons = document.querySelectorAll('.nav-btn');
+        const sectionContents = document.querySelectorAll('.section-content');
+
+        // Toggle sidebar visibility
+        function openSidebar() {
+            sidebarPanel.classList.add('is-active');
+            sidebarOverlay.classList.add('is-active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSidebar() {
+            sidebarPanel.classList.remove('is-active');
+            sidebarOverlay.classList.remove('is-active');
+            document.body.style.overflow = '';
+        }
+
+        // Event listeners
+        mobileMenuToggle?.addEventListener('click', openSidebar);
+        sidebarOverlay?.addEventListener('click', closeSidebar);
+
+        // Navigation buttons
+        navButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Update active state
+                navButtons.forEach(btn => btn.classList.remove('active-link'));
+                button.classList.add('active-link');
+
+                // Show corresponding section
+                const targetSectionId = button.dataset.section + '-section';
+                sectionContents.forEach(section => {
+                    section.classList.toggle('hidden', section.id !== targetSectionId);
+                });
+
+                // Close sidebar on mobile
+                if (window.innerWidth < 768) closeSidebar();
+            });
+        });
+
+        // Initialize default section
+        document.addEventListener('DOMContentLoaded', () => {
+            const initialActiveButton = document.querySelector('.nav-btn[data-section="updates"]');
+            if (initialActiveButton) {
+                initialActiveButton.classList.add('active-link');
+                document.getElementById('updates-section').classList.remove('hidden');
+            }
+        });
+
+        // Responsive behavior
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) closeSidebar();
+        });
+    </script>
+</body>
+</html>

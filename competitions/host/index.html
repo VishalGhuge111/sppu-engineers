@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Basic Meta -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Host a Competition - SPPU Engineers</title>
+  <meta name="description" content="Host competitions, hackathons, or tech quizzes with SPPU Engineers. Ideal for colleges, clubs, startups & students from SPPU or Maharashtra." />
+  <meta name="keywords" content="SPPU competition host, organize hackathon, student quiz platform, college event hosting, sppuengineers events" />
+  <meta name="author" content="SPPU Engineers Team" />
+
+  <!-- Open Graph (Facebook) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://sppuengineers.site/competitions/host" />
+  <meta property="og:title" content="Host a Competition - SPPU Engineers" />
+  <meta property="og:description" content="Reach thousands of SPPU students by hosting your quiz, hackathon or competition with us!" />
+  <meta property="og:image" content="https://sppuengineers.site/assets/images/sppu-engineers-preview.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Host a Competition - SPPU Engineers" />
+  <meta name="twitter:description" content="Colleges, clubs, and student groups from SPPU or Maharashtra can host competitions to reach a large student audience." />
+  <meta name="twitter:image" content="https://sppuengineers.site/assets/images/sppu-engineers-preview.png" />
+
+  <!-- Canonical Link -->
+  <link rel="canonical" href="https://sppuengineers.site/competitions/host" />
+
+  <!-- Favicon & Fonts -->
+  <link rel="icon" href="/assets/images/logo.png" type="image/png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Gabriela&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+
+<body class="bg-white text-gray-900 font-sans">
+  <div id="header-placeholder"></div>
+
+  <!-- ✅ Host Competition Form Section -->
+  <section class="pt-28 px-4 pb-16 bg-[#d4d8f0]">
+    <div class="max-w-3xl mx-auto bg-white p-6 rounded-xl shadow-md">
+      <h2 class="text-3xl font-bold text-center mb-4">Host Your Competition</h2>
+      <p class="text-center text-gray-700 mb-6 text-base md:text-lg leading-relaxed">
+        Are you a <strong>college</strong>, <strong>club</strong>, <strong>student group</strong>, or <strong>startup</strong> affiliated with SPPU or Maharashtra? Use this form to request hosting your event. <br />
+        <span class="text-red-600 font-semibold">Note:</span> Only for SPPU-affiliated colleges or Maharashtra-based organizations.
+      </p>
+
+      <form id="competitionForm" class="space-y-4">
+        <div>
+          <label class="block font-medium mb-1">Competition Title</label>
+          <input type="text" name="title" required class="w-full border px-3 py-2 rounded" placeholder="E.g. CodeFiesta 2025" />
+        </div>
+
+        <div>
+          <label class="block font-medium mb-1">Description</label>
+          <textarea name="description" required rows="8" class="w-full border px-3 py-3 rounded resize-y text-base md:text-lg leading-relaxed" placeholder="Include rules, eligibility, team size, mode (online/offline), etc."></textarea>
+        </div>
+
+        <div>
+          <label class="block font-medium mb-1">Last Date to Register</label>
+          <input type="date" name="lastDate" required class="w-full border px-3 py-2 rounded" />
+        </div>
+
+        <div>
+          <label class="block font-medium mb-1">Type of Participation</label>
+          <select name="type" id="typeSelect" required class="w-full border px-3 py-2 rounded">
+            <option value="">Select</option>
+            <option value="Free">Free</option>
+            <option value="Paid">Paid</option>
+          </select>
+        </div>
+
+        <div id="entryFeeDiv" class="hidden">
+          <label class="block font-medium mb-1">Entry Fee (in ₹)</label>
+          <input type="number" name="entryFee" id="entryFeeInput" class="w-full border px-3 py-2 rounded" placeholder="E.g. 100" min="0" />
+        </div>
+
+        <div>
+          <label class="block font-medium mb-1">Registration Link</label>
+          <input type="url" name="link" required class="w-full border px-3 py-2 rounded" placeholder="Google Form, Unstop, or website link" />
+        </div>
+
+        <div>
+          <label class="block font-medium mb-1">Banner Image URL (Optional)</label>
+          <input type="url" name="imageUrl" class="w-full border px-3 py-2 rounded" placeholder="Paste image URL for banner/poster" />
+        </div>
+
+        <div>
+          <label class="block font-medium mb-1">Organizer Name</label>
+          <input type="text" name="organizer" required class="w-full border px-3 py-2 rounded" placeholder="E.g. MIT Pune, CSI Club, StartupX" />
+        </div>
+
+        <div>
+          <label class="block font-medium mb-1">Organizer Email</label>
+          <input type="email" name="email" required class="w-full border px-3 py-2 rounded" placeholder="Email for confirmation/contact" />
+        </div>
+
+        <div>
+          <label class="block font-medium mb-1">Organizer Mobile Number</label>
+          <input type="tel" name="phone" required class="w-full border px-3 py-2 rounded" placeholder="WhatsApp or contact number" pattern="[0-9]{10}" />
+        </div>
+
+        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded w-full">Submit Request</button>
+      </form>
+
+      <!-- ✅ Popup on Success -->
+      <div id="popupSuccess" class="hidden mt-6 text-center bg-green-100 text-green-800 border border-green-300 rounded p-4 text-base shadow-md">
+        ✅ Your request has been submitted! <br />
+        We’ll review it and reach out to you soon. Thanks for your interest!
+      </div>
+
+      <!-- Footer Contact -->
+      <p class="text-sm text-center mt-6 text-gray-600">
+        📩 For queries, contact us at
+        <a href="mailto:contact.sppuengineers@gmail.com" class="text-blue-600 font-medium">contact.sppuengineers@gmail.com</a>
+      </p>
+    </div>
+  </section>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="/assets/js/main.js" defer></script>
+  <script src="/assets/js/load-components.js" defer></script>
+
+  <!-- ✅ Firebase Script -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyC7EvohC3Y9FScY0glVt-hPvkPWrbdM0rU",
+      authDomain: "sppu-engineers-111.firebaseapp.com",
+      databaseURL: "https://sppu-engineers-111-default-rtdb.firebaseio.com",
+      projectId: "sppu-engineers-111",
+      storageBucket: "sppu-engineers-111.firebasestorage.app",
+      messagingSenderId: "622650122117",
+      appId: "1:622650122117:web:0218bbf87b43cf1168aeec"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    const form = document.getElementById("competitionForm");
+    const typeSelect = document.getElementById("typeSelect");
+    const entryFeeDiv = document.getElementById("entryFeeDiv");
+    const entryFeeInput = document.getElementById("entryFeeInput");
+    const popupSuccess = document.getElementById("popupSuccess");
+
+    // Toggle Entry Fee
+    typeSelect.addEventListener("change", () => {
+      if (typeSelect.value === "Paid") {
+        entryFeeDiv.classList.remove("hidden");
+        entryFeeInput.required = true;
+      } else {
+        entryFeeDiv.classList.add("hidden");
+        entryFeeInput.required = false;
+        entryFeeInput.value = "";
+      }
+    });
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const data = {
+        title: form.title.value,
+        description: form.description.value,
+        lastDate: form.lastDate.value,
+        type: form.type.value,
+        entryFee: form.entryFee.value || "0",
+        link: form.link.value,
+        imageUrl: form.imageUrl.value || "",
+        organizer: form.organizer.value,
+        email: form.email.value,
+        phone: form.phone.value,
+        status: "pending",
+        submittedAt: new Date().toISOString()
+      };
+
+      try {
+        await push(ref(db, "competitionRequests"), data);
+        form.reset();
+        entryFeeDiv.classList.add("hidden");
+
+        // Show success popup
+        popupSuccess.classList.remove("hidden");
+        popupSuccess.scrollIntoView({ behavior: "smooth" });
+      } catch (error) {
+        alert("❌ Submission failed. Please try again.");
+        console.error(error);
+      }
+    });
+  </script>
+</body>
+</html>

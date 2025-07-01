@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Give Feedback - SPPU Engineers</title>
+  <meta name="description" content="Submit feedback as a student or organization. Help improve SPPU Engineers with your thoughts and experiences." />
+  <meta name="keywords" content="sppu feedback, student feedback, sppu reviews, engineering experience, organization reviews" />
+  <meta name="author" content="SPPU Engineers" />
+  <link rel="icon" href="/assets/images/logo.png" type="image/png" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Give Feedback - SPPU Engineers" />
+  <meta property="og:description" content="Submit your review as a student or organization to help us improve." />
+  <meta property="og:image" content="https://sppuengineers.site/assets/images/sppu-engineers-preview.png" />
+  <meta property="og:url" content="https://sppuengineers.site/feedback" />
+  <meta property="og:type" content="website" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Give Feedback - SPPU Engineers" />
+  <meta name="twitter:description" content="Submit feedback to SPPU Engineers from your college or organization." />
+  <meta name="twitter:image" content="https://sppuengineers.site/assets/images/sppu-engineers-preview.png" />
+
+  <link rel="canonical" href="https://sppuengineers.site/feedback" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Gabriela&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+
+<body class="bg-white text-gray-900 font-sans">
+  <!-- Header -->
+  <div id="header-placeholder"></div>
+
+  <!-- ✅ Feedback Section -->
+  <section class="pt-28 px-4 pb-16 bg-[#f0f5fd]">
+    <div class="max-w-3xl mx-auto bg-white p-6 rounded-xl shadow-md">
+      <h2 class="text-3xl font-bold text-center mb-6">Share Your Feedback</h2>
+
+      <!-- Toggle Buttons -->
+      <div class="flex justify-center mb-6 space-x-4">
+        <button id="studentBtn" class="bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700"><span class="hidden sm:inline">I'm a </span>Student</button>
+        <button id="orgBtn" class="bg-gray-300 text-gray-800 px-4 py-2 rounded shadow hover:bg-gray-400"><span class="hidden sm:inline">I'm from an </span>Organization</button>
+      </div>
+
+      <!-- Student Form -->
+      <form id="studentForm" class="space-y-4">
+        <input type="text" name="name" required class="w-full border px-3 py-2 rounded" placeholder="Your Name" />
+        <input type="text" name="college" required class="w-full border px-3 py-2 rounded" placeholder="College Name" />
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <input type="text" name="branch" required class="w-full border px-3 py-2 rounded" placeholder="Branch" />
+          <input type="text" name="cgpa" required class="w-full border px-3 py-2 rounded" placeholder="Current CGPA" />
+        </div>
+        <input type="email" name="email" required class="w-full border px-3 py-2 rounded" placeholder="Your Email Address" />
+        <textarea name="review" required rows="4" class="w-full border px-3 py-2 rounded" placeholder="Your Review / Feedback"></textarea>
+        <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700" id="studentSubmitBtn">Submit Feedback</button>
+        <p id="studentSuccess" class="text-green-600 text-center mt-4 hidden">✅ Thanks for your feedback!</p>
+      </form>
+
+      <!-- Organization Form -->
+      <form id="orgForm" class="space-y-4 hidden">
+        <input type="text" name="name" required class="w-full border px-3 py-2 rounded" placeholder="Your Name" />
+        <input type="text" name="organization" required class="w-full border px-3 py-2 rounded" placeholder="Organization Name" />
+        <input type="email" name="email" required class="w-full border px-3 py-2 rounded" placeholder="Organization Email" />
+        <textarea name="review" required rows="4" class="w-full border px-3 py-2 rounded" placeholder="Your Feedback"></textarea>
+        <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700" id="orgSubmitBtn">Submit Feedback</button>
+        <p id="orgSuccess" class="text-green-600 text-center mt-4 hidden">✅ Thank you for your review!</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <div id="footer-placeholder"></div>
+  <script src="/assets/js/main.js" defer></script>
+  <script src="/assets/js/load-components.js" defer></script>
+
+  <!-- Toggle Script -->
+  <script>
+    const studentBtn = document.getElementById("studentBtn");
+    const orgBtn = document.getElementById("orgBtn");
+    const studentForm = document.getElementById("studentForm");
+    const orgForm = document.getElementById("orgForm");
+
+    studentBtn.onclick = () => {
+      studentForm.classList.remove("hidden");
+      orgForm.classList.add("hidden");
+      studentBtn.classList.add("bg-blue-600", "text-white");
+      studentBtn.classList.remove("bg-gray-300", "text-gray-800");
+      orgBtn.classList.add("bg-gray-300", "text-gray-800");
+      orgBtn.classList.remove("bg-blue-600", "text-white");
+    };
+
+    orgBtn.onclick = () => {
+      orgForm.classList.remove("hidden");
+      studentForm.classList.add("hidden");
+      orgBtn.classList.add("bg-blue-600", "text-white");
+      orgBtn.classList.remove("bg-gray-300", "text-gray-800");
+      studentBtn.classList.add("bg-gray-300", "text-gray-800");
+      studentBtn.classList.remove("bg-blue-600", "text-white");
+    };
+  </script>
+
+  <!-- Firebase Form Submission -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyC7EvohC3Y9FScY0glVt-hPvkPWrbdM0rU",
+      authDomain: "sppu-engineers-111.firebaseapp.com",
+      databaseURL: "https://sppu-engineers-111-default-rtdb.firebaseio.com",
+      projectId: "sppu-engineers-111",
+      storageBucket: "sppu-engineers-111.firebasestorage.app",
+      messagingSenderId: "622650122117",
+      appId: "1:622650122117:web:0218bbf87b43cf1168aeec"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    // Student Feedback Submit
+    const studentSuccess = document.getElementById("studentSuccess");
+    document.getElementById("studentForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const submitBtn = document.getElementById("studentSubmitBtn");
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Submitting...";
+
+      const data = {
+        name: form.name.value,
+        college: form.college.value,
+        branch: form.branch.value,
+        cgpa: form.cgpa.value,
+        email: form.email.value,
+        review: form.review.value,
+        type: "student",
+        submittedAt: new Date().toISOString()
+      };
+
+      try {
+        await push(ref(db, "feedback/student"), data);
+        form.reset();
+        studentSuccess.classList.remove("hidden");
+      } catch (err) {
+        alert("❌ Failed to submit. Try again.");
+        console.error(err);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Submit Feedback";
+      }
+    });
+
+    // Organization Feedback Submit
+    const orgSuccess = document.getElementById("orgSuccess");
+    document.getElementById("orgForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const submitBtn = document.getElementById("orgSubmitBtn");
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Submitting...";
+
+      const data = {
+        name: form.name.value,
+        organization: form.organization.value,
+        email: form.email.value,
+        review: form.review.value,
+        type: "organization",
+        submittedAt: new Date().toISOString()
+      };
+
+      try {
+        await push(ref(db, "feedback/organization"), data);
+        form.reset();
+        orgSuccess.classList.remove("hidden");
+      } catch (err) {
+        alert("❌ Failed to submit. Try again.");
+        console.error(err);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Submit Feedback";
+      }
+    });
+  </script>
+</body>
+</html>

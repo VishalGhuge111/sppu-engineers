@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feedback Dashboard - SPPU Engineers</title>
+
+  <meta name="description" content="Admin panel to view feedback submitted on SPPU Engineers platform." />
+  <link rel="icon" href="/assets/images/logo.png" type="image/png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+
+<body class="bg-[#f1f5f9] text-gray-900 font-sans min-h-screen">
+
+  <!-- Top Header Bar -->
+  <div class="flex items-center justify-between bg-white px-6 py-4 shadow-md">
+    <a href="/admin/index.html" class="text-blue-700 font-semibold text-base hover:text-blue-900 flex items-center gap-2">
+      <i class="fas fa-arrow-left"></i> Back to Admin Panel
+    </a>
+    <h1 class="text-2xl font-bold text-center flex-1 -ml-16">📋 Feedback Dashboard</h1>
+    <div class="w-[140px]"></div> <!-- Spacer to balance back button -->
+  </div>
+
+  <!-- Tab Switch -->
+  <div class="flex justify-center mt-6 gap-4">
+    <button id="studentTab" class="bg-blue-600 text-white px-5 py-2 rounded shadow hover:bg-blue-700">Student Feedback</button>
+    <button id="orgTab" class="bg-gray-300 text-gray-800 px-5 py-2 rounded shadow hover:bg-gray-400">Organization Feedback</button>
+  </div>
+
+  <!-- Feedback Section -->
+  <div class="max-w-7xl mx-auto mt-8 px-4 pb-16">
+
+    <!-- Student Feedback -->
+    <div id="studentSection">
+      <div id="studentList" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </div>
+
+    <!-- Organization Feedback -->
+    <div id="orgSection" class="hidden">
+      <div id="orgList" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </div>
+
+  </div>
+
+  <!-- Script -->
+  <script type="module" src="./script.js"></script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Competition Requests | Admin Panel - SPPU Engineers</title>
+  <link rel="icon" href="/assets/images/logo.png" type="image/png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            sppublue: '#1e3a8a',
+            softgreen: '#eafbf1',
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body class="bg-softgreen text-gray-800 font-sans">
+
+  <!-- 🔙 Back + Title -->
+  <div class="bg-white p-4 shadow flex flex-col sm:flex-row justify-between items-center sticky top-0 z-50 border-b">
+    <a href="/admin/index.html" title="Back" class="text-sppublue text-2xl hover:text-blue-900 transition mb-2 sm:mb-0">
+      <i class="fas fa-circle-arrow-left"></i>
+    </a>
+    <h1 class="text-center text-lg sm:text-xl font-bold text-sppublue">Competition Requests | Admin Panel</h1>
+    <div class="w-8 sm:w-10"></div> <!-- empty space for spacing -->
+  </div>
+
+  <!-- 🧾 Requests -->
+  <main class="p-6 max-w-6xl mx-auto">
+    <div id="requestContainer" class="space-y-6">
+      <p class="text-center text-gray-500">Loading requests...</p>
+    </div>
+  </main>
+
+  <script type="module" src="./script.js"></script>
+</body>
+</html>

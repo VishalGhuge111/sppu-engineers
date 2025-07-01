@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Primary Meta Tags -->
+    <title>Competitions - SPPU Engineers | Engineering Contests & Events</title>
+    <meta name="description" content="Participate in exciting engineering competitions and contests. Register for technical events, coding competitions, and showcase your skills." />
+    <meta name="keywords" content="SPPU competitions, engineering contests, coding competitions, technical events, hackathon" />
+    <meta name="author" content="SPPU Engineers" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/assets/images/logo.png" sizes="96x96" />
+    <link rel="apple-touch-icon" href="/assets/images/logo.png" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://sppuengineers.site/competitions/" />
+    <meta property="og:title" content="Competitions - SPPU Engineers" />
+    <meta property="og:description" content="Join exciting competitions and contests for engineering students" />
+    <meta property="og:image" content="https://sppuengineers.site/assets/images/sppu-engineers-preview.png" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://sppuengineers.site/competitions/" />
+    <meta name="twitter:title" content="Competitions - SPPU Engineers" />
+    <meta name="twitter:description" content="Join exciting competitions and contests for engineering students" />
+    <meta name="twitter:image" content="https://sppuengineers.site/assets/images/sppu-engineers-preview.png" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://sppuengineers.site/competitions/" />
+
+    <!-- Preconnects -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+
+    <!-- Styles & Fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Gabriela&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+
+    <style>
+        .font-gabriela { font-family: 'Gabriela', serif; }
+        
+        /* Transparent Loading Overlay */
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(212, 216, 240, 0.8);
+            backdrop-filter: blur(4px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 0.75rem;
+            z-index: 10;
+        }
+
+        .logo-loader {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 16px;
+            opacity: 0;
+            animation: fadeInScale 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .progress-container {
+            width: 200px;
+            height: 4px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: #232946;
+            width: 0;
+            animation: progressLoad 2s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+        }
+
+        @keyframes fadeInScale {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes progressLoad {
+            0% { width: 0; }
+            100% { width: 100%; }
+        }
+
+        /* Card hover effects */
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px); /* More pronounced lift */
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15); /* Stronger shadow */
+        }
+
+        /* Image container with fixed aspect ratio */
+        .image-container {
+            width: 100%;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+            border-radius: 0.5rem 0.5rem 0 0; /* Only top corners rounded */
+            background: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Badge styles */
+        .badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 9999px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .badge-expired {
+            background-color: #ef4444; /* Red */
+            color: white;
+        }
+        .badge-upcoming {
+            background-color: #6366f1; /* Indigo */
+            color: white;
+        }
+        .badge-live {
+            background-color: #0d9488; /* Teal */
+            color: white;
+        }
+
+        /* Sticky-like section for status and prize */
+        .card-header-meta {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            right: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start; /* Align items to start for better badge placement */
+            z-index: 5;
+        }
+
+        .card-prize-info {
+            background: rgba(35, 41, 70, 0.9); /* Dark blue with transparency */
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body class="bg-[#d4d8f0] min-h-screen flex flex-col">
+    <div id="header-placeholder"></div>
+    
+    <main class="flex-grow pt-28 pb-12">
+        <div class="max-w-7xl mx-auto px-4 md:px-6">
+            <div class="text-center mb-12">
+                <h1 class="text-2xl md:text-4xl font-bold text-[#232946] mb-4 font-gabriela">Latest Competitions</h1>
+                <p class="text-base text-[#232946]">Participate in exciting competitions and showcase your skills</p>
+            </div>
+
+            <section id="mainContent" class="relative min-h-[400px]">
+                <div id="loadingOverlay" class="loading-overlay">
+                    <img src="/assets/images/logo.png" alt="SPPU Engineers" class="logo-loader">
+                    <div class="progress-container">
+                        <div class="progress-bar"></div>
+                    </div>
+                    <p class="mt-4 text-[#232946] text-sm font-gabriela">Loading competitions...</p>
+                </div>
+
+                <div id="competitions-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 opacity-0 transition-opacity duration-500">
+                    </div>
+
+                <div id="no-competitions" class="text-center py-16 hidden">
+                    <i class="fas fa-trophy text-gray-400 text-6xl mb-4"></i>
+                    <h3 class="text-xl font-semibold text-[#232946] mb-2">No Competitions Available</h3>
+                    <p class="text-[#232946]">Check back later for new competitions and contests.</p>
+                </div>
+
+                 <div class="mt-16 bg-white border border-gray-200 rounded-xl shadow-md p-6 md:p-10 text-center">
+                    <h2 class="text-xl md:text-2xl font-semibold text-[#232946] mb-3 font-gabriela">Want to Host Your Own Competition?</h2>
+                    <p class="text-sm md:text-base text-gray-700 mb-5">
+                        If you're from a college, tech club, or organization and wish to organize a competition, hackathon or challenge, we’d love to collaborate with you.
+                    </p>
+                    <a href="/competitions/host/" rel="noopener noreferrer"
+                       class="inline-block bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors shadow-md text-sm md:text-base">
+                        Fill Hosting Request Form
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+    
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getDatabase, ref, onValue } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js';
+
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyC7EvohC3Y9FScY0glVt-hPvkPWrbdM0rU",
+            authDomain: "sppu-engineers-111.firebaseapp.com",
+            databaseURL: "https://sppu-engineers-111-default-rtdb.firebaseio.com",
+            projectId: "sppu-engineers-111",
+            storageBucket: "sppu-engineers-111.firebasestorage.app",
+            messagingSenderId: "622650122117",
+            appId: "1:622650122117:web:0218bbf87b43cf1168aeec"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        // DOM Elements
+        const competitionsGrid = document.getElementById('competitions-grid');
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        const noCompetitionsMessage = document.getElementById('no-competitions');
+
+        /**
+         * Fetches and displays competition data from Firebase.
+         */
+        function loadCompetitions() {
+            const competitionsRef = ref(database, 'competitions');
+            onValue(competitionsRef, (snapshot) => {
+                const competitions = snapshot.val();
+                displayCompetitions(competitions);
+                hideLoading();
+            }, (error) => {
+                console.error("Error loading competitions:", error);
+                hideLoading();
+                showNoCompetitions();
+            });
+        }
+
+        /**
+         * Renders competition cards based on the provided data.
+         * @param {Object} competitions - An object containing competition data.
+         */
+        function displayCompetitions(competitions) {
+            competitionsGrid.innerHTML = ''; // Clear existing content
+
+            if (!competitions || Object.keys(competitions).length === 0) {
+                showNoCompetitions();
+                return;
+            }
+
+            // Hide no competitions message if data is present
+            noCompetitionsMessage.classList.add('hidden');
+
+            // Convert to array and sort by timestamp (newest first)
+            const competitionsArray = Object.entries(competitions).map(([id, competition]) => ({
+                id,
+                ...competition
+            })).sort((a, b) => b.timestamp - a.timestamp);
+
+            const now = new Date();
+
+            competitionsArray.forEach(competition => {
+                const lastDate = new Date(competition.lastDate);
+                const isExpired = lastDate < now;
+                
+                let statusBadgeClass = '';
+                let statusText = '';
+
+                // Determine competition status
+                if (isExpired) {
+                    statusBadgeClass = 'badge-expired';
+                    statusText = 'Expired';
+                } else if (competition.startDate && new Date(competition.startDate) > now) {
+                    statusBadgeClass = 'badge-upcoming';
+                    statusText = 'Upcoming';
+                } else {
+                    statusBadgeClass = 'badge-live';
+                    statusText = 'Live';
+                }
+
+                const competitionCard = `
+                    <div class="bg-[#fffffe] rounded-xl shadow-lg card-hover relative overflow-hidden flex flex-col">
+                        <div class="card-header-meta">
+                            <span class="badge ${statusBadgeClass}">${statusText}</span>
+                            ${competition.prize ? `
+                                <span class="card-prize-info">
+                                    <i class="fas fa-trophy"></i>
+                                    ${competition.prize}
+                                </span>
+                            ` : ''}
+                        </div>
+
+                        ${competition.imageUrl ? `
+                            <div class="image-container">
+                                <img src="${competition.imageUrl}" alt="${competition.title}" class="card-image">
+                            </div>
+                        ` : `
+                            <div class="image-container flex items-center justify-center bg-gray-200 text-gray-500">
+                                <i class="fas fa-image text-5xl"></i>
+                            </div>
+                        `}
+                        
+                        <div class="p-5 flex-1 flex flex-col">
+                            <div class="flex justify-between items-start mb-3">
+                                <h3 class="text-xl font-bold text-[#232946] font-gabriela line-clamp-2 flex-1">${competition.title}</h3>
+                            </div>
+                            
+                            <p class="text-[#232946] text-sm mb-4 leading-relaxed flex-1">${competition.description.substring(0, 150)}${competition.description.length > 150 ? '...' : ''}</p>
+                            
+                            <div class="mb-4 pt-2 border-t border-gray-100">
+                                <div class="flex items-center justify-between text-sm">
+                                    <span class="text-[#232946] flex items-center">
+                                        <i class="fas fa-calendar-alt mr-2 text-gray-500"></i>
+                                        <span class="font-medium">Last Date:</span>
+                                    </span>
+                                    <span class="font-bold ${isExpired ? 'text-red-600' : 'text-orange-600'}">
+                                        ${lastDate.toLocaleDateString('en-US', { 
+                                            month: 'short', 
+                                            day: 'numeric',
+                                            year: 'numeric' 
+                                        })}
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            <div class="flex gap-3 mt-auto">
+                                ${!isExpired ? `
+                                    <a href="${competition.link}" target="_blank" rel="noopener noreferrer" class="bg-blue-600 text-white px-5 py-2.5 rounded-lg hover:bg-blue-700 transition-colors flex-1 text-center font-semibold text-sm shadow-md">
+                                        Register Now
+                                    </a>
+                                ` : `
+                                    <button disabled class="bg-gray-400 text-white px-5 py-2.5 rounded-lg cursor-not-allowed flex-1 text-center font-semibold text-sm opacity-80">
+                                        Registration Closed
+                                    </button>
+                                `}
+                                <a href="view.html?id=${competition.id}" class="bg-gray-600 text-white px-5 py-2.5 rounded-lg hover:bg-gray-700 transition-colors font-semibold flex items-center justify-center text-sm shadow-md">
+                                    <i class="fas fa-arrow-right ml-1"></i> View
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                competitionsGrid.insertAdjacentHTML('beforeend', competitionCard);
+            });
+        }
+
+        /**
+         * Hides the loading overlay and makes the content visible.
+         */
+        function hideLoading() {
+            loadingOverlay.style.display = 'none';
+            competitionsGrid.style.opacity = '1';
+        }
+
+        /**
+         * Displays the "No Competitions Available" message.
+         */
+        function showNoCompetitions() {
+            noCompetitionsMessage.classList.remove('hidden');
+        }
+
+        // Initialize on DOMContentLoaded
+        document.addEventListener('DOMContentLoaded', loadCompetitions);
+    </script>
+    
+    <script src="/assets/js/main.js" defer></script>
+    <script src="/assets/js/load-components.js" defer></script>
+</body>
+</html>

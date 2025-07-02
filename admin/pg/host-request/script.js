@@ -9,7 +9,7 @@ import {
 
 // ✅ Firebase Config
 const firebaseConfig = {
-  apiKey: "AIzaSyC7EvohC3Y9FScY0glVt-hPvkPWrbdM0rU",
+  apiKey: "AIzaSyCd7mmW5FXBgARCMJ3b_yJKQbkRR8VXFi8",
   authDomain: "sppu-engineers-111.firebaseapp.com",
   databaseURL: "https://sppu-engineers-111-default-rtdb.firebaseio.com",
   projectId: "sppu-engineers-111",

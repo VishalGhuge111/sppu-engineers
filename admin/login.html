@@ -184,7 +184,15 @@
       .catch((error) => handleError(error));
   });
 
-  googleLoginBtn.addEventListener("click", () => {
+googleLoginBtn.addEventListener("click", () => {
+  signInWithPopup(auth, provider)
+    .then((result) => {
+      console.log("Google Login Successful:", result.user.email);
+      window.location.href = "/admin/";
+    })
+    .catch((error) => {
+      handleError(error);
+    });
     signInWithPopup(auth, provider)
       .then((result) => {
         const userEmail = result.user.email;

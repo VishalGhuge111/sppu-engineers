@@ -38,7 +38,7 @@ const projects = [
         price: 3499,
         shortDesc: "Secure online voting platform with OTP verification and admin panel.",
         desc: "A comprehensive online voting system designed for secure and transparent elections. Features include voter registration, OTP-based authentication, real-time vote counting, candidate management, and detailed reporting. The system ensures data integrity and prevents duplicate voting through advanced security measures.",
-        wa: "919876543210"
+        wa: "917666768179"
     },
     {
         id: "PROJ002",

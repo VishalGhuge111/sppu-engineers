@@ -140,11 +140,11 @@ function closeModal() {
 
 // Custom project functions
 function makeCall() {
-    window.location.href = 'tel:+919876543210';
+    window.location.href = 'tel:+917666768179';
 }
 
 function contactCustom() {
     const message = 'Hi! I need a custom project. Can you help me with my specific requirements?';
-    const whatsappUrl = `https://wa.me/919876543210?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/917666768179?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
 }

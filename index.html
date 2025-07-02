@@ -126,12 +126,13 @@
 
   <section id="about" class="bg-[#f4effc] py-12 md:py-16 px-6 md:px-20 border border-gray-300 rounded-2xl shadow-md">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-10 md:gap-20">
-      <div class="flex flex-col items-center md:items-stretch md:flex-row md:space-x-8 md:pl-10">
-        <div class="flex-shrink-0 w-32 h-32 bg-white border border-gray-300 rounded-full shadow flex items-center justify-center">
+      <!-- Wrapper hidden on mobile -->
+      <div class="hidden md:flex flex-col items-center md:items-stretch md:flex-row md:space-x-8 md:pl-10">
+        <div class="flex-shrink-0 w-32 h-32 bg-black border border-gray-300 rounded-full shadow flex items-center justify-center">
           <img 
-            src="/assets/images/sppu-logo.png" 
-            alt="Savitribai Phule Pune University Official Logo" 
-            class="w-full h-full object-contain rounded-full"
+            src="/assets/images/logo.png" 
+            alt="SPPU Engineers Logo icon" 
+            class="w-[90%] h-[90%] object-contain rounded-full"
             loading="lazy"
           />
         </div>
@@ -149,9 +150,8 @@
             Trusted by Students Across <span class="text-blue-700">100+ SPPU Colleges</span> in Pune
           </h2>
           <p class="text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed">
-            <strong>SPPU Engineers</strong> is the leading platform for <strong>Savitribai Phule Pune University</strong> students, providing 
-            <strong>curated engineering resources</strong> across all branches. Our materials are designed by toppers to help students achieve 
-            academic excellence in their FE to BE journey.
+             <strong>SPPU Engineers</strong> is a student-led platform supporting learners from <strong>colleges affiliated with Savitribai Phule Pune University</strong>. We provide <strong>curated engineering resources</strong> across all branches, designed by toppers to help students excel from FE to BE.
+
           </p>
         </div>
       </div>
@@ -210,47 +210,97 @@
   </section>
 
   <section id="SmartStudy" class="py-20 px-6 md:px-20 bg-[#f9f4ef]">
-    <h2 class="text-center text-4xl font-bold mb-12 text-red-600" data-aos="fade-up" data-aos-duration="1000">
+    <h2 class="text-center text-4xl font-bold mb-16 md:mb-12 text-red-600" data-aos="fade-up" data-aos-duration="1000">
       "Master SPPU Engineering with Smart Learning"
     </h2>
 
-    <div class="flex flex-col md:flex-row items-center justify-center mb-12" data-aos="fade-up" data-aos-duration="1000">
+    <div class="flex flex-col md:flex-row items-center justify-center mb-4 md:mb-0" data-aos="fade-up" data-aos-duration="1000">
+      <!-- Image 1 -->
       <div class="flex-1 mb-6 md:mb-0">
-        <img src="https://images.goseeko.com/strapi/home/Group_3150_1_069dc461b1.svg" alt="SPPU Smart Study Techniques" class="lg:w-1/2 mx-auto transform hover:scale-105 transition-transform duration-300" loading="lazy">
+        <div class="w-56 h-56 md:w-72 md:h-72 mx-auto flex items-center justify-center">
+          <img src="assets/svg/learning-1.svg" alt="SPPU Smart Study Techniques" class="max-w-full max-h-full object-contain transform hover:scale-105 transition-transform duration-300" loading="lazy">
+        </div>
       </div>
       <div class="flex-1 md:pl-12 md:pr-24 text-center md:text-left">
-        <h3 class="text-2xl font-bold text-gray-800 mb-4">Complete SPPU Learning Resources</h3>
-        <p class="text-gray-600 leading-relaxed">
+      <h3 class="text-2xl font-bold text-gray-800 mb-4">Complete SPPU Learning Resources</h3>
+
+      <!-- Mobile Content -->
+      <p class="text-gray-600 leading-relaxed md:hidden">
           Access Pune University engineering materials designed for efficient learning - syllabus-aligned notes, solved PYQs, 
-          and exam preparation guides to maximize your grades.
+          & exam preparation guides to maximize your grades.  </p>
+
+      <!-- Desktop/Tablet Content -->
+      <div class="hidden md:block text-gray-600 leading-relaxed space-y-2">
+        <p>
+          Access Pune University engineering materials designed for efficient learning — syllabus-aligned notes, solved PYQs, and exam preparation guides to maximize your grades.
         </p>
+        <ul class="list-disc list-inside text-gray-600">
+          <li>Subject-wise topic breakdown for each semester</li>
+          <li>Concise revision material curated by toppers</li>
+          <li>PDFs for fast revision before SPPU exams</li>
+        </ul>
       </div>
+    </div>
     </div>
 
     <div class="flex flex-col-reverse md:flex-row items-center justify-center mb-12" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
-      <div class="flex-1 md:pr-12 md:pl-24 text-center md:text-left">
-        <h3 class="text-2xl font-bold text-gray-800 mb-4">Excel in Your SPPU Engineering Journey</h3>
-        <p class="text-gray-600 leading-relaxed">
+    <div class="flex-1 md:pr-12 md:pl-24 text-center md:text-left">
+    <h3 class="text-2xl font-bold text-gray-800 mb-4">Excel in Your SPPU Engineering Journey</h3>
+
+      <!-- Mobile Content -->
+      <p class="text-gray-600 leading-relaxed md:hidden">
           Our Pune University resources combine theoretical knowledge with practical exam strategies to help you achieve 
-          outstanding results in your FE to BE semesters.
+          outstanding results in your FE to BE semesters.  </p>
+
+      <!-- Desktop/Tablet Content -->
+      <div class="hidden md:block text-gray-600 leading-relaxed space-y-2">
+        <p>
+          Our Pune University resources combine theoretical knowledge with practical exam strategies to help you achieve outstanding results in your FE to BE semesters.
         </p>
+        <ul class="list-disc list-inside text-gray-600">
+          <li>Concept-driven notes with clear explanations</li>
+          <li>Strategy guides tailored for each semester exam</li>
+          <li>Planner-based structure for smart daily study</li>
+        </ul>
       </div>
-      <div class="flex-1 mb-6 md:mb-0">
-        <img src="https://images.goseeko.com/strapi/home/Group_3149_1_caf9c997f3.svg" alt="SPPU Academic Success Guidance" class="lg:w-1/2 mx-auto transform hover:scale-105 transition-transform duration-300" loading="lazy">
+    </div>
+
+      <!-- Image 2 -->
+      <div class="flex-1 mb-2 md:mb-0">
+        <div class="w-80 h-80 md:w-80 md:h-80 mx-auto flex items-center justify-center">
+          <img src="assets/svg/learning-2.svg" alt="SPPU Academic Success Guidance" class="max-w-full max-h-full object-contain transform hover:scale-105 transition-transform duration-300" loading="lazy">
+        </div>
       </div>
     </div>
 
     <div class="flex flex-col md:flex-row items-center justify-center" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+     <!-- Image 3 -->
       <div class="flex-1 mb-6 md:mb-0">
-        <img src="https://images.goseeko.com/strapi/home/3_1_78507866f7.svg" alt="SPPU Exam Preparation Results" class="mx-auto transform hover:scale-105 transition-transform duration-300" loading="lazy">
+        <div class="w-64 h-64 md:w-64 md:h-64 mx-auto flex items-center justify-center">
+          <img src="assets/svg/learning-3.svg" alt="SPPU Exam Preparation Results" class="max-w-full max-h-full object-contain transform hover:scale-105 transition-transform duration-300" loading="lazy">
+        </div>
       </div>
       <div class="flex-1 md:pl-12 md:pr-24 text-center md:text-left">
-        <h3 class="text-2xl font-bold text-gray-800 mb-4">SPPU Topper Strategies & Guidance</h3>
-        <p class="text-gray-600 leading-relaxed">
-          Learn from Pune University toppers with our exam-focused resources, time management tips, and subject-specific 
-          strategies to ace your SPPU engineering exams.
+    <h3 class="text-2xl font-bold text-gray-800 mb-4">SPPU Topper Strategies & Guidance</h3>
+
+      <!-- Mobile Content -->
+      <p class="text-gray-600 leading-relaxed md:hidden">
+        Learn from Pune University toppers with our exam-focused resources, time management tips, and subject-specific 
+        strategies to ace your SPPU engineering exams.</p>
+
+      <!-- Desktop/Tablet Content -->
+      <div class="hidden md:block text-gray-600 leading-relaxed space-y-2">
+        <p>
+          Learn from Pune University toppers with our exam-focused resources, time management tips, and subject-specific strategies to ace your SPPU engineering exams.
         </p>
+        <ul class="list-disc list-inside text-gray-600">
+          <li>Last-minute revision techniques from toppers</li>
+          <li>Time management strategies for each paper</li>
+          <li>Paper-solving patterns based on PYQs</li>
+        </ul>
       </div>
+    </div>
+
     </div>
   </section>
 
@@ -307,8 +357,8 @@
       <details class="p-5 bg-white border border-gray-200 rounded-lg shadow-sm">
         <summary class="cursor-pointer font-semibold text-gray-800">What is SPPU Engineers?</summary>
         <p class="mt-2 text-sm text-gray-700">
-          SPPU Engineers is the premier academic platform for Savitribai Phule Pune University students, providing 
-          organized notes, previous year question papers, decode PDFs, and essential study resources for all engineering branches.
+          SPPU Engineers is a student-led academic platform supporting learners from colleges affiliated with Savitribai Phule Pune University. 
+          We provide organized notes, previous year question papers, decode PDFs, and essential study resources for all engineering branches.
         </p>
       </details>
 

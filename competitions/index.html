@@ -215,23 +215,8 @@
     <div id="footer-placeholder"></div>
     
     <script type="module">
-        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-        import { getDatabase, ref, onValue } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js';
-
-        // Firebase Configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyC7EvohC3Y9FScY0glVt-hPvkPWrbdM0rU",
-            authDomain: "sppu-engineers-111.firebaseapp.com",
-            databaseURL: "https://sppu-engineers-111-default-rtdb.firebaseio.com",
-            projectId: "sppu-engineers-111",
-            storageBucket: "sppu-engineers-111.firebasestorage.app",
-            messagingSenderId: "622650122117",
-            appId: "1:622650122117:web:0218bbf87b43cf1168aeec"
-        };
-
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const database = getDatabase(app);
+        import { database } from '/js/firebase-config.js';
+        import { ref, onValue } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js';
 
         // DOM Elements
         const competitionsGrid = document.getElementById('competitions-grid');

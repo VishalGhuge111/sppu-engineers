@@ -191,6 +191,18 @@
 </head>
 
 <body class="admin-bg min-h-screen md:flex">
+    <!-- Full-page overlay shown until auth check completes -->
+    <style>
+    #auth-blocker {
+        position: fixed;
+        inset: 0;
+        background: white;
+        z-index: 9999;
+    }
+    </style>
+
+    <div id="auth-blocker"></div>
+
     <!-- Mobile Menu Button -->
     <button id="mobile-menu-toggle" class="mobile-menu-toggle md:hidden">
         <i class="fas fa-bars text-xl"></i>

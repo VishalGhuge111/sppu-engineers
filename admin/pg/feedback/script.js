@@ -42,7 +42,7 @@ orgTab.onclick = () => {
   studentTab.classList.replace("text-white", "text-gray-800");
 };
 
-// Util to create copy button
+// Utility: Copy Button
 function createCopyBtn(value) {
   const button = document.createElement("button");
   button.innerHTML = `<i class="far fa-copy text-gray-500 hover:text-blue-600"></i>`;
@@ -57,7 +57,7 @@ function createCopyBtn(value) {
   return button;
 }
 
-// Create card
+// Card Builder
 function createCard(data, isStudent = true) {
   const card = document.createElement("div");
   card.className = "bg-white shadow rounded p-4";
@@ -70,45 +70,54 @@ function createCard(data, isStudent = true) {
     return row;
   };
 
-  card.appendChild(field("Name", data.name));
+  card.appendChild(field("Name", data.name || "-"));
   if (isStudent) {
-    card.appendChild(field("College", data.college));
-    card.appendChild(field("Branch", data.branch));
-    card.appendChild(field("CGPA", data.cgpa));
+    card.appendChild(field("College", data.college || "-"));
+    card.appendChild(field("Branch", data.branch || "-"));
+    card.appendChild(field("CGPA", data.cgpa || "-"));
   } else {
-    card.appendChild(field("Organization", data.organization));
+    card.appendChild(field("Organization", data.organization || "-"));
   }
 
   if (data.email) card.appendChild(field("Email", data.email));
-  card.appendChild(field("Review", data.review));
+  card.appendChild(field("Review", data.review || "-"));
 
   const date = document.createElement("p");
   date.className = "text-xs text-gray-500 mt-2";
-  date.innerText = "Submitted: " + new Date(data.submittedAt).toLocaleString();
+  date.innerText = "Submitted: " + new Date(data.submittedAt || Date.now()).toLocaleString();
   card.appendChild(date);
 
   return card;
 }
 
-
 // Load Student Feedback
 onValue(ref(db, "feedback/student"), (snapshot) => {
   studentList.innerHTML = "";
   const data = snapshot.val();
+  console.log("Student Feedback:", data);
   if (data) {
     Object.values(data).reverse().forEach((entry) => {
       studentList.appendChild(createCard(entry, true));
     });
+  } else {
+    studentList.innerHTML = "<p class='text-center text-gray-500'>No student feedback found.</p>";
   }
+}, (error) => {
+  console.error("Error loading student feedback:", error);
 });
 
 // Load Organization Feedback
 onValue(ref(db, "feedback/organization"), (snapshot) => {
   orgList.innerHTML = "";
   const data = snapshot.val();
+  console.log("Org Feedback:", data);
   if (data) {
     Object.values(data).reverse().forEach((entry) => {
       orgList.appendChild(createCard(entry, false));
     });
+  } else {
+    orgList.innerHTML = "<p class='text-center text-gray-500'>No organization feedback found.</p>";
   }
+}, (error) => {
+  console.error("Error loading organization feedback:", error);
 });

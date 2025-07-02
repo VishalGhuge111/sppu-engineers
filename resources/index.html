@@ -163,130 +163,115 @@
     <div id="footer-placeholder"></div>
     
     <script type="module">
-        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-        import { getDatabase, ref, onValue } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js';
+    import { database } from '/js/firebase-config.js';
+    import { ref, onValue } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js';
 
-        // Firebase Configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyC7EvohC3Y9FScY0glVt-hPvkPWrbdM0rU",
-            authDomain: "sppu-engineers-111.firebaseapp.com",
-            databaseURL: "https://sppu-engineers-111-default-rtdb.firebaseio.com",
-            projectId: "sppu-engineers-111",
-            storageBucket: "sppu-engineers-111.firebasestorage.app",
-            messagingSenderId: "622650122117",
-            appId: "1:622650122117:web:0218bbf87b43cf1168aeec"
-        };
+    // DOM Elements
+    const loadingOverlay = document.getElementById('loadingOverlay');
+    const resourcesGrid = document.getElementById('resources-grid');
+    const noResourcesMessage = document.getElementById('no-resources');
 
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const database = getDatabase(app);
-
-        // DOM Elements
-        const loadingOverlay = document.getElementById('loadingOverlay');
-        const resourcesGrid = document.getElementById('resources-grid');
-        const noResourcesMessage = document.getElementById('no-resources');
-
-        /**
-         * Loads resource data from Firebase.
-         */
-        function loadResources() {
-            const resourcesRef = ref(database, 'resources');
-            onValue(resourcesRef, (snapshot) => {
-                const resources = snapshot.val();
-                if (resources) {
-                    displayResources(resources);
-                } else {
-                    showNoResources();
-                }
-                hideLoading();
-            }, (error) => {
-                console.error("Error loading resources:", error);
-                hideLoading();
+    /**
+     * Loads resource data from Firebase.
+     */
+    function loadResources() {
+        const resourcesRef = ref(database, 'resources');
+        onValue(resourcesRef, (snapshot) => {
+            const resources = snapshot.val();
+            if (resources) {
+                displayResources(resources);
+            } else {
                 showNoResources();
-            });
-        }
-
-        /**
-         * Renders the resource cards on the page.
-         * @param {Object} resources - The object containing resource data from Firebase.
-         */
-        function displayResources(resources) {
-            // Clear previous content
-            resourcesGrid.innerHTML = ''; 
-
-            if (!resources || Object.keys(resources).length === 0) {
-                showNoResources();
-                return;
             }
+            hideLoading();
+        }, (error) => {
+            console.error("Error loading resources:", error);
+            hideLoading();
+            showNoResources();
+        });
+    }
 
-            // Hide no resources message if it was previously shown
-            noResourcesMessage.classList.add('hidden');
+    /**
+     * Renders the resource cards on the page.
+     * @param {Object} resources - The object containing resource data from Firebase.
+     */
+    function displayResources(resources) {
+        // Clear previous content
+        resourcesGrid.innerHTML = ''; 
 
-            // Convert to array and sort by timestamp (newest first)
-            const resourcesArray = Object.entries(resources).map(([id, resource]) => ({
-                id,
-                ...resource
-            })).sort((a, b) => b.timestamp - a.timestamp); // Assuming 'timestamp' exists in your resource objects
+        if (!resources || Object.keys(resources).length === 0) {
+            showNoResources();
+            return;
+        }
 
-            resourcesArray.forEach(resource => {
-                const primaryButtonText = "Access Resource"; 
-                
-                const resourceCard = document.createElement('div');
-                resourceCard.className = 'bg-[#fffffe] rounded-xl shadow-md p-4 card-hover min-h-[350px] flex flex-col';
-                
-                resourceCard.innerHTML = `
-                    ${resource.imageUrl ? `
-                        <div class="image-container mb-4">
-                            <img src="${resource.imageUrl}" alt="Image for ${resource.title}" class="card-image">
-                        </div>
-                    ` : `
-                        <div class="image-container mb-4 bg-gray-200 text-gray-500">
-                            <i class="fas fa-image text-5xl"></i>
-                        </div>
-                    `}
-                    
-                    <div class="flex-1 flex flex-col">
-                        <div class="flex justify-between items-start mb-3">
-                            <h3 class="text-lg font-bold text-[#232946] font-gabriela line-clamp-2 flex-1">${resource.title}</h3>
-                        </div>
-                        
-                        <p class="text-[#232946] text-sm mb-6 leading-relaxed flex-1">${resource.description.substring(0, 120)}${resource.description.length > 120 ? '...' : ''}</p>
-                        
-                        <div class="flex gap-2 mt-auto">
-                            <a href="${resource.link}" target="_blank" rel="noopener noreferrer" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors flex-1 text-center font-medium text-sm">
-                                ${primaryButtonText}
-                            </a>
-                            <a href="view.html?id=${resource.id}" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors font-medium flex items-center text-sm">
-                                <i class="fas fa-eye mr-2"></i>View More
-                            </a>
-                        </div>
+        // Hide no resources message if it was previously shown
+        noResourcesMessage.classList.add('hidden');
+
+        // Convert to array and sort by timestamp (newest first)
+        const resourcesArray = Object.entries(resources).map(([id, resource]) => ({
+            id,
+            ...resource
+        })).sort((a, b) => b.timestamp - a.timestamp); // Assuming 'timestamp' exists in your resource objects
+
+        resourcesArray.forEach(resource => {
+            const primaryButtonText = "Access Resource"; 
+            
+            const resourceCard = document.createElement('div');
+            resourceCard.className = 'bg-[#fffffe] rounded-xl shadow-md p-4 card-hover min-h-[350px] flex flex-col';
+            
+            resourceCard.innerHTML = `
+                ${resource.imageUrl ? `
+                    <div class="image-container mb-4">
+                        <img src="${resource.imageUrl}" alt="Image for ${resource.title}" class="card-image">
                     </div>
-                `;
+                ` : `
+                    <div class="image-container mb-4 bg-gray-200 text-gray-500">
+                        <i class="fas fa-image text-5xl"></i>
+                    </div>
+                `}
                 
-                resourcesGrid.appendChild(resourceCard);
-            });
-            resourcesGrid.classList.add('opacity-100'); // Ensure grid becomes visible
-        }
+                <div class="flex-1 flex flex-col">
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="text-lg font-bold text-[#232946] font-gabriela line-clamp-2 flex-1">${resource.title}</h3>
+                    </div>
+                    
+                    <p class="text-[#232946] text-sm mb-6 leading-relaxed flex-1">${resource.description.substring(0, 120)}${resource.description.length > 120 ? '...' : ''}</p>
+                    
+                    <div class="flex gap-2 mt-auto">
+                        <a href="${resource.link}" target="_blank" rel="noopener noreferrer" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors flex-1 text-center font-medium text-sm">
+                            ${primaryButtonText}
+                        </a>
+                        <a href="view.html?id=${resource.id}" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors font-medium flex items-center text-sm">
+                            <i class="fas fa-eye mr-2"></i>View More
+                        </a>
+                    </div>
+                </div>
+            `;
+            
+            resourcesGrid.appendChild(resourceCard);
+        });
+        resourcesGrid.classList.add('opacity-100'); // Ensure grid becomes visible
+    }
 
-        /**
-         * Hides the loading overlay and makes the resources grid visible.
-         */
-        function hideLoading() {
-            loadingOverlay.style.display = "none";
-            resourcesGrid.style.opacity = "1";
-        }
+    /**
+     * Hides the loading overlay and makes the resources grid visible.
+     */
+    function hideLoading() {
+        loadingOverlay.style.display = "none";
+        resourcesGrid.style.opacity = "1";
+    }
 
-        /**
-         * Displays the "No Resources Available" message.
-         */
-        function showNoResources() {
-            noResourcesMessage.classList.remove('hidden');
-            resourcesGrid.classList.remove('opacity-100'); // Hide the grid if no resources
-        }
+    /**
+     * Displays the "No Resources Available" message.
+     */
+    function showNoResources() {
+        noResourcesMessage.classList.remove('hidden');
+        resourcesGrid.classList.remove('opacity-100'); // Hide the grid if no resources
+    }
 
-        // Load resources when the DOM is fully loaded
-        document.addEventListener('DOMContentLoaded', loadResources);
-    </script>
+    // Load resources when the DOM is fully loaded
+    document.addEventListener('DOMContentLoaded', loadResources);
+</script>
     
     <script src="/assets/js/main.js" defer></script>
     <script src="/assets/js/load-components.js" defer></script>

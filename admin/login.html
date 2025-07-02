@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Login | SPPU Engineers</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script type="module" src="/js/firebase-config.js"></script>
 
-  <link rel="icon" type="image/png" href="/assets/images/logo.png" sizes="96x96"/>
-  <link rel="apple-touch-icon" href="/assets/images/logo.png"/>
+    <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/assets/images/logo.png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="/assets/images/logo.png">
 
   <style>
     :root {
@@ -83,16 +84,11 @@
       transform: translateY(-2px);
     }
 
-    .google-btn {
-      background-color: #ffffff;
-      color: #444;
-      border: 1px solid var(--border-color);
-      font-weight: 500;
-    }
-
-    .google-btn:hover {
-      background-color: #f1f1f1;
-    }
+    .text-gray-800 { color: var(--text-dark); }
+    .text-gray-600 { color: var(--text-muted); }
+    .text-gray-700 { color: var(--text-dark); }
+    .placeholder-gray-400 { color: var(--text-muted); }
+    .text-red-600 { color: #dc3545; }
 
     @media (max-width: 640px) {
       .login-card {
@@ -103,7 +99,6 @@
     }
   </style>
 </head>
-
 <body>
   <div class="login-card">
     <div class="text-center mb-8">
@@ -136,91 +131,46 @@
       <button type="submit" class="btn-primary w-full flex items-center justify-center">
         <i class="fas fa-sign-in-alt mr-3"></i>Login
       </button>
-
-      <!-- Google Sign-in Button -->
-      <button id="googleLoginBtn" type="button" class="google-btn w-full mt-3 py-2 rounded flex items-center justify-center gap-3">
-        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" class="h-5 w-5" alt="Google Logo">
-        Continue with Google
-      </button>
-
+      
       <p id="errorMsg" class="text-red-600 text-sm mt-4 hidden text-center font-medium"></p>
     </form>
   </div>
 
-<script type="module">
-  import {
-    getAuth,
-    signInWithEmailAndPassword,
-    signInWithPopup,
-    GoogleAuthProvider
-  } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+  <script type="module">
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-  const auth = getAuth();
-  const provider = new GoogleAuthProvider();
-  const loginForm = document.getElementById("loginForm");
-  const errorMsg = document.getElementById("errorMsg");
-  const googleLoginBtn = document.getElementById("googleLoginBtn");
+    const auth = getAuth();
+    const loginForm = document.getElementById("loginForm");
+    const errorMsg = document.getElementById("errorMsg");
 
-  const allowedAdmins = [
-    "sppuengineers.site@gmail.com",
-    "contact.sppuengineers@gmail.com"
-  ];
+    loginForm.addEventListener("submit", (e) => {
+      e.preventDefault();
 
-  loginForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value;
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
 
-    signInWithEmailAndPassword(auth, email, password)
-      .then((result) => {
-        const userEmail = result.user.email;
-        if (allowedAdmins.includes(userEmail)) {
+      signInWithEmailAndPassword(auth, email, password)
+        .then(() => {
           window.location.href = "/admin/";
-        } else {
-          auth.signOut();
-          showError("Access denied. Not an admin.");
-        }
-      })
-      .catch((error) => handleError(error));
-  });
-
-googleLoginBtn.addEventListener("click", () => {
-  signInWithPopup(auth, provider)
-    .then((result) => {
-      console.log("Google Login Successful:", result.user.email);
-      window.location.href = "/admin/";
-    })
-    .catch((error) => {
-      handleError(error);
+        })
+        .catch((error) => {
+          console.error("Login failed:", error);
+          let errorMessageText = "An unknown error occurred. Please try again.";
+          
+          if (error.code === 'auth/invalid-email') {
+            errorMessageText = "Invalid email format.";
+          } else if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+            errorMessageText = "Invalid email or password. Please check your credentials.";
+          } else if (error.code === 'auth/too-many-requests') {
+            errorMessageText = "Too many failed login attempts. Please try again later.";
+          } else if (error.code === 'auth/network-request-failed') {
+            errorMessageText = "Network error. Please check your internet connection.";
+          }
+          
+          errorMsg.textContent = errorMessageText;
+          errorMsg.classList.remove("hidden");
+        });
     });
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        const userEmail = result.user.email;
-        if (allowedAdmins.includes(userEmail)) {
-          window.location.href = "/admin/";
-        } else {
-          auth.signOut();
-          showError("Access denied. Not an admin.");
-        }
-      })
-      .catch((error) => handleError(error));
-  });
-
-  function handleError(error) {
-    console.error("Login failed:", error);
-    let msg = "An unknown error occurred. Please try again.";
-    if (error.code === 'auth/invalid-email') msg = "Invalid email format.";
-    else if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') msg = "Invalid email or password.";
-    else if (error.code === 'auth/too-many-requests') msg = "Too many failed attempts. Try again later.";
-    else if (error.code === 'auth/network-request-failed') msg = "Network error. Check your connection.";
-    showError(msg);
-  }
-
-  function showError(msg) {
-    errorMsg.textContent = msg;
-    errorMsg.classList.remove("hidden");
-  }
-</script>
-
+  </script>
 </body>
 </html>

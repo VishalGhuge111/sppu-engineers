@@ -147,49 +147,72 @@
     </form>
   </div>
 
-  <script type="module">
-    import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+<script type="module">
+  import {
+    getAuth,
+    signInWithEmailAndPassword,
+    signInWithPopup,
+    GoogleAuthProvider
+  } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-    const auth = getAuth();
-    const provider = new GoogleAuthProvider();
-    const loginForm = document.getElementById("loginForm");
-    const errorMsg = document.getElementById("errorMsg");
-    const googleLoginBtn = document.getElementById("googleLoginBtn");
+  const auth = getAuth();
+  const provider = new GoogleAuthProvider();
+  const loginForm = document.getElementById("loginForm");
+  const errorMsg = document.getElementById("errorMsg");
+  const googleLoginBtn = document.getElementById("googleLoginBtn");
 
-    loginForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value;
+  const allowedAdmins = [
+    "sppuengineers.site@gmail.com",
+    "contact.sppuengineers@gmail.com"
+  ];
 
-      signInWithEmailAndPassword(auth, email, password)
-        .then(() => {
+  loginForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then((result) => {
+        const userEmail = result.user.email;
+        if (allowedAdmins.includes(userEmail)) {
           window.location.href = "/admin/";
-        })
-        .catch((error) => {
-          handleError(error);
-        });
-    });
+        } else {
+          auth.signOut();
+          showError("Access denied. Not an admin.");
+        }
+      })
+      .catch((error) => handleError(error));
+  });
 
-    googleLoginBtn.addEventListener("click", () => {
-      signInWithPopup(auth, provider)
-        .then(() => {
+  googleLoginBtn.addEventListener("click", () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const userEmail = result.user.email;
+        if (allowedAdmins.includes(userEmail)) {
           window.location.href = "/admin/";
-        })
-        .catch((error) => {
-          handleError(error);
-        });
-    });
+        } else {
+          auth.signOut();
+          showError("Access denied. Not an admin.");
+        }
+      })
+      .catch((error) => handleError(error));
+  });
 
-    function handleError(error) {
-      console.error("Login failed:", error);
-      let msg = "An unknown error occurred. Please try again.";
-      if (error.code === 'auth/invalid-email') msg = "Invalid email format.";
-      else if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') msg = "Invalid email or password.";
-      else if (error.code === 'auth/too-many-requests') msg = "Too many failed attempts. Try again later.";
-      else if (error.code === 'auth/network-request-failed') msg = "Network error. Check your connection.";
-      errorMsg.textContent = msg;
-      errorMsg.classList.remove("hidden");
-    }
-  </script>
+  function handleError(error) {
+    console.error("Login failed:", error);
+    let msg = "An unknown error occurred. Please try again.";
+    if (error.code === 'auth/invalid-email') msg = "Invalid email format.";
+    else if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') msg = "Invalid email or password.";
+    else if (error.code === 'auth/too-many-requests') msg = "Too many failed attempts. Try again later.";
+    else if (error.code === 'auth/network-request-failed') msg = "Network error. Check your connection.";
+    showError(msg);
+  }
+
+  function showError(msg) {
+    errorMsg.textContent = msg;
+    errorMsg.classList.remove("hidden");
+  }
+</script>
+
 </body>
 </html>

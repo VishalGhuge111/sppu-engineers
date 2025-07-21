@@ -202,8 +202,8 @@
                 buttonText = "Download Now";
                 buttonIcon = "download";
             } else {
-                priceDisplay = `₹${resource.price}`; // Assuming Indian Rupees
-                priceIconColorClass = "text-yellow-600"; // Amber for paid
+                priceDisplay = `${resource.price}`; // Assuming Indian Rupees
+                priceIconColorClass = "text-emerald-600"; // Amber for paid
                 buttonText = "Purchase Now";
                 buttonIcon = "shopping-cart";
             }
@@ -227,7 +227,7 @@
                         <header class="mb-8">
                             <h1 class="text-2xl md:text-3xl font-bold text-[#232946] mb-4 font-gabriela">${resource.title}</h1>
                             <div class="flex items-center" role="group" aria-label="Resource price">
-                                <i class="fas fa-tag text-xl mr-2 ${priceIconColorClass}" aria-hidden="true"></i>
+                                <i class="fas fa-indian-rupee-sign text-xl mr-2 ${priceIconColorClass}" aria-hidden="true"></i>
                                 <span class="text-[#232946] text-xl font-bold">${priceDisplay}</span>
                             </div>
                         </header>
@@ -242,7 +242,7 @@
                         <div class="pt-6">
                             <h3 class="text-lg font-semibold text-[#232946] mb-4">Ready to Access?</h3>
                             <div class="flex flex-wrap gap-4">
-                                <a href="${resource.link}" target="_blank" rel="noopener noreferrer" class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors flex items-center font-medium">
+                                <a href="${resource.link}" target="_blank" rel="noopener noreferrer" class="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition-colors flex items-center font-medium">
                                     <i class="fas fa-${buttonIcon} mr-2" aria-hidden="true"></i>
                                     ${buttonText}
                                 </a>

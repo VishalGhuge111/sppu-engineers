@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>SPPU Grading System | Tools - SPPU Engineers</title>
+    <meta name="description" content="Understand the SPPU Grading System, convert grades to marks, and explore the official grading scale for Savitribai Phule Pune University." />
+    <meta name="keywords" content="sppu grading system, sppu grade to marks, sppu grade evaluator, sppu marks range, sppu students, engineering tools, sppu result" />
+    <meta name="author" content="SPPU Engineers" />
+    <link rel="icon" href="/assets/images/logo.png" type="image/png" />
+
+    <meta property="og:title" content="SPPU Grading System | Tools - SPPU Engineers" />
+    <meta property="og:description" content="Access a Grade to Marks Calculator for SPPU students based on the official grading system. Simplify your academic understanding." />
+    <meta property="og:image" content="https://sppuengineers.site/assets/images/sppu-engineers-preview.png" />
+    <meta property="og:url" content="https://sppuengineers.site/tools/sppu-grading-system/" />
+    <meta property="og:type" content="website" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="SPPU Grading System | Tools - SPPU Engineers" />
+    <meta name="twitter:description" content="Know your marks range by selecting your grade based on the official SPPU grading system with our Grade to Marks Calculator." />
+    <meta name="twitter:image" content="https://sppuengineers.site/assets/images/sppu-engineers-preview.png" />
+
+    <link rel="canonical" href="https://sppuengineers.site/tools/sppu-grading-system/" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Gabriela&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    
+</head>
+
+<body class="bg-gray-50 text-gray-900 font-sans">
+    <div id="header-placeholder"></div>
+
+    <section class="bg-[#274060] text-[#f2f7f5] py-16 pt-32 px-4 lg:px-16">
+    <div class="max-w-4xl mx-auto">
+
+        <!-- Heading and Subheading -->
+        <header class="text-center mb-10">
+        <h1 class="text-3xl sm:text-4xl font-bold text-[#fffffe] mb-2">SPPU Grading System</h1>
+        <p class="text-sm sm:text-base text-[#f2f7f5]">Know your marks based on the grade shown in your SPPU marksheet</p>
+        </header>
+
+        <!-- Grade to Marks Card -->
+        <div class="bg-[#f2f7f5] text-[#001c55] border-2 border-[#001c55] rounded-lg shadow-md p-6 mb-8">
+    <h2 class="text-xl font-semibold mb-6">Grade to Marks Range</h2>
+    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+        
+        <!-- Left: Grade Dropdown -->
+        <div class="w-full lg:w-1/2">
+        <label for="grade" class="block mb-2 text-sm font-medium text-[#001c55]">
+            Select your SPPU Grade:
+        </label>
+        <select id="grade" class="w-full border border-[#001c55] rounded px-3 text-[#001c55] bg-white h-12 text-sm sm:text-base">
+            <option value="">-- Select Grade --</option>
+            <option value="O">O</option>
+            <option value="A+">A+</option>
+            <option value="A">A</option>
+            <option value="B+">B+</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="P">P</option>
+            <option value="F">F</option>
+        </select>
+        </div>
+
+        <!-- Right: Output Box -->
+        <div class="w-full lg:w-1/2">
+        <label class="block mb-2 text-sm font-medium text-[#001c55]">
+            Calculated Marks Range:
+        </label>
+        <div id="result" class="output-box bg-white border border-[#001c55] text-[#001c55] px-4 py-3 rounded text-sm sm:text-base h-12 flex items-center">
+            Select a grade to see the marks range.
+        </div>
+        </div>
+        
+    </div>
+    </div>
+
+    <!-- Official Grading Table Card -->
+    <div class="bg-[#f2f7f5] text-[#001c55] border-2 border-[#001c55] rounded-lg shadow-md p-6 mb-8">
+      <h2 class="text-xl font-semibold mb-4">Official SPPU Grade Scale</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm sm:text-base">
+          <thead class="bg-[#001c55] text-white">
+            <tr>
+              <th class="py-2 px-4 text-left">Grade</th>
+              <th class="py-2 px-4 text-left">Grade Point</th>
+              <th class="py-2 px-4 text-left">Marks Range</th>
+              <th class="py-2 px-4 text-left">Performance</th>
+            </tr>
+          </thead>
+          <tbody class="text-[#475d5b]">
+            <tr><td class="py-2 px-4">O</td><td class="py-2 px-4">10</td><td class="py-2 px-3">80-100</td><td class="py-2 px-4">Outstanding</td></tr>
+            <tr><td class="py-2 px-4">A+</td><td class="py-2 px-4">9</td><td class="py-2 px-4">70-79</td><td class="py-2 px-4">Excellent</td></tr>
+            <tr><td class="py-2 px-4">A</td><td class="py-2 px-4">8</td><td class="py-2 px-4">60-69</td><td class="py-2 px-4">Very Good</td></tr>
+            <tr><td class="py-2 px-4">B+</td><td class="py-2 px-4">7</td><td class="py-2 px-4">55-59</td><td class="py-2 px-4">Good</td></tr>
+            <tr><td class="py-2 px-4">B</td><td class="py-2 px-4">6</td><td class="py-2 px-4">50-55</td><td class="py-2 px-4">Above Average</td></tr>
+            <tr><td class="py-2 px-4">C</td><td class="py-2 px-4">5</td><td class="py-2 px-4">45-49</td><td class="py-2 px-4">Average</td></tr>
+            <tr><td class="py-2 px-4">P</td><td class="py-2 px-4">4</td><td class="py-2 px-4">40-44</td><td class="py-2 px-4">Pass</td></tr>
+            <tr><td class="py-2 px-4">F</td><td class="py-2 px-4">0</td><td class="py-2 px-4">0-39</td><td class="py-2 px-4">Fail</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Final Understanding Card -->
+    <div class="bg-[#f2f7f5] text-[#001c55] border-2 border-[#001c55] rounded-lg shadow-md p-6">
+      <h2 class="text-xl font-semibold mb-4">Understand SPPU Grading</h2>
+      <p class="text-sm sm:text-base text-[#475d5b]">
+        SPPU follows a 10-point grading system to evaluate student performance. Your mark sheet typically shows only the grade (e.g., A+, B). This tool helps decode those grades into a rough marks range so you can estimate your performance more clearly.
+      </p>
+      <p class="text-sm text-[#475d5b]">
+        You can explore more academic tools like SGPA to CGPA, CGPA to Percentage, and more on our <a href="/tools" class="text-[#faae2b] hover:underline font-medium">Academic Tools</a> page.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  const gradeSelect = document.getElementById("grade");
+  const resultDiv = document.getElementById("result");
+
+  const gradeToMarks = {
+    "O": "Marks range = 80 - 100",
+    "A+": "Marks range = 70 - 79",
+    "A": "Marks range = 60 - 69",
+    "B+": "Marks range = 55 - 59",
+    "B": "Marks range = 50 - 54",
+    "C": "Marks range = 45 - 49",
+    "P": "Marks range = 40 - 44",
+    "F": "Marks range = Below 40 (Fail)"
+  };
+
+  gradeSelect.addEventListener("change", () => {
+    const selected = gradeSelect.value;
+    resultDiv.textContent = selected && gradeToMarks[selected] ? gradeToMarks[selected] : "Select a grade to see the marks range.";
+  });
+</script>
+
+
+
+    <div id="footer-placeholder"></div>
+    <script src="/assets/js/main.js" defer></script>
+    <script src="/assets/js/load-components.js" defer></script>
+   
+</body>
+</html>

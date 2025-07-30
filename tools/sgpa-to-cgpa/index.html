@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>SGPA to CGPA Calculator | Tools - SPPU Engineers</title>
+    <meta name="description" content="Calculate your CGPA from your semester SGPA scores using our SPPU SGPA to CGPA calculator. Understand the official formula and easily track your academic progress." />
+    <meta name="keywords" content="sppu sgpa to cgpa, sgpa to cgpa calculator, sppu cgpa calculator, sppu students, engineering tools, sppu result" />
+    <meta name="author" content="SPPU Engineers" />
+    <link rel="icon" href="/assets/images/logo.png" type="image/png" />
+
+    <meta property="og:title" content="SGPA to CGPA Calculator | Tools - SPPU Engineers" />
+    <meta property="og:description" content="Convert your SPPU SGPA to CGPA effortlessly with our online calculator. Based on official SPPU formulas, this tool helps you track your academic performance." />
+    <meta property="og:image" content="https://sppuengineers.site/assets/images/sppu-engineers-preview.png" />
+    <meta property="og:url" content="https://sppuengineers.site/tools/sgpa-to-cgpa/" />
+    <meta property="og:type" content="website" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="SGPA to CGPA Calculator | Tools - SPPU Engineers" />
+    <meta name="twitter:description" content="Calculate your SPPU CGPA from your SGPA scores. Our tool uses official formulas to give you accurate results, helping you understand your overall academic standing." />
+    <meta name="twitter:image" content="https://sppuengineers.site/assets/images/sppu-engineers-preview.png" />
+
+    <link rel="canonical" href="https://sppuengineers.site/tools/sgpa-to-cgpa/" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Gabriela&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+
+<body class="bg-gray-50 text-gray-900 font-sans">
+    <div id="header-placeholder"></div>
+
+    <section class="bg-[#274060] text-[#f2f7f5] py-16 pt-32 px-4 lg:px-16">
+        <div class="max-w-4xl mx-auto">
+
+            <header class="text-center mb-10">
+                <h1 class="text-3xl sm:text-4xl font-bold text-[#fffffe] mb-2">SPPU SGPA to CGPA Calculator</h1>
+                <p class="text-sm sm:text-base text-[#f2f7f5]">Calculate your Cumulative Grade Point Average (CGPA)</p>
+            </header>
+
+            <div class="bg-[#f2f7f5] text-[#001c55] border-2 border-[#001c55] rounded-lg shadow-md p-6 mb-8">
+                <h2 class="text-xl font-semibold mb-6">Calculate CGPA from SGPA</h2>
+                <div class="flex flex-col gap-4">
+
+                    <div class="w-full">
+                        <label for="yearSelect" class="block mb-2 text-sm font-medium text-[#001c55]">
+                            Select Your Current Academic Year:
+                        </label>
+                        <select id="yearSelect" class="w-full border border-[#001c55] rounded px-3 text-[#001c55] bg-white h-12 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-[#faae2b]">
+                            <option value="">Select Year</option>
+                            <option value="1">First Year</option>
+                            <option value="2">Second Year</option>
+                            <option value="3">Third Year</option>
+                            <option value="4">Final Year</option>
+                        </select>
+                    </div>
+
+                    <p class="text-sm text-[#475d5b] italic mt-2">
+                        Select your academic year and enter the SGPA for the required semesters only. Leave the other semester fields blank if not applicable.
+                    </p>
+
+                    <div id="sgpaInputsContainer" class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                        </div>
+
+                    <div class="w-full flex justify-center mt-4">
+                        <button id="calculateBtn" class="w-full lg:w-auto bg-[#001c55] text-white py-3 px-6 rounded-lg font-semibold hover:bg-[#faae2b] hover:text-[#001c55] transition-colors duration-300">
+                            Calculate CGPA
+                        </button>
+                    </div>
+
+                </div>
+                <div id="calculationResult" class="output-box bg-white border border-[#001c55] text-[#001c55] px-4 py-3 rounded text-sm sm:text-base h-auto flex flex-col gap-2 mt-4">
+                    <p>Select your year and enter SGPA for each semester to calculate your CGPA.</p>
+                </div>
+            </div>
+
+            <div class="bg-[#f2f7f5] text-[#001c55] border-2 border-[#001c55] rounded-lg shadow-md p-6 mb-8">
+                <h2 class="text-xl font-semibold mb-4">CGPA Calculator Formula</h2>
+                <div class="mb-4">
+                    <p class="text-sm sm:text-base text-[#475d5b] mb-4">
+                        CGPA = <span class="italic">(Total of Grade Points Earned for a course X Credit hrs for each course)</span> ÷
+                        <span class="italic">Total Credits Hours</span>
+                    </p>
+
+                    <div class="text-[#001c55] font-mono bg-white p-4 rounded-md text-base mb-4 leading-relaxed text-left border border-[#001c55]">
+                        <p class="font-bold text-sm md:text-base inline-flex items-center">
+                            CGPA = &nbsp;
+                            <span class="inline-block relative top-[-0.05em]">
+                                <span style="font-size: 0.9em;">&sum;</span><sup>n</sup><sub>i=1</sub>
+                            </span>
+                            &nbsp;(P<sub>i</sub> &times; C<sub>i</sub>)
+                            &nbsp;&nbsp;&nbsp;
+                            <span style="font-size: 1.0em; vertical-align: middle;">&divide;</span>
+                            &nbsp;&nbsp;&nbsp;
+                            <span class="inline-block relative top-[-0.05em]">
+                                <span style="font-size: 0.9em;">&sum;</span><sup>n</sup><sub>i=1</sub>
+                            </span>
+                            &nbsp;C<sub>i</sub>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="text-[#475d5b] space-y-2 text-sm sm:text-base">
+                    <p><span class="font-semibold">where,</span></p>
+                    <p><span class="font-medium">n</span> = Total number of courses (or semesters).</p>
+                    <p><span class="font-medium">P<sub>i</sub></span> = Grade points secured for <i>i</i> number of courses (or SGPA for i-th semester).</p>
+                    <p><span class="font-medium">C<sub>i</sub></span> = Number of credits for <i>i</i> number of courses (or total credits for i-th semester).</p>
+                </div>
+            </div>
+
+            <div class="bg-[#f2f7f5] text-[#001c55] border-2 border-[#001c55] rounded-lg shadow-md p-6">
+                <h2 class="text-xl font-semibold mb-4">Understand SPPU CGPA Conversions</h2>
+                <p class="text-sm sm:text-base text-[#475d5b]">
+                    Savitribai Phule Pune University (SPPU) uses a cumulative approach to calculate your CGPA (Cumulative Grade Point Average). This is determined by considering the Grade Points (SGPA) earned in each semester and their corresponding Credit Hours. Our tool helps you accurately calculate your CGPA by inputting your SGPA for each semester.
+                </p>
+                <p class="text-sm text-[#475d5b] mt-3">
+                    <strong>Note for DSE Students:</strong> If you are a Direct Second Year entry student, you can start entering your SGPA from Semester 3. Our calculator will only consider the semesters for which you provide input.
+                </p>
+                <p class="text-sm text-[#475d5b] mt-3">
+                    You can explore more academic tools like our <a href="/tools/sppu-grading-system/" class="text-[#faae2b] hover:underline font-medium">SPPU Grading System</a> tool and more on our <a href="/tools" class="text-[#faae2b] hover:underline font-medium">Academic Tools</a> page.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+    <script src="/assets/js/main.js" defer></script>
+    <script src="/assets/js/load-components.js" defer></script>
+
+    <script>
+        const yearSelect = document.getElementById("yearSelect");
+        const sgpaInputsContainer = document.getElementById("sgpaInputsContainer");
+        const calculateBtn = document.getElementById("calculateBtn");
+        const calculationResult = document.getElementById("calculationResult");
+
+        // Assuming a constant credit hour per semester for simplicity.
+        // You might need to adjust this if SPPU has varying credit hours per semester.
+        const creditHoursPerSemester = 25; 
+
+        function generateSGPASemesterInputs(numSemesters) {
+            sgpaInputsContainer.innerHTML = ''; // Clear previous inputs
+            for (let i = 1; i <= numSemesters; i++) {
+                const div = document.createElement('div');
+                div.classList.add('w-full');
+                div.innerHTML = `
+                    <label for="sgpaSem${i}" class="block mb-2 text-sm font-medium text-[#001c55]">
+                        Enter SGPA for Semester ${i}:
+                    </label>
+                    <input type="number" id="sgpaSem${i}" step="0.01" min="0" max="10" placeholder="e.g., 8.5" class="w-full border border-[#001c55] rounded px-3 text-[#001c55] bg-white h-12 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-[#faae2b]" />
+                `;
+                sgpaInputsContainer.appendChild(div);
+            }
+        }
+
+        yearSelect.addEventListener('change', () => {
+            const selectedYear = parseInt(yearSelect.value);
+            let numSemestersToShow = 0;
+
+            switch (selectedYear) {
+                case 1:
+                    numSemestersToShow = 2; // Sem 1, Sem 2
+                    break;
+                case 2:
+                    numSemestersToShow = 4; // Sem 1 to Sem 4
+                    break;
+                case 3:
+                    numSemestersToShow = 6; // Sem 1 to Sem 6
+                    break;
+                case 4:
+                    numSemestersToShow = 8; // Sem 1 to Sem 8
+                    break;
+                default:
+                    numSemestersToShow = 0;
+                    break;
+            }
+            generateSGPASemesterInputs(numSemestersToShow);
+            calculationResult.innerHTML = `<p>Enter SGPA for each semester to calculate your CGPA.</p>`;
+        });
+
+        function calculateCGPA(sgpas, credits) {
+            let totalGradePoints = 0;
+            let totalCredits = 0;
+
+            for (let i = 0; i < sgpas.length; i++) {
+                // Only consider valid SGPA inputs that are not empty
+                if (!isNaN(sgpas[i]) && sgpas[i] >= 0 && sgpas[i] <= 10 && sgpas[i] !== null) {
+                    totalGradePoints += sgpas[i] * credits;
+                    totalCredits += credits;
+                }
+            }
+            return totalCredits > 0 ? totalGradePoints / totalCredits : NaN;
+        }
+
+        calculateBtn.addEventListener("click", () => {
+            const selectedYear = parseInt(yearSelect.value);
+            if (!selectedYear) {
+                calculationResult.innerHTML = `<p>Please select your academic year first.</p>`;
+                return;
+            }
+
+            const sgpaInputs = sgpaInputsContainer.querySelectorAll('input[type="number"]');
+            const sgpaValues = [];
+            let allInputsValid = true;
+            let atLeastOneSGPAEntered = false;
+
+            sgpaInputs.forEach(input => {
+                const sgpa = input.value !== "" ? parseFloat(input.value) : null; // Use null for empty string
+                if (sgpa !== null) {
+                    atLeastOneSGPAEntered = true;
+                    if (isNaN(sgpa) || sgpa < 0 || sgpa > 10) {
+                        allInputsValid = false;
+                    }
+                }
+                sgpaValues.push(sgpa);
+            });
+
+            if (!allInputsValid) {
+                calculationResult.innerHTML = `<p>Please enter valid SGPA values (between 0 and 10) for all filled semesters.</p>`;
+                return;
+            }
+
+            if (!atLeastOneSGPAEntered) {
+                calculationResult.innerHTML = `<p>Please enter at least one SGPA to calculate your CGPA.</p>`;
+                return;
+            }
+
+            const calculatedCGPA = calculateCGPA(sgpaValues, creditHoursPerSemester);
+
+            if (!isNaN(calculatedCGPA)) {
+                calculationResult.innerHTML = `
+                    <p><strong class="text-[#001c55]">Your Calculated CGPA:</strong> ${calculatedCGPA.toFixed(2)}</p>
+                `;
+            } else {
+                calculationResult.innerHTML = `<p>Could not calculate CGPA. Please check your inputs.</p>`;
+            }
+        });
+
+        // Clear result when any input is changed or year is selected
+        sgpaInputsContainer.addEventListener('input', () => {
+            calculationResult.innerHTML = `<p>Enter SGPA for each semester to calculate your CGPA.</p>`;
+        });
+    </script>
+</body>
+</html>

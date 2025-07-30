@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/te-sem5",
+      "destination": "/study-materials/",
+      "permanent": true
+    }
+  ]
+}

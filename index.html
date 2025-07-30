@@ -112,51 +112,130 @@
       </div>
 
       <div class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6 pt-4">
-        <a href="/branches/" aria-label="Explore SPPU study material by branch"
+        <a href="/study-materials/" aria-label="Explore SPPU study material by branch"
           class="px-6 py-3 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 shadow-md transition duration-200">
           Explore Study Material
         </a>
-        <a href="/resources/" aria-label="Learn more about SPPU Engineers"
-          class="px-6 py-3 border-2 border-gray-800 text-gray-800 font-semibold rounded-md hover:bg-gray-800 hover:text-white transition duration-200">
-          Career Resources
+        <a href="/tools/" aria-label="Learn more about SPPU Engineers"
+          class="hidden md:block px-6 py-3 border-2 border-gray-800 text-gray-800 font-semibold rounded-md hover:bg-gray-800 hover:text-white transition duration-200">
+          Calculate SGPA / CGPA
         </a>
       </div>
     </div>
   </section>
+  
+  <section class="bg-blue-50 py-16">
+    <div class="container mx-auto max-w-7xl px-0">
+      <div>
+        <div class="p-8 lg:p-12">
+          <div class="text-center space-y-6 mb-12">
+            <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 leading-tight">
+              Explore <span class="text-indigo-700">SPPU Engineers</span>
+            </h2>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto text-base sm:text-lg">
+              Everything you need for your Savitribai Phule Pune University journey, all organized and accessible in one place. From academic essentials to career development resources, we've got you covered.
+            </p>
+          </div>
 
-  <section id="about" class="bg-[#f4effc] py-12 md:py-16 px-6 md:px-20 border border-gray-300 rounded-2xl shadow-md">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-10 md:gap-20">
-      <!-- Wrapper hidden on mobile -->
-      <div class="hidden md:flex flex-col items-center md:items-stretch md:flex-row md:space-x-8 md:pl-10">
-        <div class="flex-shrink-0 w-32 h-32 bg-black border border-gray-300 rounded-full shadow flex items-center justify-center">
-          <img 
-            src="/assets/images/logo.png" 
-            alt="SPPU Engineers Logo icon" 
-            class="w-[90%] h-[90%] object-contain rounded-full"
-            loading="lazy"
-          />
-        </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
-        <div class="hidden md:flex items-center">
-          <div class="w-px h-28 bg-gray-400"></div>
-        </div>
+            <a href="/syllabus/" class="p-6 bg-gray-50 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col justify-between group border border-gray-200">
+              <div class="flex items-center mb-3">
+                <div class="text-indigo-600 text-4xl mr-4">
+                  <i class="fas fa-book"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800">Syllabus</h3>
+              </div>
+              <p class="text-gray-600 text-sm">Access the latest SPPU syllabus for all engineering branches.</p>
+            </a>
 
-        <div class="block md:hidden w-16 h-px bg-gray-400 my-4"></div>
-      </div>
+            <a href="/study-materials/" class="p-6 bg-gray-50 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col justify-between group border border-gray-200">
+              <div class="flex items-center mb-3">
+                <div class="text-indigo-600 text-4xl mr-4">
+                  <i class="fas fa-atlas"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800">Study Materials</h3>
+              </div>
+              <p class="text-gray-600 text-sm">Comprehensive notes, decode PDFs, and essential study guides.</p>
+            </a>
 
-      <div class="text-center md:text-left w-full md:pr-10">
-        <div class="max-w-[1000px] mx-auto md:mx-0">
-          <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 leading-snug mt-0 sm:mt-2">
-            Trusted by Students Across <span class="text-blue-700">100+ SPPU Colleges</span> in Pune
-          </h2>
-          <p class="text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed">
-             <strong>SPPU Engineers</strong> is a student-led platform supporting learners from <strong>colleges affiliated with Savitribai Phule Pune University</strong>. We provide <strong>curated engineering resources</strong> across all branches, designed by toppers to help students excel from FE to BE.
+            <a href="/tools/" class="p-6 bg-gray-50 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col justify-between group border border-gray-200">
+              <div class="flex items-center mb-3">
+                <div class="text-indigo-600 text-4xl mr-4">
+                  <i class="fas fa-calculator"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800">SGPA/CGPA Tools</h3>
+              </div>
+              <p class="text-gray-600 text-sm">Calculate your academic performance with ease.</p>
+            </a>
 
-          </p>
+            <a href="/info/academic-calendar/" class="p-6 bg-gray-50 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col justify-between group border border-gray-200">
+              <div class="flex items-center mb-3">
+                <div class="text-indigo-600 text-4xl mr-4">
+                  <i class="fas fa-calendar-alt"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800">Academic Calendar</h3>
+              </div>
+              <p class="text-gray-600 text-sm">Stay updated with important dates and deadlines.</p>
+            </a>
+
+            <a href="/info/exam-timetable/" class="p-6 bg-gray-50 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col justify-between group border border-gray-200">
+              <div class="flex items-center mb-3">
+                <div class="text-indigo-600 text-4xl mr-4">
+                  <i class="fas fa-clipboard-list"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800">Exam Timetable</h3>
+              </div>
+              <p class="text-gray-600 text-sm">Never miss an exam with the latest schedules.</p>
+            </a>
+
+            <a href="/resources/" class="p-6 bg-gray-50 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col justify-between group border border-gray-200">
+              <div class="flex items-center mb-3">
+                <div class="text-indigo-600 text-4xl mr-4">
+                  <i class="fas fa-briefcase"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800">Career Resources</h3>
+              </div>
+              <p class="text-gray-600 text-sm">Tools and advice to kickstart your professional journey.</p>
+            </a>
+
+            <a href="/projects/" class="p-6 bg-gray-50 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col justify-between group border border-gray-200">
+              <div class="flex items-center mb-3">
+                <div class="text-indigo-600 text-4xl mr-4">
+                  <i class="fas fa-lightbulb"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800">Projects & Ideas</h3>
+              </div>
+              <p class="text-gray-600 text-sm">Inspiration and guidance for your academic projects.</p>
+            </a>
+
+            <a href="/competitions/" class="p-6 bg-gray-50 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col justify-between group border border-gray-200">
+              <div class="flex items-center mb-3">
+                <div class="text-indigo-600 text-4xl mr-4">
+                  <i class="fas fa-trophy"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800">Competitions</h3>
+              </div>
+              <p class="text-gray-600 text-sm">Find and prepare for various academic and tech competitions.</p>
+            </a>
+
+            <a href="/info/topper-rewards/" class="p-6 bg-gray-50 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col justify-between group border border-gray-200">
+              <div class="flex items-center mb-3">
+                <div class="text-indigo-600 text-4xl mr-4">
+                  <i class="fas fa-award"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800">Topper Rewards</h3>
+              </div>
+              <p class="text-gray-600 text-sm">Recognizing and celebrating academic excellence.</p>
+            </a>
+
+          </div>
         </div>
       </div>
     </div>
   </section>
+
+
 
   <section class="bg-[#e3f6f5] py-16">
     <div class="container mx-auto max-w-7xl px-4">
@@ -197,7 +276,7 @@
               </div>
 
               <div>
-                <a href="/branches/" aria-label="Get free SPPU engineering resources"
+                <a href="/study-materials/" aria-label="Get free SPPU engineering resources"
                   class="inline-block bg-indigo-600 text-white px-6 py-3 rounded-md text-base font-medium shadow-md hover:bg-indigo-700 transition">
                   Try for Free
                 </a>

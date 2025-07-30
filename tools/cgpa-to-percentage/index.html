@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>CGPA to Percentage Calculator | Tools - SPPU Engineers</title>
+    <meta name="description" content="Convert your SPPU CGPA to percentage and determine your awarded grade and class using our easy-to-use online calculator based on official Savitribai Phule Pune University formulas." />
+    <meta name="keywords" content="sppu cgpa to percentage, cgpa to percentage calculator, sppu percentage calculator, sppu awarded class, sppu grade, sppu students, engineering tools, sppu result" />
+    <meta name="author" content="SPPU Engineers" />
+    <link rel="icon" href="/assets/images/logo.png" type="image/png" />
+
+    <meta property="og:title" content="CGPA to Percentage Calculator | Tools - SPPU Engineers" />
+    <meta property="og:description" content="Quickly convert your SPPU CGPA to percentage and find your awarded grade and class using the official Savitribai Phule Pune University formulas (Circular No. 332-2020)." />
+    <meta property="og:image" content="https://sppuengineers.site/assets/images/sppu-engineers-preview.png" />
+    <meta property="og:url" content="https://sppuengineers.site/tools/cgpa-to-percentage/" />
+    <meta property="og:type" content="website" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="CGPA to Percentage Calculator | Tools - SPPU Engineers" />
+    <meta name="twitter:description" content="Effortlessly convert your SPPU CGPA to percentage, and see your awarded grade and class with our dedicated online tool, based on official circulars." />
+    <meta name="twitter:image" content="https://sppuengineers.site/assets/images/sppu-engineers-preview.png" />
+
+    <link rel="canonical" href="https://sppuengineers.site/tools/cgpa-to-percentage/" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Gabriela&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+
+<body class="bg-gray-50 text-gray-900 font-sans">
+    <div id="header-placeholder"></div>
+
+    <section class="bg-[#274060] text-[#f2f7f5] py-16 pt-32 px-4 lg:px-16">
+        <div class="max-w-4xl mx-auto">
+
+            <header class="text-center mb-10">
+                <h1 class="text-3xl sm:text-4xl font-bold text-[#fffffe] mb-2">SPPU CGPA to Percentage Calculator</h1>
+                <p class="text-sm sm:text-base text-[#f2f7f5]">Convert your CGPA to Percentage, Grade, and Class Award</p>
+            </header>
+
+            <div class="bg-[#f2f7f5] text-[#001c55] border-2 border-[#001c55] rounded-lg shadow-md p-6 mb-8">
+                <h2 class="text-xl font-semibold mb-6">Convert CGPA to Percentage</h2>
+                <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
+
+                    <div class="w-full lg:w-2/3">
+                        <label for="cgpaInput" class="block mb-2 text-sm font-medium text-[#001c55]">
+                            Enter your CGPA:
+                        </label>
+                        <input type="number" id="cgpaInput" step="0.01" min="0" max="10" placeholder="e.g., 8.5" class="w-full border border-[#001c55] rounded px-3 text-[#001c55] bg-white h-12 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-[#faae2b]" />
+                    </div>
+
+                    <div class="w-full lg:w-1/3 flex justify-center lg:justify-end mt-2 lg:mt-0">
+                        <button id="calculateBtn" class="w-full lg:w-auto bg-[#001c55] text-white py-3 px-6 rounded-lg font-semibold hover:bg-[#faae2b] hover:text-[#001c55] transition-colors duration-300">
+                            Calculate Results
+                        </button>
+                    </div>
+
+                </div>
+                <div id="calculationResult" class="output-box bg-white border border-[#001c55] text-[#001c55] px-4 py-3 rounded text-sm sm:text-base h-auto flex flex-col gap-2 mt-4">
+                    <p>Enter your CGPA and click "Calculate Results" to see your percentage, grade, and class awarded.</p>
+                </div>
+            </div>
+
+            <div class="bg-[#f2f7f5] text-[#001c55] border-2 border-[#001c55] rounded-lg shadow-md p-6 mb-8">
+                <h2 class="text-xl font-semibold mb-4">Official SPPU Conversion Formulas (Circular No. 332-2020)</h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm sm:text-base">
+                        <thead class="bg-[#001c55] text-white">
+                            <tr>
+                                <th class="py-2 px-4 text-left">CGPA Range</th>
+                                <th class="py-2 px-4 text-left">Formula for Percentage</th>
+                                <th class="py-2 px-4 text-left">Grade</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-[#475d5b]">
+                            <tr><td class="py-2 px-4">9.50 and above</td><td class="py-2 px-4">20 * CGPA - 100</td><td class="py-2 px-4">O</td></tr>
+                            <tr><td class="py-2 px-4">8.25 to 9.50</td><td class="py-2 px-4">12 * CGPA - 25</td><td class="py-2 px-4">A+</td></tr>
+                            <tr><td class="py-2 px-4">6.75 to 8.25</td><td class="py-2 px-4">10 * CGPA - 7.5</td><td class="py-2 px-4">A</td></tr>
+                            <tr><td class="py-2 px-4">5.75 to 6.75</td><td class="py-2 px-4">5 * CGPA + 26.25</td><td class="py-2 px-4">B+</td></tr>
+                            <tr><td class="py-2 px-4">5.25 to 5.75</td><td class="py-2 px-4">10 * CGPA - 2.5</td><td class="py-2 px-4">B</td></tr>
+                            <tr><td class="py-2 px-4">4.75 to 5.25</td><td class="py-2 px-4">10 * CGPA - 2.5</td><td class="py-2 px-4">C</td></tr>
+                            <tr><td class="py-2 px-4">4.00 to 4.75</td><td class="py-2 px-4">6.6 * CGPA + 13.6</td><td class="py-2 px-4">D/P</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="bg-[#f2f7f5] text-[#001c55] border-2 border-[#001c55] rounded-lg shadow-md p-6 mb-8">
+                <h2 class="text-xl font-semibold mb-4">SPPU Class Awarded Scale (Relation between CGPA and Degree)</h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm sm:text-base">
+                        <thead class="bg-[#001c55] text-white">
+                            <tr>
+                                <th class="py-2 px-4 text-left">CGPA Range</th>
+                                <th class="py-2 px-4 text-left">Degree Class</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-[#475d5b]">
+                            <tr><td class="py-2 px-4">7.75 and above</td><td class="py-2 px-4">First Class With Distinction</td></tr>
+                            <tr><td class="py-2 px-4">6.75 to 7.74</td><td class="py-2 px-4">First Class</td></tr>
+                            <tr><td class="py-2 px-4">6.25 to 6.74</td><td class="py-2 px-4">Higher Second Class</td></tr>
+                            <tr><td class="py-2 px-4">5.50 to 6.24</td><td class="py-2 px-4">Second Class</td></tr>
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+            <div class="bg-[#f2f7f5] text-[#001c55] border-2 border-[#001c55] rounded-lg shadow-md p-6">
+                <h2 class="text-xl font-semibold mb-4">Understand SPPU Conversions</h2>
+                <p class="text-sm sm:text-base text-[#475d5b]">
+                    Savitribai Phule Pune University (SPPU) uses specific, range-based formulas to convert your CGPA (Cumulative Grade Point Average) to an equivalent percentage, as outlined in their Official Circular No. 332-2020. This tool helps you quickly perform these calculations to accurately determine your percentage, awarded grade, and class based on your CGPA.
+                </p>
+                <p class="text-sm text-[#475d5b] mt-3">
+                    You can explore more academic tools like our <a href="/tools/sppu-grading-system/" class="text-[#faae2b] hover:underline font-medium">SPPU Grading System</a> tool and more on our <a href="/tools" class="text-[#faae2b] hover:underline font-medium">Academic Tools</a> page.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+    <script src="/assets/js/main.js" defer></script>
+    <script src="/assets/js/load-components.js" defer></script>
+
+    <script>
+        const cgpaInput = document.getElementById("cgpaInput");
+        const calculateBtn = document.getElementById("calculateBtn");
+        const calculationResult = document.getElementById("calculationResult");
+
+        function calculatePercentageAndGradeFromCGPA(cgpa) {
+            let percentage;
+            let grade;
+
+            if (cgpa >= 9.50) {
+                percentage = (20 * cgpa) - 100;
+                grade = "O";
+            } else if (cgpa >= 8.25 && cgpa < 9.50) {
+                percentage = (12 * cgpa) - 25;
+                grade = "A+";
+            } else if (cgpa >= 6.75 && cgpa < 8.25) {
+                percentage = (10 * cgpa) - 7.5;
+                grade = "A";
+            } else if (cgpa >= 5.75 && cgpa < 6.75) {
+                percentage = (5 * cgpa) + 26.25;
+                grade = "B+";
+            } else if (cgpa >= 5.25 && cgpa < 5.75) { // Specific range for B
+                percentage = (10 * cgpa) - 2.5;
+                grade = "B";
+            } else if (cgpa >= 4.75 && cgpa < 5.25) { // Specific range for C
+                percentage = (10 * cgpa) - 2.5;
+                grade = "C";
+            } else if (cgpa >= 4.00 && cgpa < 4.75) {
+                percentage = (6.6 * cgpa) + 13.6;
+                grade = "D";
+            } else {
+                percentage = NaN; // CGPA below 4.00 or invalid
+                grade = "F"; // Standard grade for fail
+            }
+            return { percentage, grade };
+        }
+
+        function getAwardedClass(cgpa) {
+            if (cgpa >= 7.75) {
+                return "First Class With Distinction";
+            } else if (cgpa >= 6.75 && cgpa <= 7.74) {
+                return "First Class";
+            } else if (cgpa >= 6.25 && cgpa <= 6.74) {
+                return "Higher Second Class";
+            } else if (cgpa >= 5.50 && cgpa <= 6.24) {
+                return "Second Class";
+            } else {
+                // Assuming "Fail" or "Not Classified" for CGPA below 5.50, as per common practice
+                // and the lowest range provided in the "Relation between CGPA and Degree" table.
+                return " NA"; 
+            }
+        }
+
+        calculateBtn.addEventListener("click", () => {
+            const cgpa = parseFloat(cgpaInput.value);
+
+            if (!isNaN(cgpa) && cgpa >= 0 && cgpa <= 10) {
+                const { percentage: calculatedPercentage, grade } = calculatePercentageAndGradeFromCGPA(cgpa);
+                const awardedClass = getAwardedClass(cgpa); // Pass CGPA to get awarded class
+
+                if (!isNaN(calculatedPercentage)) {
+                    // Ensure percentage is not above 100
+                    const finalPercentage = Math.min(calculatedPercentage, 100); 
+                    
+                    calculationResult.innerHTML = `
+                        <p><strong class="text-[#001c55]">Calculated Percentage:</strong> ${finalPercentage.toFixed(2)}%</p>
+                        <p><strong class="text-[#001c55]">Awarded Grade:</strong> ${grade}</p>
+                        <p><strong class="text-[#001c55]">Awarded Class:</strong> ${awardedClass}</p>
+                    `;
+                } else {
+                    // This covers cases where CGPA is too low to fall into any defined range (e.g., < 4.00)
+                    calculationResult.innerHTML = `<p>CGPA is outside the defined conversion ranges (e.g., below 4.00) or invalid.</p>`;
+                }
+            } else {
+                cgpaInput.value = "";
+                calculationResult.innerHTML = `<p>Please enter a valid CGPA between 0 and 10.</p>`;
+            }
+        });
+
+        // Clear result when CGPA input is changed
+        cgpaInput.addEventListener('input', () => {
+            calculationResult.innerHTML = `<p>Enter your CGPA and click "Calculate Results" to see your percentage, grade, and class awarded.</p>`;
+        });
+    </script>
+</body>
+</html>

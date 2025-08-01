@@ -4,6 +4,12 @@
       "source": "/te-sem5",
       "destination": "/study-materials/",
       "permanent": true
+    },
+    {
+      "source": "/branches",
+      "destination": "/study-materials/",
+      "permanent": true
     }
   ]
 }
+

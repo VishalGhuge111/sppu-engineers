@@ -29,6 +29,8 @@ The app is a Next.js 15 project (App Router) with same-origin API routes and a t
 
 ## Problem
 
+Notes and previous year papers are scattered across Telegram and WhatsApp groups, and there is no single SPPU-focused place for internships, scholarships and events.
+
 SPPU students need study material, previous year papers, syllabus PDFs, events and opportunities that are specific to their university and branch. This platform keeps them in one place, organized by branch, pattern (2019 or 2024) and semester.
 
 ---
@@ -89,7 +91,7 @@ Search performance data is pulled from the Google Search Console API by a daily 
 
 ## System Architecture
 
-The project was moved from static HTML/CSS/JS plus an Express backend to Next.js 15 (App Router).
+The project was moved from a static HTML/CSS/JS site with a separate Node backend to Next.js 15 (App Router).
 
 ```
 Browser (React 19 client components)
@@ -179,7 +181,7 @@ Authentication
 - Magic links are generated on the server and sent through ZeptoMail. The response is always the same, so it does not reveal whether an account exists. There is a 60 second cooldown per email and IP.
 - Mobile OTP is generated on the server and sent and verified through MSG91. The server checks the phone number is not used by another account before saving it.
 - Each login registers a device session under `users/{uid}/sessions`. A student can revoke any device.
-- Raising `NEXT_PUBLIC_APP_SESSION_VERSION` signs all users out once.
+- Raising a session version setting signs all users out once.
 
 Admin role
 - There is one role: `users/{uid}.role == "admin"`. The API checks it in `verifyAdmin`, the Firestore rules check the same field, and the admin pages are wrapped in `RequireAdmin`. There are no custom claims.
@@ -256,7 +258,6 @@ State is held in React Context and custom hooks. There is no Redux, Zustand or R
 
 - Hosted on Vercel. Hosts used by the code: `sppuengineers.in` (site), `admin.sppuengineers.in` (admin), `dev.sppuengineers.in` and `*.vercel.app` (non-production).
 - Firestore rules and indexes are deployed with the Firebase CLI. Rules tests run against the Firestore emulator on port 8098.
-- Configuration is by environment variables. Names only: `NEXT_PUBLIC_FIREBASE_*`, `FIREBASE_PROJECT_ID`, `FIREBASE_CLIENT_EMAIL`, `FIREBASE_PRIVATE_KEY`, `CASHFREE_*`, `NEXT_PUBLIC_CASHFREE_ENV`, `ZOHO_ZEPTOMAIL_*`, `ZOHO_MAIL_*`, `MSG91_*`, `ADMIN_API_TOKEN`, `CRON_SECRET`, `GSC_SITE_URL`, `APPS_SCRIPT_URL`, `APPS_SCRIPT_SECRET`, `SESSION_IP_HASH_SALT`, `NEXT_PUBLIC_APP_SESSION_VERSION`, `NEXT_PUBLIC_APP_ONBOARDING_VERSION`.
 
 ---
 

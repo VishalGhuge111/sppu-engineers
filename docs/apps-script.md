@@ -5,7 +5,7 @@ Apps Script is an optional step after a successful payment. It is not part of th
 ## How it works
 
 - `fulfillOrder()` commits the Firestore transaction first.
-- If `APPS_SCRIPT_URL` and `APPS_SCRIPT_SECRET` are set, it then sends a JSON `POST` to the script. If either is missing, it logs a warning and skips the call.
+- If the script URL and shared secret are configured, it then sends a JSON `POST` to the script. If either is missing, it logs a warning and skips the call.
 - The payload has the shared secret, order id, name, email, phone, college, pattern, branch, semester, product, coupon, amount, transaction id and the expiry date (`YYYY-MM-DD`).
 - The call is best effort. A failure is logged and does not affect the purchase.
 

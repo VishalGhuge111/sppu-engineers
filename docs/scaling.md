@@ -34,4 +34,4 @@ PDFs stream from Cloud Storage and are not buffered in memory. Responses are cac
 ## Known limits
 
 - Unit locking is decided in the client. Real access to paid files depends on Google Drive sharing.
-- `DEFAULT_MAX_DEVICES = 3` exists in the sessions code but is not enforced.
+- A default limit of 3 devices per user exists in the sessions code but is not enforced.

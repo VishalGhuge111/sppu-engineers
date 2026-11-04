@@ -1,55 +1,40 @@
-# Modules Overview
+# Modules
 
-The SPPU Engineers system is organized into functional modules, each mapped to a real set of code, data, and workflows. Every module is responsible for a specific part of the platform and interacts with others through well-defined interfaces.
+How the codebase is organized, by folder.
 
----
+| Folder | Contents |
+|--------|----------|
+| `src/app/(site)` | Public pages: home, study materials, syllabus, events, opportunities, resources, tools, checkout, student dashboard, Campus Ambassador pages, legal pages |
+| `src/app/(viewer)` | The in-app PDF viewer |
+| `src/app/admin` | The admin panel, 17 sections |
+| `src/app/api` | Route Handlers |
+| `src/components` | UI by feature: admin, auth, payment, study, dashboard, events and others |
+| `src/hooks` | `useAuth`, `useStudyAccess`, `useOnboardingGuard`, `useSessionTracking` and others |
+| `src/services` | Firestore access per collection |
+| `src/lib` | Shared logic: payments, fulfillment, enrollment expiry, stats, sessions, search helpers |
+| `src/data` | Static page content and the admin navigation |
+| `scripts` | Tests, backfills and stats maintenance scripts |
 
-## 1. Academic Content Module
+## Key modules
 
-- Delivers notes, PYQs, and study resources to users
-- Content is stored in Google Drive folders; Firestore holds metadata (titles, mapping, preview links)
-- Access is controlled: users must purchase a pack to get Drive access (granted via Apps Script after payment)
-- Frontend fetches resource lists from Firestore and checks user access before showing download/view links
-- Free previews are available; full content is gated by Drive permissions
+- `lib/fulfill-order.ts`: the single idempotent fulfillment function used by the Cashfree webhook and by the polling fallback.
+- `lib/cashfree.ts`: Cashfree API version, base URL and the order status query.
+- `lib/enrollment-expiry-core.ts`: expiry dates on SPPU academic cycles, stored as end-of-day IST.
+- `lib/sessions.server.ts`: device sessions and the denormalized `activeSessionCount`.
+- `lib/stats/*`: counters written in transactions, and the aggregation reads behind the admin dashboard.
+- `lib/admin-search.ts` and `lib/admin-list.server.ts`: search tokens and cursor pagination for admin lists.
+- `lib/msg91.server.ts`: send and verify OTP through MSG91.
+- `lib/search-console/gsc.server.ts`: Google Search Console client. It signs a service-account JWT with `node:crypto`.
+- `lib/mail.ts`: Zoho ZeptoMail sending.
+- `lib/gcs-pdf-stream.server.ts`: streams PDFs from Cloud Storage.
 
----
+## Admin API
 
-## 2. Opportunities Module
+Admin routes live under `src/app/api/admin`. They cover enrollments, transactions, users, sessions, content, uploads, stats, newsletters, query replies and Search Console sync.
 
-- Handles internships, jobs, and scholarship listings
-- All data is stored in Firestore ("opportunities" collection)
-- Frontend fetches using `orderBy` and `limit` queries for recent items
-- Results are cached in localStorage to reduce Firestore reads and speed up repeat visits
-- Admins can add, edit, or remove opportunities via the admin dashboard
+## Tests and scripts
 
----
-
-## 3. Payment Module
-
-- Manages order creation, payment processing, and post-payment workflows
-- Integrates with Cashfree for payment gateway and webhooks
-- Orders are created via backend API; payment status is updated by webhook
-- Firestore transactions update orders, enrollments, stats, and coupon usage atomically
-- After successful payment, triggers Apps Script to grant Drive access
-- Handles idempotency to prevent duplicate processing
-
----
-
-## 4. Access Automation Module
-
-- Uses Google Apps Script to automate Drive access provisioning
-- Receives webhook from backend after payment confirmation
-- Checks for duplicate access before granting
-- Logs all actions in Google Sheets for audit
-- Removes access if required (admin/manual)
-
----
-
-## 5. Admin Module
-
-- Admin dashboard for managing users, content, coupons, stats, and opportunities
-- Protected by Firebase Authentication and Firestore role checks
-- All admin actions are logged
-- Admin APIs are only accessible to users with the "admin" role
-
----
+- `npm run test:firestore-rules`: rules tests on the Firestore emulator
+- `npm run test:enrollment-expiry`: expiry calculation tests
+- `rebuild:stats`, `verify:stats`, `validate:aggregation`, `verify:ui`: stats checks and repair
+- `backfill:admin-search`: fills search fields on older records

@@ -1,102 +1,37 @@
-# Scaling & Performance
+# Scaling and Performance
 
----
+This page lists the techniques used to keep Firestore reads and server work small. It does not include load test numbers.
 
-## Current Scale
+## Reads
 
-- ~10,000+ users
-- ~50K+ monthly visits (organic)
-- Payment transactions handled via Cashfree
-- Content delivered through Google Drive
-- Firestore as the main database
+- Public content (events, opportunities, resources, academic documents, study content) is cached with `unstable_cache`. Events and opportunities use 300 seconds. The others use 60 seconds.
+- The syllabus and exam timetable pages use ISR with a 60 second revalidate.
+- Study material, legal and first year subject pages are generated with `generateStaticParams`.
+- `enrollmentCount` and `activeSessionCount` are stored on the user document, so the admin users list does not read other collections.
+- Admin lists use cursor pagination (`pageSize + 1`, then `startAfter`) and `count()` for totals.
+- The admin stats route caches its result in memory for 60 seconds.
 
-Scale here means:
-- Handling thousands of concurrent reads (notes, events, opportunities)
-- Processing payment transactions reliably
-- Granting/removing Drive access for paid users
+## Writes
 
----
+- Dashboard and analytics counters are incremented with `FieldValue.increment` inside the transaction that makes the business write.
+- Payment fulfillment is idempotent, so retries and duplicate confirmations do not change data twice.
 
-## System Design That Enables Scale
+## Search
 
-- Frontend reads public data directly from Firestore (no backend bottleneck)
-- Backend is only used for payments, webhooks, and admin actions
-- Firebase and Apps Script are serverless (auto-scale, no manual ops)
-- Read-heavy (content, events) and write-heavy (payments, enrollments) flows are separated
+Firestore cannot search inside strings. Users, payments and enrollments store lowercase fields and a `searchTokens` array. The 23 composite indexes support the admin filters and sorts.
 
----
+## Files
 
-## Backend Load Strategy
+PDFs stream from Cloud Storage and are not buffered in memory. Responses are cacheable for one hour.
 
-- Backend is not used for every user request
-- Only handles:
-  - Payment order creation
-  - Webhook processing
-  - Admin operations (content, coupons, stats)
-- All other reads (content, events, opportunities) go direct to Firestore
-- This keeps server load minimal and predictable
+## Client
 
----
+- Charts and the PDF viewer load lazily.
+- The Cashfree SDK is preloaded on the checkout page.
+- Several `sessionStorage` and `localStorage` caches avoid repeat loads.
+- The service worker caches only an offline page and icons.
 
-## Firestore Scaling Approach
+## Known limits
 
-- Collections: users, orders, enrollments, opportunities, events, coupons, stats
-- All queries use filters, `orderBy`, and `limit` (no full scans)
-- No unnecessary reads or writes
-- Firestore auto-scales, but query discipline is enforced in code
-
----
-
-## Webhook & Idempotency Design
-
-- Payment webhook can be triggered multiple times (by Cashfree)
-- System checks order ID and status before processing
-- Firestore transactions ensure atomic, single-write updates
-- Prevents duplicate enrollments, coupon usage, and stats updates
-
----
-
-## Access Delivery Scaling
-
-- Google Apps Script handles Drive access provisioning
-- No backend load for file delivery
-- Access is granted/removed via Drive permissions (not file hosting)
-- Mapping system (pattern/branch/semester/product) allows structured scaling as content grows
-
----
-
-## Caching Strategy (Frontend)
-
-- localStorage caches large lists (opportunities, events)
-- Reduces repeated Firestore reads for returning users
-- Improves perceived performance and reduces Firestore costs
-
----
-
-## Asynchronous Workflow Design
-
-- Payment flow is fully async
-- User pays → webhook triggers backend → backend triggers Apps Script
-- User does not wait for full pipeline (access is granted after payment confirmation)
-- Improves reliability and user experience under load
-
----
-
-## Limitations & Future Improvements
-
-- No webhook signature verification (should be added for security)
-- No rate limiting on backend endpoints
-- Folder mapping in Apps Script uses linear lookup (can be optimized)
-- Heavy reliance on external services (Drive, Apps Script)
-
----
-
-## Key Takeaways
-
-- System scales by offloading work to managed services (Firestore, Drive, Apps Script)
-- Minimal backend load due to direct Firestore reads
-- Automation reduces manual admin work
-- Designed for current scale, with clear paths for future optimization
-
----
-
+- Unit locking is decided in the client. Real access to paid files depends on Google Drive sharing.
+- `DEFAULT_MAX_DEVICES = 3` exists in the sessions code but is not enforced.

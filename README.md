@@ -1,492 +1,269 @@
-<div align="center" style="margin-bottom:1.5rem;">
-  <img src="screenshots/logo.png" alt="SPPU Engineers Logo" width="200" style="margin-bottom:0.5rem;"/>
-  <h1 style="font-size:2.2rem; font-weight:700; color:#222; margin:0;">SPPU Engineers Platform</h1>
+<div align="center">
+  <img src="screenshots/logo.png" alt="SPPU Engineers Logo" width="200"/>
+  <h1>SPPU Engineers Platform</h1>
 </div>
-
-> Source code is private. This repository documents system architecture, workflows, and implementation details.
 
 ---
 
 ## Introduction
 
-SPPU Engineers is a unified digital platform serving SPPU students across Maharashtra. The system provides centralized access to academic materials, opportunity tracking, and automated resource management through a single dashboard. The platform handles authentication, payment processing, resource access control, and real-time notifications — all backed by Firebase services and deployed backend infrastructure.
+SPPU Engineers is a production ed-tech platform for SPPU engineering students. It puts academic resources, internships and opportunities in one place, across 100+ colleges. Live site: https://sppuengineers.in
 
-Students access notes, PYQs, and master solutions; browse jobs and events; use academic calculators; and receive instant updates. Admins manage content, users, and analytics through a role-protected dashboard. The system automates everything from payment verification to Google Drive access provisioning.
+Students use it for semester study material, syllabus and exam timetable PDFs, events, jobs, internships, scholarships and SGPA/CGPA calculators. Study material is sold as semester packs, paid through Cashfree. Admins run content, users, payments and analytics from a role-protected panel with 17 sections.
 
-This system handles real transactions, user data, and automated access workflows in production.
-
----
-
-## Achievements & Impact
-
-<table align="center" style="margin:0; padding:0; width:100%; table-layout:fixed; border-collapse: separate; border-spacing: 0;">
-  <tr>
-    <td align="center" style="padding:1.2rem 0; border:1px solid #444; width:20%;"><img src="https://img.icons8.com/color/48/1A6DFF/group-foreground-selected.png" width="56"/><br/><span style="font-size:1.18rem;">10,000+<br/>students served</span></td>
-    <td align="center" style="padding:1.2rem 0; border:1px solid #444; width:20%;"><img src="https://img.icons8.com/color/48/1A6DFF/visible.png" width="56"/><br/><span style="font-size:1.18rem;">50,000+<br/>organic visits</span></td>
-    <td align="center" style="padding:1.2rem 0; border:1px solid #444; width:20%;"><img src="https://img.icons8.com/color/48/1A6DFF/combo-chart.png" width="56"/><br/><span style="font-size:1.18rem;">1.5M+<br/>Google impressions</span></td>
-    <td align="center" style="padding:1.2rem 0; border:1px solid #444; width:20%;"><img src="https://img.icons8.com/color/48/1A6DFF/money-bag.png" width="56"/><br/><span style="font-size:1.18rem;">₹1.5L+<br/>revenue generated</span></td>
-    <td align="center" style="padding:1.2rem 0; border:1px solid #444; width:20%;"><img src="https://img.icons8.com/color/48/1A6DFF/university.png" width="56"/><br/><span style="font-size:1.18rem;">Used across<br/>multiple colleges</span></td>
-  </tr>
-</table>
+The app is a Next.js 15 project (App Router) with same-origin API routes and a typed service layer over Firebase.
 
 ---
 
-## Problem Statement
+## Achievements
 
-SPPU students face fragmented resource distribution and manual access workflows.
+| Metric | Value |
+|--------|-------|
+| Paid enrollments | 3,672+ |
+| Revenue | INR 4.1L+ |
+| Colleges | 100+ |
+| Google Search impressions | 6.35M+ |
+| Organic clicks | 272K+ |
 
-<table align="center" style="margin:1.2rem 0; min-width:340px;">
-  <tr>
-    <th style="background:#ffebee; color:#b71c1c; text-align:left; padding:0.7rem 1.2rem;">Problems</th>
-    <th style="background:#e8f5e9; color:#1b5e20; text-align:left; padding:0.7rem 1.2rem;">Solutions</th>
-  </tr>
-  <tr>
-    <td style="padding:0.7rem 1.2rem;">Notes scattered across chat groups</td>
-    <td style="padding:0.7rem 1.2rem;">Centralized resource hub with search</td>
-  </tr>
-  <tr>
-    <td style="padding:0.7rem 1.2rem;">No version control or authenticity checks</td>
-    <td style="padding:0.7rem 1.2rem;">All content mapped to verified Google Drive sources</td>
-  </tr>
-  <tr>
-    <td style="padding:0.7rem 1.2rem;">Manual payment verification and file sharing</td>
-    <td style="padding:0.7rem 1.2rem;">Automated payment → access provisioning pipeline</td>
-  </tr>
-  <tr>
-    <td style="padding:0.7rem 1.2rem;">No access tracking or audit logs</td>
-    <td style="padding:0.7rem 1.2rem;">Role-based access control with full audit trails</td>
-  </tr>
-  <tr>
-    <td style="padding:0.7rem 1.2rem;">Missed opportunities and updates</td>
-    <td style="padding:0.7rem 1.2rem;">Real-time notifications and centralized tracking</td>
-  </tr>
-  <tr>
-    <td style="padding:0.7rem 1.2rem;">Admin bottlenecks at scale</td>
-    <td style="padding:0.7rem 1.2rem;">Admin dashboard with analytics and bulk operations</td>
-  </tr>
-</table>
+---
 
-The platform eliminates these inefficiencies through centralized access control, automated workflows, and real-time synchronization.
+## Problem
+
+SPPU students need study material, previous year papers, syllabus PDFs, events and opportunities that are specific to their university and branch. This platform keeps them in one place, organized by branch, pattern (2019 or 2024) and semester.
 
 ---
 
 ## Product Walkthrough
 
-### 1. Home Page
-![Home Page](screenshots/home.png)
+### 1. Home Page (Signed-in View)
+The home page shows a different view for signed-in users, with featured opportunities and upcoming events.
 
-Landing page for SPPU Engineers. Users see featured resources, and navigation to all modules (notes, PYQs, internships, tools, etc). SEO-optimized, fast-loading, and mobile-friendly.
+![Home page, signed-in view](screenshots/home.png)
 
----
+### 2. Study Materials (Semester View)
+Content is organized by branch, pattern, semester and subject. Each semester page shows its subjects and the pack options.
 
-### 2. Events
-![Events Page](screenshots/events.png)
+![Study materials, semester view](screenshots/study-materials.png)
 
-Browse all current SPPU events, hackathons, workshops, and competitions. Search, filter, and register for events. Data is fetched from Firestore and rendered instantly.
+### 3. PDF Viewer with Unit Navigation
+The in-app viewer opens a unit and lets the student move to the previous or next unit. Units unlock based on the student's enrollment.
 
-```js
-// Frontend: Fetch and render events
-const eventsSnap = await db.collection("events").orderBy("date", "desc").get();
-const events = eventsSnap.docs.map(doc => doc.data());
-events.forEach(event => renderEventCard(event));
-```
+![PDF viewer with unit navigation](screenshots/pdf-viewer.png)
 
----
+### 4. Checkout and Cashfree Payment Flow
+Checkout supports coupons and opens the Cashfree payment modal. The status page polls until the payment resolves.
 
-### 3. Opportunities
-![Opportunities Page](screenshots/opportunities.png)
+![Checkout and Cashfree payment flow](screenshots/payment-checkout.png)
 
-Find internships, jobs, and scholarships. Search, filter, and apply directly. Data is fetched from Firestore and cached for speed.
+### 5. Student Dashboard (Purchases and Sessions)
+Students see their purchases with access expiry dates, and the devices they are signed in on. Any device can be revoked.
 
-```js
-// Frontend: Cached opportunities fetch
-const oppSnap = await db.collection("opportunities")
-  .orderBy("addedDate", "desc")
-  .limit(100)
-  .get();
-const opportunities = oppSnap.docs.map(doc => doc.data());
-opportunities.forEach(opp => renderOpportunityCard(opp));
-```
+![Student dashboard, purchases and sessions](screenshots/user-dashboard.png)
 
----
+### 6. Campus Ambassador Dashboard
+Ambassadors see the students they referred (emails masked), submit UPI payout details and view payout history.
 
-### 4. Study Materials Hub
-![Study Materials](screenshots/study-materials.png)
+![Campus Ambassador dashboard](screenshots/ambassador-dashboard.png)
 
-Branch-wise and semester-wise study materials, notes, and PYQs. Each resource is mapped to a Google Drive folder, and access is granted via Apps Script after payment. Users preview free content and can purchase full access.
+### 7. Admin Dashboard (Revenue and KPIs)
+KPI tiles for today, this week and this month, a revenue trend, an activity timeline and a Search Console sync control.
 
----
+![Admin dashboard, revenue and KPIs](screenshots/admin-dashboard.png)
 
-### 5. Subjects Page
-![Subject Page](screenshots/subject-page.png)
+### 8. Analytics (Revenue and Enrollment Trends)
+A conversion funnel and revenue breakdowns by product, branch, semester and pattern.
 
-See all available notes, PYQs, and solutions for a specific subject. Access is shown based on your purchase status.
+![Analytics, revenue and enrollment trends](screenshots/analytics.png)
 
----
+### 9. Admin (User and Enrollment Management)
+Server-side search and pagination for users and enrollments, manual enrollment grants, revoke, and per-user device sessions.
 
-### 6. Semester Pack Selection
-![Semester Pack Selection](screenshots/sempack-sellection.png)
+![Admin, user and enrollment management](screenshots/admin-users.png)
 
-Choose your semester pack. Each pack is linked to a Google Drive folder, and access is granted via Apps Script after payment. Pricing and included resources are shown.
+### 10. Google Search Console Performance
+Search performance data is pulled from the Google Search Console API by a daily cron and shown in the admin panel.
 
----
-
-### 7. Secure Payment Checkout
-![Payment Checkout](screenshots/payment-checkout.png)
-
-Complete payment via Cashfree. Coupon codes are validated, order is created, and payment is processed securely.
-
-```js
-// Backend: Create order
-const res = await fetch("https://api.sppuengineers.in/createOrder", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ packId, couponCode })
-});
-const { orderId } = await res.json();
-// Redirect to Cashfree payment page
-```
-
-```js
-// Frontend: Coupon validation
-async function validateCouponFromCollection(rawCode) {
-  const snap = await getDoc(doc(pricingDb, "coupons", code));
-  if (!snap.exists()) return { valid: false, errorCode: "NOT_FOUND" };
-  // Validate usage limits, expiration, and applicability
-}
-```
-
----
-
-### 8. Payment Webhook Handler
-
-When payment is completed, Cashfree sends a webhook to `/api/webhook/cashfree`. The backend processes payment, updates Firestore, and ensures idempotency using transactions.
-
-```js
-// Backend: Webhook handler with transaction
-if (paymentStatus === "SUCCESS") {
-  await db.runTransaction(async (tx) => {
-    const paymentSnap = await tx.get(paymentRef);
-    if (paymentSnap.exists() && paymentSnap.data().status === "SUCCESS") {
-      // Already processed - skip to prevent duplicates
-      return;
-    }
-    // Atomic updates: payment, enrollment, stats, user, coupon
-    tx.set(paymentRef, paymentData);
-    tx.set(enrollmentRef, enrollmentData);
-    tx.update(statsRef, { totalOrders: FieldValue.increment(1) });
-    tx.update(userRef, { enrollments: FieldValue.arrayUnion(packId) });
-    if (couponCode) tx.update(couponRef, { usedCount: FieldValue.increment(1) });
-  });
-}
-```
-
----
-
-### 9. Google Drive Access Automation
-After payment verification, a second webhook triggers Google Apps Script to grant Drive access. This separation ensures database consistency before external API calls. Apps Script checks for duplicate access and logs all actions.
-
-```js
-// Backend: Trigger Apps Script for Drive access
-async function triggerAccessScript(email, semester) {
-  await fetch(process.env.APPS_SCRIPT_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, semester })
-  });
-}
-```
-
----
-
-### 10. User Dashboard
-![User Dashboard](screenshots/user-dashboard.png)
-
-See your purchased packs, access status, and profile info. Access is updated in real-time after payment.
-
----
-
-### 11. Admin Dashboard
-![Admin Dashboard](screenshots/admin-dashboard.png)
-
-Admins can view all users, orders, stats, and manage content. Admin routes are protected by Firebase Authentication and Firestore role checks. All admin actions are logged for audit.
-
-```js
-// Backend: Admin route protection
-router.use('/admin', firebaseAuth, async (req, res, next) => {
-  const userDoc = await db.collection('users').doc(req.firebaseUser.uid).get();
-  if (!userDoc.exists || userDoc.data().role !== 'admin') {
-    return res.status(403).json({ error: 'Admin access required' });
-  }
-  next();
-});
-```
-
----
-
-### 12. Tools & Calculators
-![Tools](screenshots/tools.png)
-
-Browse and use academic tools: SGPA/CGPA calculators, grade evaluators, and more. All tools are client-side and privacy-friendly.
-
----
-
-### 13. Updates & Notifications
-![Updates Page](screenshots/updates.png)
-
-See the latest platform updates, new features, and important notifications. Users get real-time updates and can track all changes from one place.
-
----
-
-### 14. Google Search Console Performance
-![Google Search Console](screenshots/google-stats.png)
-
-Official Google Search Console performance page for sppuengineers.in. Shows real search impressions, clicks, and SEO growth. This is not stored in Firestore — it's a direct screenshot from the official Google Search Console, reflecting the platform's real organic reach and authority.
+![Google Search Console performance](screenshots/google-stats.png)
 
 ---
 
 ## System Architecture
 
-### Payment & Access Provisioning Flow
+The project was moved from static HTML/CSS/JS plus an Express backend to Next.js 15 (App Router).
 
-```mermaid
-graph TD
-U[User] -.->|Selects Pack & Pays| F[Frontend]
-F -.->|POST api.sppuengineers.in/createOrder| B[Backend: Express.js]
-B -.->|Verify user, coupon, pack| D[Firestore: users, coupons, packs]
-B -.->|Create order| O[Firestore: orders]
-F -.->|Redirect to Cashfree| C[Cashfree Payment]
-C -.->|Webhook| W[Backend: api.sppuengineers.in/webhook/cashfree]
-W -.->|Transaction: update orders, enrollments, stats, users, coupons| D
-W -.->|Trigger Apps Script| S[Drive Access Update]
+```
+Browser (React 19 client components)
+   |
+   |  server-rendered pages, same-origin /api/* route handlers
+   v
+Next.js 15 on Vercel
+   |-- middleware: clean PDF URLs, admin subdomain routing
+   |-- Server Components: SEO pages, data loading with unstable_cache
+   |-- Route Handlers (Node runtime): payments, auth helpers, admin, stats
+   |
+   v
+Firebase: Auth, Firestore, Storage
+External: Cashfree, MSG91, Zoho ZeptoMail, Google Search Console API
 ```
 
-The platform processes real payments and manages access to paid academic resources through an automated backend pipeline. The payment flow separates order creation from payment verification. The backend creates an order record in Firestore, redirects to Cashfree, and waits for a webhook callback. On payment success, the webhook handler runs a Firestore transaction that updates multiple collections atomically (orders, enrollments, user stats, coupon usage). After database updates complete, a second webhook triggers Google Apps Script to provision Google Drive access. This separation ensures payment state consistency before external API calls.
+Rendering split: most files under `src/app` are Server Components. SEO pages load data on the server and pass it to client components as initial content. Auth-gated pages wrap a client view in `RequireAuth` or `RequireAdmin`.
 
-**Key Design Decisions:**
-- **Firestore transactions** ensure atomicity across collections (no partial updates)
-- **Webhook idempotency** via status checks prevents duplicate processing
-- **Apps Script decoupling** isolates Drive provisioning from payment logic
-- **Order → Payment separation** supports retry logic and audit trails
+### Payment flow
 
-**Example: Webhook Transaction Logic**
+1. The client calls `POST /api/createOrder` with a Firebase ID token.
+2. The server reads the user, the coupon and the price document in parallel. The price comes from a document keyed `pattern__branch__semester__product`. If that document does not exist, the request fails. There is no default price.
+3. The server checks coupon total and per-user limits, creates a Cashfree order and writes `payments/{orderId}` as `PENDING` in a transaction.
+4. The client opens the Cashfree checkout modal with the returned `payment_session_id`.
+5. Confirmation arrives by two paths: the Cashfree webhook, and a polling fallback. The status page polls `GET /api/verifyOrder`. If Firestore still shows `PENDING`, that route asks the Cashfree Orders API for the status.
+6. Both paths call the same `fulfillOrder()` function.
 
-```js
-// server/api/webhook.js (excerpt)
-if (paymentStatus === "SUCCESS") {
-  await db.runTransaction(async (tx) => {
-    // ✅ ALL READS FIRST
-    const paymentSnap = await tx.get(paymentRef);
-    const enrollSnap = await tx.get(enrollRef);
-    const existing = paymentSnap.exists ? paymentSnap.data() : {};
-    // ...prepare data, check coupon, stats, etc.
-    // ✅ NOW DO WRITES
-    tx.set(paymentRef, paymentData, { merge: true });
-    if (shouldCountCoupon) {
-      tx.set(couponRef, { ...couponUpdate }, { merge: true });
-    }
-    if (!enrollSnap.exists) {
-      tx.set(enrollRef, buildEnrollmentData(orderId, transactionId, paymentData, event), { merge: true });
-    }
-    if (!alreadyCounted) {
-      tx.set(statsRef, { enrollments: admin.firestore.FieldValue.increment(1), updatedAt: admin.firestore.FieldValue.serverTimestamp() }, { merge: true });
-    }
-    if (existing.uid) {
-      const userRef = db.collection("users").doc(existing.uid);
-      tx.set(userRef, { hasActivePlan: true, lastPurchase: orderId, updatedAt: admin.firestore.FieldValue.serverTimestamp() }, { merge: true });
-    }
-  });
-}
-```
+Cashfree webhook requests are verified with an HMAC-SHA256 signature check using a timing-safe compare.
 
----
+`fulfillOrder()` is idempotent. It runs one Firestore transaction with all reads before any writes. It marks the payment `SUCCESS`, creates the enrollment if it does not exist, updates coupon usage and stats, and sets `hasActivePlan` and `enrollmentCount` on the user. Each side effect has a flag on the payment (`statsUpdated`, `couponSuccessCounted`), so a duplicate or late confirmation does not apply it twice. A `FAILED` or `CANCELLED` result never overwrites a `SUCCESS`.
 
-### Full Platform Architecture
+After the transaction commits, the order receipt email (Zoho ZeptoMail) and an optional Google Apps Script call are sent. Both are best effort and do not block the purchase.
 
-```mermaid
-graph TD
-U[User] -->|Home| F[Frontend]
-F -->|Study Materials| SM[Study Materials Page]
-SM -->|Select & Purchase| SCR[Checkout Page]
-SCR -->|Payment Success| GD[Google Drive Access Grant]
-F -->|Events| EV[Events Page]
-EV -->|Render| BEV[Backend: /events]
-F -->|Opportunities| OP[Opportunities Page]
-OP -->|Render| BOP[Backend: /opportunities]
-F -->|Updates| UP[Updates Page]
-UP -->|Render| BUP[Backend: /updates]
-F -->|Notifications| NT[Notifications Page]
-NT -->|Render| BNT[Backend: /notifications]
-```
+### Access expiry
 
-**System Layers:**
+Expiry is computed from the semester and purchase date using SPPU academic cycles and stored as end-of-day IST. There is a test file for it and a migration script.
 
-The platform uses a three-tier architecture with clear separation of concerns:
+### Access control for study material
 
-1. **Frontend Layer** (Vercel) — Static HTML/CSS/JavaScript served via CDN. Client-side Firebase Authentication. LocalStorage caching for performance. Direct Firestore reads for public data.
-
-2. **Backend Layer** (Render) — Express.js API with Firebase Admin SDK. Protected routes with JWT verification. Payment webhook handlers. Admin operations and bulk updates.
-
-3. **Database Layer** (Firestore) — NoSQL document store with real-time sync. Composite indexes for filtered queries. Security rules for client-side access. Transaction support for critical operations.
-
-4. **Integration Layer** — Google Apps Script for Drive access automation. Cashfree for payment processing. ZeptoMail for welcome emails.
+Unit locking is decided in the client by `isUnitAccessible`. The `studyContent` collection holds the Drive links and is readable by any signed-in user, so real access to paid files depends on Google Drive sharing. Syllabus and PYQ PDFs are public and are streamed from Cloud Storage.
 
 ---
 
 ## Data Model
 
-The system uses Firestore collections with denormalized structures optimized for read performance.
+Firestore is the only database. The server uses the Admin SDK. The browser uses the Firebase JS SDK for reads that the security rules allow. There is no ORM.
 
-**Core Collections:**
-- `users` → stores profile data, purchase history, access status, and role flags
-- `orders` → immutable payment records with status tracking and metadata
-- `enrollments` → maps users to purchased content with access timestamps
-- `pricing` → defines semester packs with pricing, Drive folder IDs, and availability
-- `opportunities` → job/internship listings with filters and application deadlines
-- `coupons` → discount codes with usage limits and expiration logic
+| Collection | Purpose |
+|------------|---------|
+| `users` (subcollection `sessions`) | Profile, role, phone, `hasActivePlan`, `enrollmentCount`, `activeSessionCount` |
+| `payments` | One document per order, status, amounts, search fields |
+| `enrollments` | Created by fulfillment, with `expiresAt` |
+| `enrolled-students` | Legacy enrollments, admin only |
+| `coupons` | Code as document id, limits, usage counters |
+| `pricing` | One document per pattern, branch, semester and product |
+| `studyContent` | Subjects and units per semester |
+| `studyProgress` | Per-user progress |
+| `academicDocuments`, `events`, `opportunities`, `resources`, `updates`, `notifications` | Public content |
+| `feedbacks`, `contact_queries` | Form submissions, admin read |
+| `ambassadors` (subcollection `payouts`), `referrals` | Campus Ambassador program |
+| `stats/*` | Dashboard and analytics counters |
+| `settings`, `newsletters`, `mailRateLimits` | Server-only |
 
-**Design Principles:**
-- Each collection is structured to minimize reads through denormalization
-- Composite indexes support filtered queries without full collection scans
-- Status flags enable efficient webhook idempotency checks
-- Timestamps use Firestore server timestamps for consistency
+There are 23 composite indexes in `firestore.indexes.json`, covering payments, enrollments, events, opportunities, resources, feedbacks, contact queries and notifications.
 
-**Example Document Structure:**
+Study PDFs, resource files, academic documents and uploaded images are in Firebase Storage.
 
-```js
-// users/{uid}
-{
-  email: "student@example.com",
-  displayName: "Student Name",
-  enrollments: ["sem3_2024", "sem4_2024"],
-  role: "student",
-  createdAt: Timestamp,
-  stats: { totalOrders: 2, totalSpent: 698 }
-}
+### Security rules
 
-// orders/{orderId}
-{
-  userId: "uid123",
-  packId: "sem3_2024",
-  amount: 349,
-  status: "SUCCESS",
-  paymentId: "cf_123",
-  createdAt: Timestamp,
-  processedAt: Timestamp
-}
-```
+- A user can create their own document only with `role: "user"`, no phone and `hasActivePlan: false`.
+- A user cannot change their own `role`, `email`, `phone`, `mobileVerified`, `hasActivePlan`, `enrollmentCount`, `activeSessionCount` or `createdAt`.
+- An ambassador can only write their UPI fields, can only set `upiStatus` to `pending`, and `upiSubmittedAt` must equal the request time.
+- A referral document is created once by the referred student. The rules block self-referral and check that the ambassador code matches.
+- `payments` and `coupons` are admin only. Any collection without a rule is denied by a default-deny catch-all, so only the Admin SDK can use it.
+- The rules have an emulator test suite (`npm run test:firestore-rules`).
 
 ---
 
 ## Backend Architecture
 
-**Core Responsibilities:**
+The backend is 54 Next.js Route Handlers under `src/app/api`, all on the Node runtime. Firebase Admin is initialized lazily, so `next build` works without admin credentials.
 
-1. **Payment Processing** — Validates pack availability and user eligibility. Creates Cashfree payment orders. Webhook requests are validated based on payment status and internal checks. Signature-based verification can be added as an additional security layer. Ensures idempotency through transaction-based status checks.
+Authentication
+- Google sign-in (popup, with a redirect fallback), email magic link, and mobile OTP.
+- Admin login uses email and password on a separate page.
+- API calls carry a Firebase ID token as a Bearer token.
+- Magic links are generated on the server and sent through ZeptoMail. The response is always the same, so it does not reveal whether an account exists. There is a 60 second cooldown per email and IP.
+- Mobile OTP is generated on the server and sent and verified through MSG91. The server checks the phone number is not used by another account before saving it.
+- Each login registers a device session under `users/{uid}/sessions`. A student can revoke any device.
+- Raising `NEXT_PUBLIC_APP_SESSION_VERSION` signs all users out once.
 
-2. **Access Control** — Verifies Firebase ID tokens on protected routes. Enforces role-based access for admin operations. Maintains audit logs for sensitive actions. Triggers Google Apps Script for Drive provisioning.
+Admin role
+- There is one role: `users/{uid}.role == "admin"`. The API checks it in `verifyAdmin`, the Firestore rules check the same field, and the admin pages are wrapped in `RequireAdmin`. There are no custom claims.
+- Some admin routes also accept an `x-admin-token` header.
 
-3. **Data Management** — Runs Firestore transactions for multi-collection updates. Implements caching strategies for frequently accessed data. Handles coupon validation and usage tracking. Generates analytics for admin dashboard.
+Middleware
+- Rewrites clean syllabus, PYQ, resource and academic document URLs to path-based API handlers.
+- On production, `sppuengineers.in/admin/*` redirects to `admin.sppuengineers.in`. The admin host is served with `noindex, nofollow`. Localhost, `dev.sppuengineers.in` and `*.vercel.app` skip this routing.
 
-4. **Integration Orchestration** — Coordinates payment → database → access provisioning pipeline. Sends transactional emails via ZeptoMail. Updates user stats and platform-wide metrics. Manages error handling and retry logic.
+Admin panel (17 sections)
+The sections, by group:
+- Overview: Dashboard, Analytics
+- Study Materials: Content, Pricing
+- People: Users, Enrollments, Ambassadors
+- Payments: Transactions, Coupons
+- Content: Events, Opportunities, Resources, Academics
+- Inbox: Queries, Feedbacks, Newsletter, Notifications
+- System: Settings
 
-**Authentication Flow:**
+Stats and analytics
+- Counters are incremented in the same transactions as the business writes. They are stored in `stats/dashboard` and `stats/sales`, plus daily, weekly, monthly and yearly buckets keyed by IST date. Breakdowns cover product, branch, semester, pattern, payment method and coupon.
+- `GET /api/admin/stats` returns one bundle. Headline numbers come from live Firestore `count()` and `sum()` queries. Time series come from the stored buckets. The result is cached in memory for 60 seconds.
+- Scripts exist to rebuild and verify the stats (`rebuild:stats`, `verify:stats`, `validate:aggregation`, `verify:ui`).
 
-```js
-export default async function firebaseAuth(req, res, next) {
-  const authHeader = req.headers.authorization || '';
-  const match = authHeader.match(/^Bearer (.+)$/);
-  if (!match) return res.status(401).json({ error: 'Missing or invalid Authorization header' });
-  const idToken = match[1];
-  try {
-    const decoded = await admin.auth().verifyIdToken(idToken);
-    req.firebaseUser = decoded;
-    next();
-  } catch (err) {
-    return res.status(401).json({ error: 'Invalid or expired Firebase ID token' });
-  }
-}
-```
+Admin search and pagination
+- Firestore cannot search inside strings. Writes to users, payments and enrollments also store lowercase copies of fields and a `searchTokens` array (up to 40 tokens). Queries use prefix ranges and `array-contains-any` with at most 10 tokens. A backfill script fills older records.
+- Pagination uses cursors: fetch `pageSize + 1` documents, then `startAfter`. Totals use `count()`.
+
+Campus Ambassador program
+- A student who signs up with an ambassador code gets a `referrals` document with status `signed_up`. On the student's first enrollment, `fulfillOrder()` sets it to `converted` inside the same transaction.
+
+Cron
+- One cron is configured in `vercel.json`: `/api/cron/gsc-sync` at `0 4 * * *`. It syncs Google Search Console data.
 
 ---
 
-## Performance Optimizations
+## Performance
 
-**1. Webhook Idempotency** — Transaction-based status checks before writes. Prevents duplicate payment processing and access grants. Flags in Firestore track processing state (e.g., `couponUsed`, `enrollmentCreated`).
-
-**2. Atomic Updates** — Firestore transactions ensure all-or-nothing writes across collections. All reads happen before writes within transaction scope. Prevents race conditions during concurrent webhook calls.
-
-**3. Client-Side Caching** — Opportunities data cached in localStorage (1-hour TTL). Reduces Firestore reads by ~70% for repeat visits. Cache invalidation on data mutations.
-
-**4. Query Optimization** — All queries use composite indexes for filtered results. No unfiltered collection scans. Pagination limits read operations.
-
-**5. Frontend Performance** — Skeleton loaders for perceived speed. Lazy image loading with IntersectionObserver. Critical CSS inlined, non-critical deferred.
-
-**6. Admin Dashboard Efficiency** — Aggregated stats precomputed in dedicated collection. Real-time listeners limited to active sessions. Batch operations for bulk updates.
+- Server caching with `unstable_cache`: published events and opportunities for 300 seconds, resources, academic documents and study content for 60 seconds.
+- ISR with `revalidate = 60` on the syllabus and exam timetable pages.
+- Static generation with `generateStaticParams` for study material, legal and first year subject pages.
+- PDFs stream from Cloud Storage with `Readable.toWeb` and are not buffered in memory. Responses use `Cache-Control: public, max-age=3600`.
+- The admin charts and the viewer load lazily through `next/dynamic`.
+- The Cashfree SDK is preloaded when the checkout page mounts.
+- Client caches in `sessionStorage` and `localStorage` for auth, study access, home feed, semester pricing and study progress.
+- A `StaleChunkRecovery` provider handles failed chunk loads after a deploy.
+- `enrollmentCount` and `activeSessionCount` are stored on the user document, so the admin users list needs no extra reads.
+- PWA: a hand-written service worker caches an offline page and icons. It does not cache `/_next/` or `/api/`. There is a manifest and an install page.
+- SEO: metadata in 74 route files, JSON-LD in 27 files, a generated `sitemap.ts` and `robots.ts`, and `trailingSlash: true` to keep the old URLs.
 
 ---
 
 ## Tech Stack
 
-<table align="center">
-  <tr><th>Frontend</th><th>Backend</th><th>Database</th><th>Integrations</th></tr>
-  <tr align="center">
-    <td>HTML, CSS, JavaScript<br/>Tailwind CSS</td>
-    <td>Express.js<br/>Firebase Admin SDK</td>
-    <td>Firestore<br/>Firebase Auth</td>
-    <td>Cashfree<br/>Google Apps Script<br/>Google Drive API<br/>ZeptoMail</td>
-  </tr>
-</table>
+- Next.js 15 (App Router)
+- React 19
+- TypeScript
+- Tailwind CSS
+- Firebase Auth
+- Firestore
+- Firebase Storage
+- Cashfree Payment Gateway
+- MSG91 (SMS OTP)
+- Zoho ZeptoMail
+- Google Search Console API
+- Recharts
+- Vercel
 
----
-
-## Engineering Approach
-
-**Why Firebase + Firestore:** Real-time sync for instant UI updates without polling. Built-in authentication with JWT token verification. Security rules enable client-side reads without backend proxy. NoSQL structure fits denormalized, read-heavy workload. Scales automatically without manual database management.
-
-**Why Cashfree:** UPI and card support required for Indian student payments. Webhook reliability critical for automated access provisioning. Lower transaction fees than alternatives for small ticket sizes.
-
-**Why Google Apps Script:** Direct Drive API access without OAuth flows for each user. Runs in Google's infrastructure (low latency to Drive). Handles Drive permission management at scale. Free tier sufficient for current usage patterns.
-
-**Tradeoffs Made:**
-- **Firestore over SQL:** No joins or complex queries, but real-time sync and easier scaling
-- **Apps Script over backend Drive API:** Less control, but simpler permission management
-- **Denormalized data:** Higher storage cost, but much faster reads (acceptable for read-heavy app)
-- **Client-side reads:** Security rules maintenance required, but eliminates backend proxy overhead
-
-**What Could Be Improved:**
-- Move to Cloud Functions for webhook handling (currently Express on Render)
-- Add Redis caching layer for frequently accessed pack data
-- Implement GraphQL for more efficient client-side data fetching
-- Add Stripe for international payment support
+State is held in React Context and custom hooks. There is no Redux, Zustand or React Query. The animation library is `@lottiefiles/dotlottie-react`.
 
 ---
 
 ## Deployment
 
-- **Frontend:** Vercel (CDN, automatic HTTPS)
-- **Backend:** Render (containerized Express.js)
-- **Database:** Firebase (managed Firestore + Auth)
-- **Email:** ZeptoMail (transactional email service)
-- **Storage:** Google Drive (student access)
-
-**Custom Domains:**
-- `sppuengineers.in` → Vercel frontend
-- `api.sppuengineers.in` → Render backend
-- `auth.sppuengineers.in` → Firebase Auth
+- Hosted on Vercel. Hosts used by the code: `sppuengineers.in` (site), `admin.sppuengineers.in` (admin), `dev.sppuengineers.in` and `*.vercel.app` (non-production).
+- Firestore rules and indexes are deployed with the Firebase CLI. Rules tests run against the Firestore emulator on port 8098.
+- Configuration is by environment variables. Names only: `NEXT_PUBLIC_FIREBASE_*`, `FIREBASE_PROJECT_ID`, `FIREBASE_CLIENT_EMAIL`, `FIREBASE_PRIVATE_KEY`, `CASHFREE_*`, `NEXT_PUBLIC_CASHFREE_ENV`, `ZOHO_ZEPTOMAIL_*`, `ZOHO_MAIL_*`, `MSG91_*`, `ADMIN_API_TOKEN`, `CRON_SECRET`, `GSC_SITE_URL`, `APPS_SCRIPT_URL`, `APPS_SCRIPT_SECRET`, `SESSION_IP_HASH_SALT`, `NEXT_PUBLIC_APP_SESSION_VERSION`, `NEXT_PUBLIC_APP_ONBOARDING_VERSION`.
 
 ---
 
 ## Documentation
 
-- [docs/architecture.md](docs/architecture.md): System structure and architecture diagrams
-- [docs/modules.md](docs/modules.md): Detailed breakdown of all modules (frontend, backend, admin, integrations)
-- [docs/data-flow.md](docs/data-flow.md): End-to-end process flows for all major features
-- [docs/apps-script.md](docs/apps-script.md): Google Apps Script integration and automation
-- [docs/scaling.md](docs/scaling.md): Scaling strategies and lessons learned
-
-See the [docs/](docs/) folder for complete technical documentation.
-
----
-
-**Built and maintained by Vishal Ghuge** | [GitHub](https://github.com/vishalghuge111) | [LinkedIn](https://linkedin.com/in/vishalghuge111)
+- [docs/architecture.md](docs/architecture.md): structure of the app and the request paths
+- [docs/modules.md](docs/modules.md): what each part of the codebase does
+- [docs/data-flow.md](docs/data-flow.md): payment, sign-in and stats flows
+- [docs/apps-script.md](docs/apps-script.md): the optional Google Apps Script call after payment
+- [docs/scaling.md](docs/scaling.md): how reads, writes and caching are kept small
